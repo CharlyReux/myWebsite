@@ -1,21 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Website</title>
-  </head>
-  <body>
-    
-    <canvas id="bg"></canvas>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Website</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato&family=Titillium+Web:wght@900&display=swap"
+    rel="stylesheet">
+
+</head>
+
+<body>
+  <script type="module" src="/src/main.ts"></script>
+  <canvas id="bg"></canvas>
 
 
-<h1>test</h1>
-<p><br></p>
+  <div class="title">
+    <h1>Charly Reux</h1>
+    <h2>Software Engineering Student</h2>
+  </div>
 
 
+  <main>
+    <!-- WHO I AM -->
+    <div class="iam">
+      <div class="txt">
+        <h1>Who I am</h1>
+        <p>
+          Hello! My name is charly, I am a software engineering student in the ESIR school in Rennes. I am passionated
+          by programming and engineering in general. I love working on hard and complex projects and most of all, I love
+          creating and exploring new ideas and newconcepts.<br>
+          On this website, you will find everything that there is to know about me, my projects, my passions, and how
+          you can contact me.
+        </p>
+      </div>
+      <img src="images/profile.jpeg">
+    </div>
+    <!-- TODO: put the "my passion" here ?-->
+    <!-- My projects -->
+    <div class="proj">
+      <h1>My projects</h1>
+      <p>I have worked on a few projects now, whether those are personnal or school related. You can find more details
+        by following this link, or even more details by checking my github</p>
+    </div>
+  </main>
 
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+</body>
+
 </html>

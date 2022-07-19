@@ -55,13 +55,15 @@ scene.add(gridHelper)
 //orbitcontrol
 const controls = new OrbitControls(camera,renderer.domElement)
  */
+
+//on scroll animation
 var currentscroll = 0;
 document.body.onscroll = moveCamera
 function moveCamera(){
   const t= document.body.getBoundingClientRect().top
   const scrolled = currentscroll-t;
   squareArray.forEach(square=>{
-    square.position.z+=0.05*scrolled
+    square.position.z+=0.01*scrolled
   })
   currentscroll = t;
 }
@@ -101,7 +103,7 @@ function animate(){
   //all subCubes animation
   squareArray.forEach(square=>{
     square.position.y+=0.3
-    square.position.z+=0.3
+    square.position.z+=0.15
     if(square.position.y>300){
       square.position.y = -300
     }

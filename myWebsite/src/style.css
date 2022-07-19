@@ -1,5 +1,117 @@
-canvas{
+@font-face {
+  font-family: 'Anita  Semi-square';
+  src: url('AnitaSemi-square.woff2') format('woff2'),
+    url('AnitaSemi-square.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  padding: 0;
+  margin: 0
+}
+
+canvas {
   position: fixed;
   top: 0;
   left: 0;
+}
+
+/* TITLE */
+.title {
+  left: 0;
+  top: 0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  color: white;
+  font-family: 'Anita  Semi-square';
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title>h1 {
+  font-size: 17vh;
+  animation: fadeIn 3s;
+}
+
+
+.title>h2 {
+  font-size: 8vh;
+  animation: fadeIn 5s;
+
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* MAIN */
+main {
+  top: 100%;
+  left: 0;
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  color: white;
+  font-family: 'Anita  Semi-square';
+  background-color: rgba(10, 10, 10, 0.575);
+
+}
+
+/* main>h1,
+main>h2,
+main>p {
+  text-align: justify;
+  grid-column: 2 /8;
+  background-color: rgba(10, 10, 10, 0.575);
+} */
+
+/* WHO I AM */
+.iam {
+  height: 100%;
+  text-align: justify;
+  grid-column: 2/11;
+  display: flex;
+  padding-top: 80px;
+}
+
+.txt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 50px;
+}
+
+.txt>h1 {
+  font-size: 3rem;
+}
+
+.txt>p {
+  font-size: 1.5rem;
+}
+
+.iam>img {
+  width: 35%;
+}
+
+/* MY PROJECTS */
+.proj{
+  margin-top: 15%;
+  grid-column: 2/11;
+}
+
+.proj>p{
+  font-size: 1.3rem;
 }
