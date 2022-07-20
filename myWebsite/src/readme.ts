@@ -100,8 +100,8 @@ divRead.style.backgroundAttachment= "fixed";
 divRead.style.backgroundSize= "contain";
 
 ///ONCLICK event
-canvaselem.addEventListener("click",zoomIn)
+divRead.addEventListener("click",zoomIn)
 function zoomIn(){
-
+    divRead.classList.toggle("fullscreen")
 }
 
