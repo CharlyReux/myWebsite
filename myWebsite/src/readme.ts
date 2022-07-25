@@ -1,7 +1,7 @@
 import './style.css'
 
 import * as THREE from 'three';
-import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
+//import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 
 const scene = new THREE.Scene();
 {
@@ -47,7 +47,7 @@ scene.background = spaceTexture
 scene.add(gridHelper) */
 
 //orbitcontrol
-const controls = new OrbitControls(camera,renderer.domElement)
+//const controls = new OrbitControls(camera,renderer.domElement)
 
 //cube creation
 const cubeCoord = createTab(3,8)
