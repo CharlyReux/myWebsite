@@ -40,6 +40,19 @@ pointlight.position.set(0,0,30)
 pointlight.power = 6
 scene.add(pointlight)
 
+
+//window resize
+window.addEventListener('resize', onWindowResize, false);
+
+function onWindowResize() {
+
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+}
+
  //ambientlight
 /* const ambientLight = new THREE.AmbientLight(0xffffff)
 scene.add(ambientLight) */

@@ -79,10 +79,11 @@ main>p {
 
 /* WHO I AM */
 .iam {
-  height: 100%;
   text-align: justify;
-  grid-column: 2/11;
+  grid-column: 1/12;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   padding-top: 80px;
 }
 
@@ -91,7 +92,9 @@ main>p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0 50px;
+  padding: 30px 30px;
+  width: 50%;
+  min-width: 20rem;
 }
 
 .txt>h1 {
@@ -104,17 +107,16 @@ main>p {
 }
 
 .iam>img {
-  padding-top: 20%;
-  display: block;
-  max-width:50%;
-  max-height:50%;
+  padding-top: 50px;
+  max-width:400px;
+  max-height:400px;
   width: auto;
   height: auto;
 }
 
 /* MY PROJECTS */
 .proj{
-  margin-top: 15%;
+  margin-top: 10%;
   grid-column: 2/11;
 }
 
@@ -151,4 +153,24 @@ main>p {
   position: fixed; 
   top: 0; 
   left: 0; 
+}
+
+
+/* My hobbies*/
+.int {
+  text-align: justify;
+  grid-column: 1/12;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 100px;
+}
+
+
+.int>img {
+  padding-top: 80px;
+  max-width:400px;
+  max-height:400px;
+  width: auto;
+  height: auto;
 }
