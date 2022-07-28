@@ -1,7 +1,7 @@
 import './style.css'
 
 import * as THREE from 'three';
-//import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 
 const scene = new THREE.Scene();
 {
@@ -16,15 +16,27 @@ const camera = new THREE.PerspectiveCamera(75, canvaselem.offsetWidth / canvasel
 
 const renderer = new THREE.WebGLRenderer({
     canvas: document.querySelector("#rd")!,
+    preserveDrawingBuffer:true
 });
 
 renderer.setSize(canvaselem.offsetWidth, canvaselem.offsetHeight)
 
+//window resize
+window.addEventListener('resize', onWindowResize, false);
 
+function onWindowResize() {
+
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+}
 
 //pointlight
 const pointlight = new THREE.PointLight(0xffffff)
-pointlight.power=50
+pointlight.power=20
+pointlight.position.set(10,10,0)
 scene.add(pointlight)
 
 
@@ -47,10 +59,10 @@ scene.background = spaceTexture
 scene.add(gridHelper) */
 
 //orbitcontrol
-//const controls = new OrbitControls(camera,renderer.domElement)
+const controls = new OrbitControls(camera,renderer.domElement)
 
 //cube creation
-const cubeCoord = createTab(3,8)
+const cubeCoord = createTab(1,8)
 cubeCoord.forEach(co => {
     const nCube = new THREE.BoxGeometry(5,5,5)
     const material = new THREE.MeshStandardMaterial({color: 0x9e9e9e})
@@ -90,18 +102,7 @@ function animate(){
 }
 animate();
 
-//makeitBackground
-var dataurl = canvaselem.toDataURL();
-var divRead = document.getElementById("cnv")!
-divRead.style.background = 'url('+dataurl+')'
 
-divRead.style.backgroundRepeat="no-repeat";
-divRead.style.backgroundAttachment= "fixed";
-divRead.style.backgroundSize= "contain";
 
-///ONCLICK event
-divRead.addEventListener("click",zoomIn)
-function zoomIn(){
-    divRead.classList.toggle("fullscreen")
-}
+
 

@@ -18,6 +18,9 @@
   <script type="module" src="/src/main.ts"></script>
   <script type="module" src="/src/readme.ts"></script>
   <script type="module" src="/src/Page.ts"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+  
 
   <canvas id="bg"></canvas>
 
@@ -28,7 +31,7 @@
   </div>
 
 
-  <main>
+  <main id="main">
     <!-- WHO I AM -->
     <div class="iam">
       <div class="txt">
@@ -48,7 +51,7 @@
       <h1>My projects</h1>
       <p>I have worked on a few projects now, whether those are personnal or school related. You can find more details
         by clicking below, or even more details by checking my github.</p>
-      <div id="cnv" class="cnvClass">
+      <div id="cnv" class="cnvClass">My projects
       </div>
     </div>
 
@@ -57,7 +60,7 @@
     <div class="int">
       <img src="images/interests.jpg">
       <div class="txt">
-        <h1>My hobbies</h1>
+        <h1>My interests</h1>
         <p>
           I am passionated by many things other than computers. First of all I love sports, for example I practice
           climbing 3 times a week or gymnastics that I practised for 6 years when I was younger. Other than sport I
@@ -70,13 +73,16 @@
     </div>
 
     <!-- Contacts -->
-    
-
 
 
   </main>
-  <canvas id="rd"></canvas>
+  <div id ="readmeText">
+    <h1>My projects</h1>
 
+  </div>
+
+  <canvas id="rd"></canvas>
+  <button id="backMenu" class="button-27" >Back to menu</button>
 
 
 
