@@ -6,7 +6,6 @@ window.addEventListener('load', () => {
   document.body.style.visibility = ""
 });
 
-document.body.style.overflow = "hidden"
 
 var divRead = document.getElementById("cnv")!
 const canvaselem = <HTMLCanvasElement>document.getElementById("rd")!
