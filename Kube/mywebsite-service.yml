@@ -1,0 +1,13 @@
+kind: Service 
+apiVersion: v1 
+metadata:
+  name: hostname-service
+  namespace: mywebsite 
+spec:
+  type: NodePort
+  selector:
+    app: mywebsite 
+  ports:
+    - nodePort: 30111
+      port: 8080 
+      targetPort: 5173

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mywebsite
+  namespace: mywebsite
+  labels:
+    app: mywebsite
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mywebsite
+  template:
+    metadata:
+      labels:
+        app: mywebsite
+    spec:
+      containers:
+      - image: charlyreux/mywebsite:latest
+        name: mywebsite
+      imagePullSecrets:
+      - name: regcred
