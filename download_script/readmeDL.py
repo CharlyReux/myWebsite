@@ -5,20 +5,16 @@
 
 import requests
 import json
-import os
 import sys
-
-
-scriptPath = os.path.dirname(os.path.realpath(__file__))
+import base64
 
 AllRepos= requests.get("https://api.github.com/users/CharlyReux/repos",headers={"Accept":"application/vnd.github+json","Authorization":sys.argv[0]})
 
 JsonRepos = json.loads(AllRepos.content)
 
 for rep in JsonRepos:
-    f = open(scriptPath+"/../dist/assets/Readmes/"+rep["name"]+"_README.html","w")
     
     RHtml = requests.get("https://api.github.com/repos/CharlyReux/"+rep["name"]+"/readme",headers={"Accept": "application/vnd.github.html","Authorization":sys.argv[0]})
     
-    f.write(RHtml.content.decode("utf-8"))
-    f.close()
+
+    puReq = requests.put("https://api.github.com/repos/CharlyReux/myWebsite/Readmes/"+rep["name"]+"/readme",data={"message":"getting Readme","committer":{"name":"githubRunner","email":"charlyreux@gmail.com"},"content":base64.b64encode(RHtml.content.decode("utf-8"))},headers={"Accept": "application/vnd.github.html","Authorization":sys.argv[0]})
