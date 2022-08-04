@@ -8,7 +8,7 @@ import json
 import sys
 import base64
 
-token = sys.argv[0]
+token = sys.argv[1]
 
 print(token)
 
