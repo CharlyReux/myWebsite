@@ -21,4 +21,4 @@ jobs:
     - name: Login to dockerhub
       run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u charlyreux --password-stdin
     - name: Push the Docker image
-      run: docker push . --file dockerfile --tag charlyreux/mywebsite:$(date +%s)
+      run: docker push charlyreux/mywebsite:$(date +%s)
