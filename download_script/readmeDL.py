@@ -18,4 +18,4 @@ for rep in JsonRepos:
     
 
     puReq = requests.put("https://api.github.com/repos/CharlyReux/myWebsite/Readmes/"+rep["name"]+"_readme",data={"message":"getting Readme","committer":{"name":"githubRunner","email":"charlyreux@gmail.com"},"content":base64.b64encode(RHtml.content)},headers={"Accept": "application/vnd.github.html","Authorization":sys.argv[0]})
-    print(puReq + "=>\n"+puReq.content)
+    print(puReq.content)
