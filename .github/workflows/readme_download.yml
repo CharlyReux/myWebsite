@@ -1,8 +1,12 @@
 name: Download readmes
 
 on:
-  schedule:
-    - cron: "33 * * * *"
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  #schedule:
+   # - cron: "*/5 * * * *"
 
 jobs:
 
