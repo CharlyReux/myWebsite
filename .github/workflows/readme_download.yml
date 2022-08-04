@@ -2,7 +2,7 @@ name: Download readmes
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "33 * * * *"
 
 jobs:
 
