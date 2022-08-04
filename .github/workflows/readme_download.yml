@@ -7,7 +7,7 @@ on:
 jobs:
 
   build:
-
+    name: Trigger readme Download
     runs-on: ubuntu-latest
 
     steps:
