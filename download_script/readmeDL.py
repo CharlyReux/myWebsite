@@ -10,6 +10,8 @@ import base64
 
 token = sys.argv[0]
 
+print(token)
+
 AllRepos= requests.get("https://api.github.com/users/CharlyReux/repos",headers={"Accept":"application/vnd.github+json","Authorization":"token "+token})
 print(AllRepos.content)
 
