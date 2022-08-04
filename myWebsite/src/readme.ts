@@ -2,30 +2,11 @@ import './style.css'
 
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
-import { Octokit, App } from "octokit";
 
 
 ///readme stuff
 
-const octokit = new Octokit({
-  })
-  
 
-
-  const {data:allRepo} = await octokit.request('GET /users/{username}/repos', {
-    username: 'CharlyReux'
-  })
-
-    var allReadme:string[] = []
-
-  allRepo!.forEach(async (rep: { name: any; }) => {
-    
-       const{data:red} = await octokit.request('GET /repos/{owner}/{repo}/readme', {
-          owner: 'CharlyReux',
-          repo: rep.name
-        })
-        allReadme.push(red.content)
-    });
 
     //TODO use npm showdown to put the content in the readme part
 
