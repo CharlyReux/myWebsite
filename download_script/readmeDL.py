@@ -22,7 +22,7 @@ for rep in JsonRepos:
     
 
     ta={"message":"getting Readme","committer":{"name":"CharlyReux","email":"charlyreux@gmail.com"},"content":base64.b64encode(RHtml.content).decode("utf8")}
-    print(ta)
+    tastr = json.dump(ta)
 
-    puReq = requests.put("https://api.github.com/repos/CharlyReux/myWebsite/contents/Readmes/"+rep["name"]+"README.html",data={"message":"getting Readme","committer":{"name":"CharlyReux","email":"charlyreux@gmail.com"},"content":base64.b64encode(RHtml.content).decode("utf8")},headers={"Accept": "application/vnd.github+json","Authorization":"token "+token})
+    puReq = requests.put("https://api.github.com/repos/CharlyReux/myWebsite/contents/Readmes/"+rep["name"]+"README.html",data=tastr,headers={"Accept": "application/vnd.github+json","Authorization":"token "+token})
     print(puReq.content)
