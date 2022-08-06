@@ -157,7 +157,7 @@ main>p {
   z-index: 2;
   position:fixed;
   top: 10%;
-  left: -20%;
+  left: -700px;
 }
 
 .button-27 {
@@ -221,6 +221,14 @@ main>p {
     margin-top: 10%;
     grid-column: 2/11;
 }
+
+#readmeText>p{
+  text-align: center;
+    margin-top: -10%;
+    grid-column: 2/11;
+    font-size: larger;
+}
+
 
 
 /* My hobbies*/
