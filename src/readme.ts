@@ -8,9 +8,6 @@ import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 
 
 
-    //TODO use npm showdown to put the content in the readme part
-
-
 
 //treejs stuff
 const scene = new THREE.Scene();
