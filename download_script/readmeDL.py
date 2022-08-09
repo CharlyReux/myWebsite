@@ -14,7 +14,7 @@ token = sys.argv[1]
 AllRepos= requests.get("https://api.github.com/users/CharlyReux/repos",headers={"Accept":"application/vnd.github+json","Authorization":"token "+token})
 
 JsonRepos = json.loads(AllRepos.content)
-jsonList=[]
+jsonList=["mainReadme.html"]
 
 for rep in JsonRepos:
     

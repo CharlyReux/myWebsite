@@ -2,6 +2,7 @@ import './style.css'
 
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
+import { Camera, Vector3 } from 'three';
 
 
 ///readme stuff
@@ -11,11 +12,7 @@ import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 
 //treejs stuff
 const scene = new THREE.Scene();
-{
-    const color = 0x000000;
-    const density = 0.05;
-    scene.fog = new THREE.FogExp2(color, density)
-}
+
 
 const canvaselem = <HTMLCanvasElement> document.getElementById("rd")!
 
@@ -42,7 +39,7 @@ function onWindowResize() {
 
 //pointlight
 const pointlight = new THREE.PointLight(0xffffff)
-pointlight.power=20
+pointlight.power=100
 pointlight.position.set(10,10,0)
 scene.add(pointlight)
 
@@ -69,20 +66,17 @@ scene.add(gridHelper) */
 const controls = new OrbitControls(camera,renderer.domElement)
 
 //cube creation
-const cubeCoord = createTab(1,8)
-cubeCoord.forEach(co => {
-    const nCube = new THREE.BoxGeometry(5,5,5)
-    const material = new THREE.MeshStandardMaterial({color: 0x9e9e9e})
-    const Ccube = new THREE.Mesh(nCube,material)
-    Ccube.position.set(co[0],co[1],co[2])
-    scene.add(Ccube)
-});
+createTab(1,10)
+
+var WantedCamPosition:Vector3 = new Vector3(20,15,15)
+
+import * as TWEEN from "@tweenjs/tween.js";
 
 
 /**
- * Function that create a tri-dimensional array a equally distant coordinates around 0
+ * Function that create a tri-dimensional array with equally distant coordinates around 0
  */
- function createTab(WIDTH:number,DIST:number):number[][]{
+ export function createTab(WIDTH:number,DIST:number){
     const v =Math.floor(WIDTH/2)
     var index = 0;
     var tabarray=[] ;
@@ -98,14 +92,47 @@ cubeCoord.forEach(co => {
             }   
         }   
     }
-    return tabarray
+    tabarray.forEach(co => {
+        const nCube = new THREE.BoxGeometry(5,5,5)
+        const material = new THREE.MeshStandardMaterial({color: 0x9e9e9e})
+        const Ccube = new THREE.Mesh(nCube,material)
+        Ccube.position.set(co[0],co[1],co[2])
+        scene.add(Ccube)
+    });
+
+    var posX = 40*(WIDTH/10)+16;
+    var test:Vector3 = camera.position.clone()
+    WantedCamPosition= test.normalize().multiplyScalar(new Vector3(posX,posX*(3/4),posX*(3/4)).length())
+    var previousCamPos = camera.position
+    new TWEEN.Tween(previousCamPos)
+      .to(WantedCamPosition)
+      .onUpdate(() =>
+        camera.position.set(previousCamPos.x, previousCamPos.y, previousCamPos.z)
+      )
+      .start();
+
+    pointlight.power= 2*WIDTH
+}
+
+controls.autoRotate= true
+controls.autoRotateSpeed = 1
+
+controls.enableZoom = false;
+controls.enableRotate = false;
+controls.enablePan = false;
+export function stopRotate(){
+    controls.autoRotate= false
+}
+export function startRotate(){
+    controls.autoRotate= true
 }
 
 
 function animate(){
     requestAnimationFrame(animate);
-    renderer.render(scene, camera)
-
+    renderer.render(scene, camera);
+    TWEEN.update()
+    controls.update()
 }
 animate();
 

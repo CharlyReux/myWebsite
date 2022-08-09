@@ -1,5 +1,5 @@
 import './style.css'
-
+import { createTab, startRotate, stopRotate } from './readme';
 
 
 window.addEventListener('load', () => {
@@ -40,6 +40,7 @@ function zoomIn() {
   var mainText = document.getElementById("main");
   mainText!.style.display = "none"
   document.body.scrollTop = document.documentElement.scrollTop = 0;
+  startRotate()
 }
 
 
@@ -57,6 +58,7 @@ function goBackMenu() {
   textReadMe!.style.display = "none"
   createBackGroundCube()
   document.body.scrollTop = document.documentElement.scrollTop = FormerScroll
+  stopRotate()
 }
 
 
@@ -65,7 +67,7 @@ function goBackMenu() {
 var indexReadme = 0;
 import allReadmes from "./ListReadme.json" assert {type: "json"}
 
-$("#ReadmeCounter").text(indexReadme + " / " + allReadmes.length)
+$("#ReadmeCounter").text(indexReadme + " / " + (allReadmes.length - 1))
 
 
 var ALeft = document.getElementById("ALeft")
@@ -73,28 +75,36 @@ var ARight = document.getElementById("ARight")
 
 ARight?.addEventListener("click", nextReadme)
 
+var maxRD = 0;
+
 function nextReadme() {
-  if (indexReadme == allReadmes.length -1) {
+  if (indexReadme == allReadmes.length - 2) {
     $(".right").css({ "opacity": "0.5" })
-  }else   if (indexReadme == allReadmes.length) {
+  } else if (indexReadme == allReadmes.length-1) {
     return
   }
-  if (indexReadme >= 1) $(".left").css({ "opacity": "1" })
   indexReadme++;
-  $("#ReadmeCounter").text(indexReadme + " / " + allReadmes.length)
-  $("#readmeText").load("./Readmes/" + allReadmes[indexReadme - 1])
+  if (indexReadme >= 1) $(".left").css({ "opacity": "1" })
+  $("#ReadmeCounter").text(indexReadme + " / " + (allReadmes.length-1))
+  $("#readmeText").load("./Readmes/" + allReadmes[indexReadme])
+
+  if(indexReadme>maxRD){
+    createTab(indexReadme*2,8)
+    maxRD = indexReadme
+  }
+
 }
 
 ALeft?.addEventListener("click", previousReadme)
 
 function previousReadme() {
-  if (indexReadme <= 1) {
-    return;
-  } else  if (indexReadme <= 2) {
+  if (indexReadme == 1) {
     $(".left").css({ "opacity": "0.5" })
-  } 
+  } else if (indexReadme <= 0) {
+    return
+  }
   indexReadme--
   $(".right").css({ "opacity": "1" })
-  $("#ReadmeCounter").text(indexReadme + " / " + allReadmes.length)
-  $("#readmeText").load("./Readmes/" + allReadmes[indexReadme - 1])
+  $("#ReadmeCounter").text(indexReadme + " / " + (allReadmes.length-1))
+  $("#readmeText").load("./Readmes/" + allReadmes[indexReadme])
 }
