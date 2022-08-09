@@ -42,9 +42,9 @@ for rep in JsonRepos:
     puReq = requests.put("https://api.github.com/repos/CharlyReux/myWebsite/contents/Readmes/"+rep["name"]+"_README.html",data=tastr,headers={"Accept": "application/vnd.github+json","Authorization":"token "+token})
     print(puReq.content)
 
+print(jsonList)
 
-
-#Getting the sha of the readmes
+#Getting the sha of the json
 ShaReq = requests.get("https://api.github.com/repos/CharlyReux/myWebsite/contents/src/listReadme.json",headers={"Accept": "application/vnd.github+json","Authorization":"token "+token})
 if(ShaReq.status_code!=404):
     ShaReqJson = json.loads(ShaReq.content)
@@ -57,3 +57,4 @@ ta={"message":"[automatic]modifying readme list","committer":{"name":"CharlyReux
 tastr = json.dumps(jsonList)
 
 puReq = requests.put("https://api.github.com/repos/CharlyReux/myWebsite/contents/src/listReadme.json",data=tastr,headers={"Accept": "application/vnd.github+json","Authorization":"token "+token})
+print(puReq)
