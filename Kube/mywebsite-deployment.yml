@@ -18,5 +18,6 @@ spec:
       containers:
       - image: charlyreux/mywebsite:latest
         name: mywebsite
+        imagePullPolicy: Always
       imagePullSecrets:
       - name: regcred

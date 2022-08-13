@@ -53,8 +53,8 @@ else:
     ShaValue =""
 
 #Modifying the the readmes json list in the repository
-ta={"message":"[automatic]modifying readme list","committer":{"name":"CharlyReux","email":"charlyreux@gmail.com"},"content":base64.b64encode(RHtml.content).decode("utf8"),"sha":ShaValue}
-tastr = json.dumps(jsonList)
+ta={"message":"[automatic]modifying readme list","committer":{"name":"CharlyReux","email":"charlyreux@gmail.com"},"content":base64.b64encode(jsonList).decode("utf8"),"sha":ShaValue}
+tastr = json.dumps(ta)
 
 puReq = requests.put("https://api.github.com/repos/CharlyReux/myWebsite/contents/src/listReadme.json",data=tastr,headers={"Accept": "application/vnd.github+json","Authorization":"token "+token})
 print(puReq)

@@ -6,11 +6,15 @@
   <link rel="icon" type="image/png" sizes="16x16" href="./images/mylogo.png">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Website</title>
+  <title>Charly Reux - Website</title>
+  <meta name="description" content="Everything that there is to know about myself, my studies, my projects, my hobbies">
+  <meta name="robots" content="index, archive, follow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato&family=Titillium+Web:wght@900&display=swap"
     rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
 </head>
 
@@ -20,7 +24,25 @@
   <script type="module" src="/src/Page.ts"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
-
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Rennes, France",
+        "postalCode": "35000"
+        },
+      "email": "mailto:charlyreux@gmail.com",
+      "jobTitle": "Student",
+      "alumniOf":{
+        "name":"ESIR"
+      }
+      "name": "Charly REUX",
+      "telephone": "07 88 87 38 57",
+      "url": "http://www.charlyr.me"
+    }
+    </script>
 
   <canvas id="bg"></canvas>
 
@@ -35,7 +57,7 @@
     <!-- WHO I AM -->
     <div class="iam">
       <div class="txt">
-        <h1>Who I am</h1>
+        <h2>Who I am</h2>
         <p>
           Hello! My name is charly, I am a software engineering student in the ESIR school in Rennes. I am passionated
           by programming and engineering in general. I love working on hard and complex projects and most of all, I love
@@ -44,7 +66,7 @@
           you can contact me.
         </p>
       </div>
-      <img src="images/profile.jpeg">
+      <img alt="Profile photo of me" src="images/profile.jpeg">
     </div>
     <!-- My projects -->
     <div class="proj">
@@ -58,9 +80,9 @@
 
     <!-- My interests -->
     <div class="int">
-      <img src="images/interests.jpg">
+      <img alt="Photo of me climbing" src="images/interests.jpg">
       <div class="txt">
-        <h1>My interests</h1>
+        <h2>My interests</h2>
         <p>
           I am passionated by many things other than computers. First of all I love sports, for example I practice
           climbing 3 times a week or gymnastics that I practised for 6 years when I was younger. Other than sport I
@@ -73,11 +95,23 @@
     </div>
 
     <!-- Contacts -->
+    <footer>
+      <div class="contxt">
+        <h2>Contact</h2>
+        <div class="links">
+          <a target="_blank" href="https://github.com/CharlyReux"><i class="fa fa-github"></i>GitHub</a>
+          <a href="/CVs/Charly REUX.pdf" download="CV_Charly_REUX"><i class="fa fa-file"></i>CV</a>
+          <a href="mailto:charlyreux@gmail.com?subject=We want to hire you" ><i class="fa fa-envelope"></i>mail</a>
+          <a href="https://www.linkedin.com/in/charly-reux" ><i class="fa fa-linkedin"></i>Linkedin</a>
 
+        </div>
+      </div>
+    </footer>
 
   </main>
+  <!-- Readme Part -->
   <div id="readmeText">
-    <h1>My projects</h1>
+    <h2>My projects</h2>
     <p>
       All of the projects that follows are automatically retrieved from my github repositories with the github api, so
       some of them could potentially be in progress.<br>
