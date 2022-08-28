@@ -54,8 +54,16 @@ else:
 
 #Modifying the the readmes json list in the repository
 newListJson = json.dumps(jsonList)
+<<<<<<< HEAD
 ta={"message":"[automatic]modifying readme list","committer":{"name":"CharlyReux","email":"charlyreux@gmail.com"},"content":base64.b64encode(str.encode(newListJson)).decode("utf8"),"sha":ShaValue}
 tastr = json.dumps(ta)
 
 puReq = requests.put("https://api.github.com/repos/CharlyReux/myWebsite/contents/src/ListReadme.json",data=tastr,headers={"Accept": "application/vnd.github+json","Authorization":"token "+token})
 print(puReq)
+=======
+ta={"message":"[automatic]modifying readme list","committer":{"name":"CharlyReux","email":"charlyreux@gmail.com"},"content":base64.b64encode(newListJson.encode('ascii')).decode("utf8"),"sha":ShaValue}
+
+
+puReq = requests.put("https://api.github.com/repos/CharlyReux/myWebsite/contents/src/listReadme.json",data=ta,headers={"Accept": "application/vnd.github+json","Authorization":"token "+token})
+print(puReq)
+>>>>>>> 2b13425e516c28d85078cb04768c0bf548a446d3
