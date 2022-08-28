@@ -45,7 +45,7 @@ for rep in JsonRepos:
 print(jsonList)
 
 #Getting the sha of the json
-ShaReq = requests.get("https://api.github.com/repos/CharlyReux/myWebsite/contents/src/listReadme.json",headers={"Accept": "application/vnd.github+json","Authorization":"token "+token})
+ShaReq = requests.get("https://api.github.com/repos/CharlyReux/myWebsite/contents/src/ListReadme.json",headers={"Accept": "application/vnd.github+json","Authorization":"token "+token})
 if(ShaReq.status_code!=404):
     ShaReqJson = json.loads(ShaReq.content)
     ShaValue = ShaReqJson["sha"]
@@ -54,8 +54,8 @@ else:
 
 #Modifying the the readmes json list in the repository
 newListJson = json.dumps(jsonList)
-ta={"message":"[automatic]modifying readme list","committer":{"name":"CharlyReux","email":"charlyreux@gmail.com"},"content":base64.b64encode(newListJson).decode("utf8"),"sha":ShaValue}
+ta={"message":"[automatic]modifying readme list","committer":{"name":"CharlyReux","email":"charlyreux@gmail.com"},"content":base64.b64encode(str.encode(newListJson)).decode("utf8"),"sha":ShaValue}
 tastr = json.dumps(ta)
 
-puReq = requests.put("https://api.github.com/repos/CharlyReux/myWebsite/contents/src/listReadme.json",data=tastr,headers={"Accept": "application/vnd.github+json","Authorization":"token "+token})
+puReq = requests.put("https://api.github.com/repos/CharlyReux/myWebsite/contents/src/ListReadme.json",data=tastr,headers={"Accept": "application/vnd.github+json","Authorization":"token "+token})
 print(puReq)
