@@ -1,0 +1,873 @@
+<div id="readme" class="md" data-path="README.md"><article class="markdown-body entry-content container-lg" itemprop="text"><h1 dir="auto"><a id="user-content-tp-mongodb-reux_thomas" class="anchor" aria-hidden="true" href="#tp-mongodb-reux_thomas"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>TP-mongoDB-REUX_THOMAS</h1>
+<h2 dir="auto"><a id="user-content-commands" class="anchor" aria-hidden="true" href="#commands"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Commands:</h2>
+<p dir="auto">Démarrer l'instance docker:</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="docker-compose up"><pre>docker-compose up</pre></div>
+<p dir="auto">Se connecter au shell</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="docker exec -it mongo bash
+mongo admin -u root -p password"><pre>docker <span class="pl-c1">exec</span> -it mongo bash
+mongo admin -u root -p password</pre></div>
+<h2 dir="auto"><a id="user-content-pour-débuter-1" class="anchor" aria-hidden="true" href="#pour-débuter-1"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Pour débuter 1</h2>
+<h3 dir="auto"><a id="user-content-3-insertion-utilisateur" class="anchor" aria-hidden="true" href="#3-insertion-utilisateur"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>3. Insertion utilisateur</h3>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; use forum"><pre><span class="pl-k">&gt;</span> use forum</pre></div>
+<p dir="auto">2./3. insertion utilisateur</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.collection.insert({&quot;nickname&quot;:&quot;jean&quot;,&quot;age&quot;:20})"><pre><span class="pl-k">&gt;</span> db.collection.insert({<span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>jean<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span>:20})</pre></div>
+<h3 dir="auto"><a id="user-content-4-vérification-du-résultat" class="anchor" aria-hidden="true" href="#4-vérification-du-résultat"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>4. Vérification du résultat</h3>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.collection.find()
+{ &quot;_id&quot; : ObjectId(&quot;63cfe4054a461e15c728b3bc&quot;), &quot;nickname&quot; : &quot;jean&quot;, &quot;age&quot; : 20 }"><pre><span class="pl-k">&gt;</span> <span class="pl-en">db.collection.find</span>()
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> ObjectId(<span class="pl-s"><span class="pl-pds">"</span>63cfe4054a461e15c728b3bc<span class="pl-pds">"</span></span>), <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>jean<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 20 }</pre></div>
+<h3 dir="auto"><a id="user-content-5-recherche-par-champ" class="anchor" aria-hidden="true" href="#5-recherche-par-champ"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>5. Recherche par champ</h3>
+<p dir="auto">par le champ age</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.collection.find({&quot;age&quot;:20})
+{ &quot;_id&quot; : ObjectId(&quot;63cfe540d4286c9a88c98c00&quot;), &quot;nickname&quot; : &quot;jean&quot;, &quot;age&quot; : 20 }"><pre><span class="pl-k">&gt;</span> db.collection.find({<span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span>:20})
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> ObjectId(<span class="pl-s"><span class="pl-pds">"</span>63cfe540d4286c9a88c98c00<span class="pl-pds">"</span></span>), <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>jean<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 20 }</pre></div>
+<p dir="auto">Recherche par l'ID</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.collection.find({},{&quot;_id&quot;:0})
+{ &quot;nickname&quot; : &quot;jean&quot;, &quot;age&quot; : 20 }"><pre><span class="pl-k">&gt;</span> db.collection.find({},{<span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span>:0})
+{ <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>jean<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 20 }</pre></div>
+<h3 dir="auto"><a id="user-content-6-ajout-dun-attribut-interest-et-recherche" class="anchor" aria-hidden="true" href="#6-ajout-dun-attribut-interest-et-recherche"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>6. Ajout d'un attribut interest et recherche</h3>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.collection.update({ &quot;nickname&quot; : &quot;jean&quot; }, { $set : { &quot;interests&quot; : [&quot;sucre&quot;,&quot;poe&quot;] }})
+WriteResult({ &quot;nMatched&quot; : 1, &quot;nUpserted&quot; : 0, &quot;nModified&quot; : 1 })"><pre><span class="pl-k">&gt;</span> db.collection.update({ <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>jean<span class="pl-pds">"</span></span> }, { <span class="pl-smi">$set</span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>interests<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [<span class="pl-s"><span class="pl-pds">"</span>sucre<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>poe<span class="pl-pds">"</span></span>] }})
+WriteResult({ <span class="pl-s"><span class="pl-pds">"</span>nMatched<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1, <span class="pl-s"><span class="pl-pds">"</span>nUpserted<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 0, <span class="pl-s"><span class="pl-pds">"</span>nModified<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1 })</pre></div>
+<p dir="auto">Recherche par cet attribut</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.collection.find({&quot;interests&quot;:{$all: [&quot;sucre&quot;]}})
+{ &quot;_id&quot; : ObjectId(&quot;63cfe4054a461e15c728b3bc&quot;), &quot;nickname&quot; : &quot;jean&quot;, &quot;age&quot; : 20, &quot;interests&quot; : [ &quot;sucre&quot;, &quot;poe&quot; ] }"><pre><span class="pl-k">&gt;</span> db.collection.find({<span class="pl-s"><span class="pl-pds">"</span>interests<span class="pl-pds">"</span></span>:{<span class="pl-smi">$all</span>: [<span class="pl-s"><span class="pl-pds">"</span>sucre<span class="pl-pds">"</span></span>]}})
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> ObjectId(<span class="pl-s"><span class="pl-pds">"</span>63cfe4054a461e15c728b3bc<span class="pl-pds">"</span></span>), <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>jean<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 20, <span class="pl-s"><span class="pl-pds">"</span>interests<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ <span class="pl-s"><span class="pl-pds">"</span>sucre<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>poe<span class="pl-pds">"</span></span> ] }</pre></div>
+<h3 dir="auto"><a id="user-content-7-champ-_id" class="anchor" aria-hidden="true" href="#7-champ-_id"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>7. Champ _id</h3>
+<p dir="auto">Le champ _id est un champ généré automatiquement par mongodb si non spécifié, il contient un timestamp, une adresse MAC, un Process Identifier, ainsi qu'un counter.</p>
+<h3 dir="auto"><a id="user-content-8-essai-de-modification-de-lid" class="anchor" aria-hidden="true" href="#8-essai-de-modification-de-lid"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>8. Essai de modification de l'ID</h3>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.collection.update({ &quot;nickname&quot; : &quot;jean&quot; }, { $set : { &quot;_id&quot; : &quot;test&quot; }})
+WriteResult({
+        &quot;nMatched&quot; : 0,
+        &quot;nUpserted&quot; : 0,
+        &quot;nModified&quot; : 0,
+        &quot;writeError&quot; : {
+                &quot;code&quot; : 66,
+                &quot;errmsg&quot; : &quot;Performing an update on the path '_id' would modify the immutable field '_id'&quot;
+        }
+})"><pre><span class="pl-k">&gt;</span> db.collection.update({ <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>jean<span class="pl-pds">"</span></span> }, { <span class="pl-smi">$set</span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>test<span class="pl-pds">"</span></span> }})
+WriteResult({
+        <span class="pl-s"><span class="pl-pds">"</span>nMatched<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 0,
+        <span class="pl-s"><span class="pl-pds">"</span>nUpserted<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 0,
+        <span class="pl-s"><span class="pl-pds">"</span>nModified<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 0,
+        <span class="pl-s"><span class="pl-pds">"</span>writeError<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> {
+                <span class="pl-s"><span class="pl-pds">"</span>code<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 66,
+                <span class="pl-s"><span class="pl-pds">"</span>errmsg<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Performing an update on the path '_id' would modify the immutable field '_id'<span class="pl-pds">"</span></span>
+        }
+})</pre></div>
+<h3 dir="auto"><a id="user-content-9-méthode-pour-mettre-à-jour-lid-de-lutilisateur" class="anchor" aria-hidden="true" href="#9-méthode-pour-mettre-à-jour-lid-de-lutilisateur"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>9. Méthode pour mettre à jour l'id de l'utilisateur</h3>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="doc = db.collection.findOne({_id: OAbjectId(&quot;63cfe4054a461e15c728b3bc&quot;)})
+
+doc._id = ObjectId(&quot;000123454a461e15c728b3bc&quot;)
+
+db.collection.insert(doc)   
+
+db.collection.remove({_id: ObjectId(&quot;63cfe4054a461e15c728b3bc&quot;)})"><pre>doc = db.collection.findOne({_id: OAbjectId(<span class="pl-s"><span class="pl-pds">"</span>63cfe4054a461e15c728b3bc<span class="pl-pds">"</span></span>)})
+
+doc._id = ObjectId(<span class="pl-s"><span class="pl-pds">"</span>000123454a461e15c728b3bc<span class="pl-pds">"</span></span>)
+
+db.collection.insert(doc)   
+
+db.collection.remove({_id: ObjectId(<span class="pl-s"><span class="pl-pds">"</span>63cfe4054a461e15c728b3bc<span class="pl-pds">"</span></span>)})</pre></div>
+<h2 dir="auto"><a id="user-content-pour-débuter-2" class="anchor" aria-hidden="true" href="#pour-débuter-2"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Pour débuter 2</h2>
+<h3 dir="auto"><a id="user-content-1-insertion-deux-utilisateurs-en-une-commande" class="anchor" aria-hidden="true" href="#1-insertion-deux-utilisateurs-en-une-commande"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>1. Insertion deux utilisateurs en une commande</h3>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.collection.insertMany( [{ &quot;nickname&quot;: &quot;pierre&quot;, &quot;age&quot; : 22, &quot;interests&quot; : [ &quot;vélo&quot;, &quot;natation&quot; ] },{ &quot;nickname&quot;: &quot;jacque&quot;, &quot;age&quot; : 31, &quot;interests&quot; : [ &quot;cuisine&quot; ] }] );"><pre><span class="pl-k">&gt;</span> db.collection.insertMany( [{ <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>pierre<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 22, <span class="pl-s"><span class="pl-pds">"</span>interests<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ <span class="pl-s"><span class="pl-pds">"</span>vélo<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>natation<span class="pl-pds">"</span></span> ] },{ <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>jacque<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 31, <span class="pl-s"><span class="pl-pds">"</span>interests<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ <span class="pl-s"><span class="pl-pds">"</span>cuisine<span class="pl-pds">"</span></span> ] }] )<span class="pl-k">;</span></pre></div>
+<h3 dir="auto"><a id="user-content-2-vérifier-linsertion-dans-la-base" class="anchor" aria-hidden="true" href="#2-vérifier-linsertion-dans-la-base"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>2. Vérifier l'insertion dans la base</h3>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.collection.find()
+{ &quot;_id&quot; : ObjectId(&quot;000123454a461e15c728b3bc&quot;), &quot;nickname&quot; : &quot;jean&quot;, &quot;age&quot; : 20, &quot;interests&quot; : [ &quot;sucre&quot;, &quot;poe&quot; ] }
+{ &quot;_id&quot; : ObjectId(&quot;63cfedbeb7c2dd93d791d101&quot;), &quot;nickname&quot; : &quot;pierre&quot;, &quot;age&quot; : 22, &quot;interests&quot; : [ &quot;vélo&quot;, &quot;natation&quot; ] }
+{ &quot;_id&quot; : ObjectId(&quot;63cfedbeb7c2dd93d791d102&quot;), &quot;nickname&quot; : &quot;jacque&quot;, &quot;age&quot; : 31, &quot;interests&quot; : [ &quot;cuisine&quot; ] }"><pre><span class="pl-k">&gt;</span> <span class="pl-en">db.collection.find</span>()
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> ObjectId(<span class="pl-s"><span class="pl-pds">"</span>000123454a461e15c728b3bc<span class="pl-pds">"</span></span>), <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>jean<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 20, <span class="pl-s"><span class="pl-pds">"</span>interests<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ <span class="pl-s"><span class="pl-pds">"</span>sucre<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>poe<span class="pl-pds">"</span></span> ] }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> ObjectId(<span class="pl-s"><span class="pl-pds">"</span>63cfedbeb7c2dd93d791d101<span class="pl-pds">"</span></span>), <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>pierre<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 22, <span class="pl-s"><span class="pl-pds">"</span>interests<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ <span class="pl-s"><span class="pl-pds">"</span>vélo<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>natation<span class="pl-pds">"</span></span> ] }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> ObjectId(<span class="pl-s"><span class="pl-pds">"</span>63cfedbeb7c2dd93d791d102<span class="pl-pds">"</span></span>), <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>jacque<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 31, <span class="pl-s"><span class="pl-pds">"</span>interests<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ <span class="pl-s"><span class="pl-pds">"</span>cuisine<span class="pl-pds">"</span></span> ] }</pre></div>
+<h3 dir="auto"><a id="user-content-3-insertion-utilisateur-avec-un-id-déjà-existant" class="anchor" aria-hidden="true" href="#3-insertion-utilisateur-avec-un-id-déjà-existant"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>3. insertion utilisateur avec un ID déjà existant</h3>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.collection.insert({&quot;nickname&quot;:&quot;patrick&quot;,&quot;age&quot;:42,&quot;_id&quot; : ObjectId(&quot;000123454a461e15c728b3bc&quot;)})
+WriteResult({
+        &quot;nInserted&quot; : 0,
+        &quot;writeError&quot; : {
+                &quot;code&quot; : 11000,
+                &quot;errmsg&quot; : &quot;E11000 duplicate key error collection: forum.collection index: _id_ dup key: { _id: ObjectId('000123454a461e15c728b3bc') }&quot;
+        }
+})"><pre><span class="pl-k">&gt;</span> db.collection.insert({<span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>patrick<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span>:42,<span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> ObjectId(<span class="pl-s"><span class="pl-pds">"</span>000123454a461e15c728b3bc<span class="pl-pds">"</span></span>)})
+WriteResult({
+        <span class="pl-s"><span class="pl-pds">"</span>nInserted<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 0,
+        <span class="pl-s"><span class="pl-pds">"</span>writeError<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> {
+                <span class="pl-s"><span class="pl-pds">"</span>code<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 11000,
+                <span class="pl-s"><span class="pl-pds">"</span>errmsg<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>E11000 duplicate key error collection: forum.collection index: _id_ dup key: { _id: ObjectId('000123454a461e15c728b3bc') }<span class="pl-pds">"</span></span>
+        }
+})</pre></div>
+<p dir="auto">Impossible car l'id est unique</p>
+<h3 dir="auto"><a id="user-content-4-supprimer-un-utilisateur-grâce-à-son-identifiant" class="anchor" aria-hidden="true" href="#4-supprimer-un-utilisateur-grâce-à-son-identifiant"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>4. Supprimer un utilisateur grâce à son identifiant</h3>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.collection.remove({_id: ObjectId(&quot;000123454a461e15c728b3bc&quot;)})
+WriteResult({ &quot;nRemoved&quot; : 1 })"><pre><span class="pl-k">&gt;</span> db.collection.remove({_id: ObjectId(<span class="pl-s"><span class="pl-pds">"</span>000123454a461e15c728b3bc<span class="pl-pds">"</span></span>)})
+WriteResult({ <span class="pl-s"><span class="pl-pds">"</span>nRemoved<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1 })</pre></div>
+<h3 dir="auto"><a id="user-content-5-suppression-de-plusieurs-utilisateurs-en-même-temps" class="anchor" aria-hidden="true" href="#5-suppression-de-plusieurs-utilisateurs-en-même-temps"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>5. Suppression de plusieurs utilisateurs en même temps</h3>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.collection.remove({&quot;age&quot;:20})"><pre><span class="pl-k">&gt;</span> db.collection.remove({<span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span>:20})</pre></div>
+<p dir="auto">5.1. Suppression de tout les document en gardant la base</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.collection.remove({})"><pre><span class="pl-k">&gt;</span> db.collection.remove({})</pre></div>
+<p dir="auto">ou</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.collection.deletemany({})"><pre><span class="pl-k">&gt;</span> db.collection.deletemany({})</pre></div>
+<p dir="auto">La différence est que deletemany va retourner un booléen alors que remove va retourner object WriteResult.<br>
+On peut aussi utiliser <code>db.collection.drop()</code> qui va supprimer l'ensemble d'une collection</p>
+<h2 dir="auto"><a id="user-content-générons-des-données" class="anchor" aria-hidden="true" href="#générons-des-données"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Générons des données</h2>
+<h3 dir="auto"><a id="user-content-1-accès-à-la-base" class="anchor" aria-hidden="true" href="#1-accès-à-la-base"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>1. Accès à la base</h3>
+<p dir="auto">On ajoute dans la ligne 13 de application.propertie:</p>
+<div class="highlight highlight-source-yaml notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="mongo.cnx.string=mongodb://root:password@localhost:27017"><pre><span class="pl-s">mongo.cnx.string=mongodb://root:password@localhost:27017</span></pre></div>
+<h3 dir="auto"><a id="user-content-3-observation-et-recherche-sur-les-données-générées" class="anchor" aria-hidden="true" href="#3-observation-et-recherche-sur-les-données-générées"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>3. Observation et recherche sur les données générées</h3>
+<p dir="auto">On retrouve bien les trois collections générées</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; show collections
+posts
+threads
+users"><pre><span class="pl-k">&gt;</span> show collections
+posts
+threads
+users</pre></div>
+<p dir="auto">Les données contenues dans ces collections sont les suivantes:</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.posts.find().limit(5)
+{ &quot;_id&quot; : &quot;0&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot; }
+{ &quot;_id&quot; : &quot;1&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot; }
+{ &quot;_id&quot; : &quot;2&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot; }
+{ &quot;_id&quot; : &quot;3&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot; }
+{ &quot;_id&quot; : &quot;4&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot; }"><pre><span class="pl-k">&gt;</span> <span class="pl-en">db.posts.find</span>().limit(5)
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>2<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>3<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>4<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> }</pre></div>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.threads.find().limit(5)
+{ &quot;_id&quot; : &quot;0&quot;, &quot;title&quot; : &quot;blah. &quot; }
+{ &quot;_id&quot; : &quot;1&quot;, &quot;title&quot; : &quot;blah. &quot; }
+{ &quot;_id&quot; : &quot;2&quot;, &quot;title&quot; : &quot;blah. &quot; }
+{ &quot;_id&quot; : &quot;3&quot;, &quot;title&quot; : &quot;blah. &quot; }
+{ &quot;_id&quot; : &quot;4&quot;, &quot;title&quot; : &quot;blah. &quot; }"><pre><span class="pl-k">&gt;</span> <span class="pl-en">db.threads.find</span>().limit(5)
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span> }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span> }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>2<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span> }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>3<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span> }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>4<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span> }</pre></div>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.users.find().limit(5)
+{ &quot;_id&quot; : &quot;Nina Theroux|60&quot;, &quot;nickname&quot; : &quot;Nina Theroux&quot;, &quot;age&quot; : 43 }
+{ &quot;_id&quot; : &quot;Hawkgirl|80&quot;, &quot;nickname&quot; : &quot;Hawkgirl&quot;, &quot;age&quot; : 13 }
+{ &quot;_id&quot; : &quot;Cy-Gor|56&quot;, &quot;nickname&quot; : &quot;Cy-Gor&quot;, &quot;age&quot; : 25 }
+{ &quot;_id&quot; : &quot;Ego|65&quot;, &quot;nickname&quot; : &quot;Ego&quot;, &quot;age&quot; : 13 }
+{ &quot;_id&quot; : &quot;Bushido|08&quot;, &quot;nickname&quot; : &quot;Bushido&quot;, &quot;age&quot; : 13 }"><pre><span class="pl-k">&gt;</span> <span class="pl-en">db.users.find</span>().limit(5)
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Nina Theroux|60<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Nina Theroux<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 43 }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Hawkgirl|80<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Hawkgirl<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 13 }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Cy-Gor|56<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Cy-Gor<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 25 }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Ego|65<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Ego<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 13 }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Bushido|08<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Bushido<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 13 }</pre></div>
+<p dir="auto">Pour avoir plus d'informations sur les collection on peut utiliser les méthodes suivantes:</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.getCollectionInfos()
+&gt; db.users.stats()"><pre><span class="pl-k">&gt;</span> <span class="pl-en">db.getCollectionInfos</span>()
+<span class="pl-k">&gt;</span> <span class="pl-en">db.users.stats</span>()</pre></div>
+<h3 dir="auto"><a id="user-content-4-différetes-valeurs-du-champ-age" class="anchor" aria-hidden="true" href="#4-différetes-valeurs-du-champ-age"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>4. Différetes valeurs du champ age</h3>
+<p dir="auto">On peut utiliser la methode distinct en spécifiant l'attribut pour avoir la liste des valeurs distinctes</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.users.distinct(&quot;age&quot;)
+[
+        13,
+        15,
+        16,
+        ...
+]"><pre><span class="pl-k">&gt;</span> db.users.distinct(<span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span>)
+[
+        13,
+        15,
+        16,
+        ...
+]</pre></div>
+<h3 dir="auto"><a id="user-content-5-recherche-dutilisateur-avec-3-valeurs-différentes-pour-le-champ-age" class="anchor" aria-hidden="true" href="#5-recherche-dutilisateur-avec-3-valeurs-différentes-pour-le-champ-age"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>5. Recherche d'utilisateur avec 3 valeurs différentes pour le champ age</h3>
+<p dir="auto">On utilise l'opérateur logique or pour spécifier les différents ages possibles.</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.users.find({&quot;$or&quot;:[{&quot;age&quot;:20},{&quot;age&quot;:25},{&quot;age&quot;:35}]})
+{ &quot;_id&quot; : &quot;Cy-Gor|56&quot;, &quot;nickname&quot; : &quot;Cy-Gor&quot;, &quot;age&quot; : 25 }
+{ &quot;_id&quot; : &quot;Abe Sapien|07&quot;, &quot;nickname&quot; : &quot;Abe Sapien&quot;, &quot;age&quot; : 25 }
+{ &quot;_id&quot; : &quot;Scarecrow|85&quot;, &quot;nickname&quot; : &quot;Scarecrow&quot;, &quot;age&quot; : 35 }
+{ &quot;_id&quot; : &quot;Indigo|01&quot;, &quot;nickname&quot; : &quot;Indigo&quot;, &quot;age&quot; : 20 }
+{ &quot;_id&quot; : &quot;Metamorpho|29&quot;, &quot;nickname&quot; : &quot;Metamorpho&quot;, &quot;age&quot; : 20 }"><pre><span class="pl-k">&gt;</span> db.users.find({<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$or</span><span class="pl-pds">"</span></span>:[{<span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span>:20},{<span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span>:25},{<span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span>:35}]})
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Cy-Gor|56<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Cy-Gor<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 25 }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Abe Sapien|07<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Abe Sapien<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 25 }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Scarecrow|85<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Scarecrow<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 35 }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Indigo|01<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Indigo<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 20 }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Metamorpho|29<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Metamorpho<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 20 }</pre></div>
+<h3 dir="auto"><a id="user-content-6-recherche-des-utilisateurs-de-plus-de-30-ans-et-tri-par-lage" class="anchor" aria-hidden="true" href="#6-recherche-des-utilisateurs-de-plus-de-30-ans-et-tri-par-lage"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>6. Recherche des utilisateurs de plus de 30 ans et tri par l'age</h3>
+<p dir="auto">On utilise l'opérateur de comparaison $gt pour "existe et est suppérieur" avec la méthode .sort("..") en spécifiant l'attribut et le sens du tri</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.users.find({&quot;age&quot;:{&quot;$gt&quot;:30}}).sort({&quot;age&quot;:1}) 
+{ &quot;_id&quot; : &quot;Wonder Woman|85&quot;, &quot;nickname&quot; : &quot;Wonder Woman&quot;, &quot;age&quot; : 32 }
+{ &quot;_id&quot; : &quot;Captain Cold|88&quot;, &quot;nickname&quot; : &quot;Captain Cold&quot;, &quot;age&quot; : 33 }
+{ &quot;_id&quot; : &quot;Big Man|93&quot;, &quot;nickname&quot; : &quot;Big Man&quot;, &quot;age&quot; : 33 }
+{ &quot;_id&quot; : &quot;Crimson Dynamo|84&quot;, &quot;nickname&quot; : &quot;Crimson Dynamo&quot;, &quot;age&quot; : 34 }
+{ &quot;_id&quot; : &quot;Scarecrow|85&quot;, &quot;nickname&quot; : &quot;Scarecrow&quot;, &quot;age&quot; : 35 }
+{ &quot;_id&quot; : &quot;Amazo|11&quot;, &quot;nickname&quot; : &quot;Amazo&quot;, &quot;age&quot; : 36 }
+{ &quot;_id&quot; : &quot;Gladiator|42&quot;, &quot;nickname&quot; : &quot;Gladiator&quot;, &quot;age&quot; : 36 }
+..."><pre><span class="pl-k">&gt;</span> db.users.find({<span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span>:{<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$gt</span><span class="pl-pds">"</span></span>:30}}).sort({<span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span>:1}) 
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Wonder Woman|85<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Wonder Woman<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 32 }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Captain Cold|88<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Captain Cold<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 33 }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Big Man|93<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Big Man<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 33 }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Crimson Dynamo|84<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Crimson Dynamo<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 34 }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Scarecrow|85<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Scarecrow<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 35 }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Amazo|11<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Amazo<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 36 }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Gladiator|42<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Gladiator<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 36 }
+...</pre></div>
+<h2 dir="auto"><a id="user-content-explain" class="anchor" aria-hidden="true" href="#explain"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Explain</h2>
+<h3 dir="auto"><a id="user-content-1-execution-de-de-la-requête-explain" class="anchor" aria-hidden="true" href="#1-execution-de-de-la-requête-explain"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>1. Execution de de la requête explain</h3>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.users.find({&quot;age&quot;:{&quot;$gt&quot;:30}}).sort({&quot;age&quot;:1}).explain()"><pre><span class="pl-k">&gt;</span> <span class="pl-en">db.users.find({"age":{"$gt":30}}).sort({"age":1}).explain</span>()</pre></div>
+<h3 dir="auto"><a id="user-content-2-résultat" class="anchor" aria-hidden="true" href="#2-résultat"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>2. Résultat</h3>
+<div class="highlight highlight-source-json notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="{
+        &quot;queryPlanner&quot; : {
+                &quot;plannerVersion&quot; : 1,
+                &quot;namespace&quot; : &quot;forum.users&quot;,
+                &quot;indexFilterSet&quot; : false,
+                &quot;parsedQuery&quot; : {
+                        &quot;age&quot; : {
+                                &quot;$gt&quot; : 30
+                        }
+                },
+                &quot;queryHash&quot; : &quot;F760A7CC&quot;,
+                &quot;planCacheKey&quot; : &quot;F760A7CC&quot;,
+                &quot;winningPlan&quot; : {
+                        &quot;stage&quot; : &quot;SORT&quot;,
+                        &quot;sortPattern&quot; : {
+                                &quot;age&quot; : 1
+                        },
+                        &quot;memLimit&quot; : 104857600,
+                        &quot;type&quot; : &quot;simple&quot;,
+                        &quot;inputStage&quot; : {
+                                &quot;stage&quot; : &quot;COLLSCAN&quot;,
+                                &quot;filter&quot; : {
+                                        &quot;age&quot; : {
+                                                &quot;$gt&quot; : 30
+                                        }
+                                },
+                                &quot;direction&quot; : &quot;forward&quot;
+                        }
+                },
+                &quot;rejectedPlans&quot; : [ ]
+        },
+        &quot;serverInfo&quot; : {
+                &quot;host&quot; : &quot;6066384c07db&quot;,
+                &quot;port&quot; : 27017,
+                &quot;version&quot; : &quot;4.4.18&quot;,
+                &quot;gitVersion&quot; : &quot;8ed32b5c2c68ebe7f8ae2ebe8d23f36037a17dea&quot;
+        },
+        &quot;ok&quot; : 1
+}"><pre>{
+        <span class="pl-ent">"queryPlanner"</span> : {
+                <span class="pl-ent">"plannerVersion"</span> : <span class="pl-c1">1</span>,
+                <span class="pl-ent">"namespace"</span> : <span class="pl-s"><span class="pl-pds">"</span>forum.users<span class="pl-pds">"</span></span>,
+                <span class="pl-ent">"indexFilterSet"</span> : <span class="pl-c1">false</span>,
+                <span class="pl-ent">"parsedQuery"</span> : {
+                        <span class="pl-ent">"age"</span> : {
+                                <span class="pl-ent">"$gt"</span> : <span class="pl-c1">30</span>
+                        }
+                },
+                <span class="pl-ent">"queryHash"</span> : <span class="pl-s"><span class="pl-pds">"</span>F760A7CC<span class="pl-pds">"</span></span>,
+                <span class="pl-ent">"planCacheKey"</span> : <span class="pl-s"><span class="pl-pds">"</span>F760A7CC<span class="pl-pds">"</span></span>,
+                <span class="pl-ent">"winningPlan"</span> : {
+                        <span class="pl-ent">"stage"</span> : <span class="pl-s"><span class="pl-pds">"</span>SORT<span class="pl-pds">"</span></span>,
+                        <span class="pl-ent">"sortPattern"</span> : {
+                                <span class="pl-ent">"age"</span> : <span class="pl-c1">1</span>
+                        },
+                        <span class="pl-ent">"memLimit"</span> : <span class="pl-c1">104857600</span>,
+                        <span class="pl-ent">"type"</span> : <span class="pl-s"><span class="pl-pds">"</span>simple<span class="pl-pds">"</span></span>,
+                        <span class="pl-ent">"inputStage"</span> : {
+                                <span class="pl-ent">"stage"</span> : <span class="pl-s"><span class="pl-pds">"</span>COLLSCAN<span class="pl-pds">"</span></span>,
+                                <span class="pl-ent">"filter"</span> : {
+                                        <span class="pl-ent">"age"</span> : {
+                                                <span class="pl-ent">"$gt"</span> : <span class="pl-c1">30</span>
+                                        }
+                                },
+                                <span class="pl-ent">"direction"</span> : <span class="pl-s"><span class="pl-pds">"</span>forward<span class="pl-pds">"</span></span>
+                        }
+                },
+                <span class="pl-ent">"rejectedPlans"</span> : [ ]
+        },
+        <span class="pl-ent">"serverInfo"</span> : {
+                <span class="pl-ent">"host"</span> : <span class="pl-s"><span class="pl-pds">"</span>6066384c07db<span class="pl-pds">"</span></span>,
+                <span class="pl-ent">"port"</span> : <span class="pl-c1">27017</span>,
+                <span class="pl-ent">"version"</span> : <span class="pl-s"><span class="pl-pds">"</span>4.4.18<span class="pl-pds">"</span></span>,
+                <span class="pl-ent">"gitVersion"</span> : <span class="pl-s"><span class="pl-pds">"</span>8ed32b5c2c68ebe7f8ae2ebe8d23f36037a17dea<span class="pl-pds">"</span></span>
+        },
+        <span class="pl-ent">"ok"</span> : <span class="pl-c1">1</span>
+}</pre></div>
+<p dir="auto">La méthode explain nous donne (en plus de données générales sur la requête), le nombre d'indexes utilisé.<br> Un index est une structure de données qui stocke une partie des données d'une collection pour améliorer la performance d'accès à ces données.<br>
+Dans notre requête actuelle, aucun index n'est utilisé.</p>
+<h3 dir="auto"><a id="user-content-3-création-dun-index-sur-le-champ-age" class="anchor" aria-hidden="true" href="#3-création-dun-index-sur-le-champ-age"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>3. Création d'un index sur le champ age</h3>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.users.createIndex({&quot;age&quot;:1})"><pre><span class="pl-k">&gt;</span> db.users.createIndex({<span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span>:1})</pre></div>
+<p dir="auto">On obtient la réponse suivante:</p>
+<div class="highlight highlight-source-json notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="{
+        &quot;createdCollectionAutomatically&quot; : false,
+        &quot;numIndexesBefore&quot; : 1,
+        &quot;numIndexesAfter&quot; : 2,
+        &quot;ok&quot; : 1
+}"><pre>{
+        <span class="pl-ent">"createdCollectionAutomatically"</span> : <span class="pl-c1">false</span>,
+        <span class="pl-ent">"numIndexesBefore"</span> : <span class="pl-c1">1</span>,
+        <span class="pl-ent">"numIndexesAfter"</span> : <span class="pl-c1">2</span>,
+        <span class="pl-ent">"ok"</span> : <span class="pl-c1">1</span>
+}</pre></div>
+<p dir="auto">En renouvelant la recherche</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.users.find({&quot;age&quot;:{&quot;$gt&quot;:30}}).sort({&quot;age&quot;:1}).explain()"><pre><span class="pl-k">&gt;</span> <span class="pl-en">db.users.find({"age":{"$gt":30}}).sort({"age":1}).explain</span>()</pre></div>
+<p dir="auto">On obtient le résultat suivant:</p>
+<div class="highlight highlight-source-json notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="{
+        &quot;queryPlanner&quot; : {
+                &quot;plannerVersion&quot; : 1,
+                &quot;namespace&quot; : &quot;forum.users&quot;,
+                &quot;indexFilterSet&quot; : false,
+                &quot;parsedQuery&quot; : {
+                        &quot;age&quot; : {
+                                &quot;$gt&quot; : 30
+                        }
+                },
+                &quot;queryHash&quot; : &quot;F760A7CC&quot;,
+                &quot;planCacheKey&quot; : &quot;45A19300&quot;,
+                &quot;winningPlan&quot; : {
+                        &quot;stage&quot; : &quot;FETCH&quot;,
+                        &quot;inputStage&quot; : {
+                                &quot;stage&quot; : &quot;IXSCAN&quot;,
+                                &quot;keyPattern&quot; : {
+                                        &quot;age&quot; : 1
+                                },
+                                &quot;indexName&quot; : &quot;age_1&quot;,
+                                &quot;isMultiKey&quot; : false,
+                                &quot;multiKeyPaths&quot; : {
+                                        &quot;age&quot; : [ ]
+                                },
+                                &quot;isUnique&quot; : false,
+                                &quot;isSparse&quot; : false,
+                                &quot;isPartial&quot; : false,
+                                &quot;indexVersion&quot; : 2,
+                                &quot;direction&quot; : &quot;forward&quot;,
+                                &quot;indexBounds&quot; : {
+                                        &quot;age&quot; : [
+                                                &quot;(30.0, inf.0]&quot;
+                                        ]
+                                }
+                        }
+                },
+                &quot;rejectedPlans&quot; : [ ]
+        },
+        &quot;serverInfo&quot; : {
+                &quot;host&quot; : &quot;6066384c07db&quot;,
+                &quot;port&quot; : 27017,
+                &quot;version&quot; : &quot;4.4.18&quot;,
+                &quot;gitVersion&quot; : &quot;8ed32b5c2c68ebe7f8ae2ebe8d23f36037a17dea&quot;
+        },
+        &quot;ok&quot; : 1
+}"><pre>{
+        <span class="pl-ent">"queryPlanner"</span> : {
+                <span class="pl-ent">"plannerVersion"</span> : <span class="pl-c1">1</span>,
+                <span class="pl-ent">"namespace"</span> : <span class="pl-s"><span class="pl-pds">"</span>forum.users<span class="pl-pds">"</span></span>,
+                <span class="pl-ent">"indexFilterSet"</span> : <span class="pl-c1">false</span>,
+                <span class="pl-ent">"parsedQuery"</span> : {
+                        <span class="pl-ent">"age"</span> : {
+                                <span class="pl-ent">"$gt"</span> : <span class="pl-c1">30</span>
+                        }
+                },
+                <span class="pl-ent">"queryHash"</span> : <span class="pl-s"><span class="pl-pds">"</span>F760A7CC<span class="pl-pds">"</span></span>,
+                <span class="pl-ent">"planCacheKey"</span> : <span class="pl-s"><span class="pl-pds">"</span>45A19300<span class="pl-pds">"</span></span>,
+                <span class="pl-ent">"winningPlan"</span> : {
+                        <span class="pl-ent">"stage"</span> : <span class="pl-s"><span class="pl-pds">"</span>FETCH<span class="pl-pds">"</span></span>,
+                        <span class="pl-ent">"inputStage"</span> : {
+                                <span class="pl-ent">"stage"</span> : <span class="pl-s"><span class="pl-pds">"</span>IXSCAN<span class="pl-pds">"</span></span>,
+                                <span class="pl-ent">"keyPattern"</span> : {
+                                        <span class="pl-ent">"age"</span> : <span class="pl-c1">1</span>
+                                },
+                                <span class="pl-ent">"indexName"</span> : <span class="pl-s"><span class="pl-pds">"</span>age_1<span class="pl-pds">"</span></span>,
+                                <span class="pl-ent">"isMultiKey"</span> : <span class="pl-c1">false</span>,
+                                <span class="pl-ent">"multiKeyPaths"</span> : {
+                                        <span class="pl-ent">"age"</span> : [ ]
+                                },
+                                <span class="pl-ent">"isUnique"</span> : <span class="pl-c1">false</span>,
+                                <span class="pl-ent">"isSparse"</span> : <span class="pl-c1">false</span>,
+                                <span class="pl-ent">"isPartial"</span> : <span class="pl-c1">false</span>,
+                                <span class="pl-ent">"indexVersion"</span> : <span class="pl-c1">2</span>,
+                                <span class="pl-ent">"direction"</span> : <span class="pl-s"><span class="pl-pds">"</span>forward<span class="pl-pds">"</span></span>,
+                                <span class="pl-ent">"indexBounds"</span> : {
+                                        <span class="pl-ent">"age"</span> : [
+                                                <span class="pl-s"><span class="pl-pds">"</span>(30.0, inf.0]<span class="pl-pds">"</span></span>
+                                        ]
+                                }
+                        }
+                },
+                <span class="pl-ent">"rejectedPlans"</span> : [ ]
+        },
+        <span class="pl-ent">"serverInfo"</span> : {
+                <span class="pl-ent">"host"</span> : <span class="pl-s"><span class="pl-pds">"</span>6066384c07db<span class="pl-pds">"</span></span>,
+                <span class="pl-ent">"port"</span> : <span class="pl-c1">27017</span>,
+                <span class="pl-ent">"version"</span> : <span class="pl-s"><span class="pl-pds">"</span>4.4.18<span class="pl-pds">"</span></span>,
+                <span class="pl-ent">"gitVersion"</span> : <span class="pl-s"><span class="pl-pds">"</span>8ed32b5c2c68ebe7f8ae2ebe8d23f36037a17dea<span class="pl-pds">"</span></span>
+        },
+        <span class="pl-ent">"ok"</span> : <span class="pl-c1">1</span>
+}</pre></div>
+<p dir="auto">On voit que l'index apparaît <code>"indexName" : "age_1"</code></p>
+<h3 dir="auto"><a id="user-content-4-plans-de-requêtes-utilisé-par-mongodb" class="anchor" aria-hidden="true" href="#4-plans-de-requêtes-utilisé-par-mongodb"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>4. Plans de requêtes utilisé par mongoDB</h3>
+<p dir="auto">Lors de la première requête l'optimizer de mongodb a utilisé comme "winning plan" un SORT car aucun index n'avait été créé. Lors de la seconde requête, l'optimizer a trouvé qu'un index existait et a donc utilisé un FETCH, ce qui améliore les performances.</p>
+<h3 dir="auto"><a id="user-content-5-utilisation-dun-indexe-hashed" class="anchor" aria-hidden="true" href="#5-utilisation-dun-indexe-hashed"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>5. Utilisation d'un indexe "Hashed"</h3>
+<p dir="auto">On récupère et on supprime d'abord l'index existant avec</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.users.getIndexes()
+&gt; db.users.dropIndex(&quot;age_1&quot;)"><pre><span class="pl-k">&gt;</span> <span class="pl-en">db.users.getIndexes</span>()
+<span class="pl-k">&gt;</span> db.users.dropIndex(<span class="pl-s"><span class="pl-pds">"</span>age_1<span class="pl-pds">"</span></span>)</pre></div>
+<p dir="auto">Puis on ajoute un index haché:</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.users.ensureIndex({ &quot;age&quot; : &quot;hashed&quot; })
+{
+        &quot;createdCollectionAutomatically&quot; : false,
+        &quot;numIndexesBefore&quot; : 1,
+        &quot;numIndexesAfter&quot; : 2,
+        &quot;ok&quot; : 1
+}"><pre><span class="pl-k">&gt;</span> db.users.ensureIndex({ <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>hashed<span class="pl-pds">"</span></span> })
+{
+        <span class="pl-s"><span class="pl-pds">"</span>createdCollectionAutomatically<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> false,
+        <span class="pl-s"><span class="pl-pds">"</span>numIndexesBefore<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1,
+        <span class="pl-s"><span class="pl-pds">"</span>numIndexesAfter<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 2,
+        <span class="pl-s"><span class="pl-pds">"</span>ok<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1
+}</pre></div>
+<p dir="auto">On recommence la requête:</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.users.find({&quot;age&quot;:{&quot;$gt&quot;:30}}).sort({&quot;age&quot;:1}).explain()
+{
+        &quot;queryPlanner&quot; : {
+                &quot;plannerVersion&quot; : 1,
+                &quot;namespace&quot; : &quot;forum.users&quot;,
+                &quot;indexFilterSet&quot; : false,
+                &quot;parsedQuery&quot; : {
+                        &quot;age&quot; : {
+                                &quot;$gt&quot; : 30
+                        }
+                },
+                &quot;queryHash&quot; : &quot;F760A7CC&quot;,
+                &quot;planCacheKey&quot; : &quot;45A19300&quot;,
+                &quot;winningPlan&quot; : {
+                        &quot;stage&quot; : &quot;SORT&quot;,
+                        &quot;sortPattern&quot; : {
+                                &quot;age&quot; : 1
+                        },
+                        &quot;memLimit&quot; : 104857600,
+                        &quot;type&quot; : &quot;simple&quot;,
+                        &quot;inputStage&quot; : {
+                                &quot;stage&quot; : &quot;COLLSCAN&quot;,
+                                &quot;filter&quot; : {
+                                        &quot;age&quot; : {
+                                                &quot;$gt&quot; : 30
+                                        }
+                                },
+                                &quot;direction&quot; : &quot;forward&quot;
+                        }
+                },
+                &quot;rejectedPlans&quot; : [ ]
+        },
+        &quot;serverInfo&quot; : {
+                &quot;host&quot; : &quot;6066384c07db&quot;,
+                &quot;port&quot; : 27017,
+                &quot;version&quot; : &quot;4.4.18&quot;,
+                &quot;gitVersion&quot; : &quot;8ed32b5c2c68ebe7f8ae2ebe8d23f36037a17dea&quot;
+        },
+        &quot;ok&quot; : 1
+}
+"><pre><span class="pl-k">&gt;</span> <span class="pl-en">db.users.find({"age":{"$gt":30}}).sort({"age":1}).explain</span>()
+{
+        <span class="pl-s"><span class="pl-pds">"</span>queryPlanner<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> {
+                <span class="pl-s"><span class="pl-pds">"</span>plannerVersion<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1,
+                <span class="pl-s"><span class="pl-pds">"</span>namespace<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>forum.users<span class="pl-pds">"</span></span>,
+                <span class="pl-s"><span class="pl-pds">"</span>indexFilterSet<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> false,
+                <span class="pl-s"><span class="pl-pds">"</span>parsedQuery<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> {
+                        <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> {
+                                <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$gt</span><span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 30
+                        }
+                },
+                <span class="pl-s"><span class="pl-pds">"</span>queryHash<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>F760A7CC<span class="pl-pds">"</span></span>,
+                <span class="pl-s"><span class="pl-pds">"</span>planCacheKey<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>45A19300<span class="pl-pds">"</span></span>,
+                <span class="pl-s"><span class="pl-pds">"</span>winningPlan<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> {
+                        <span class="pl-s"><span class="pl-pds">"</span>stage<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>SORT<span class="pl-pds">"</span></span>,
+                        <span class="pl-s"><span class="pl-pds">"</span>sortPattern<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> {
+                                <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1
+                        },
+                        <span class="pl-s"><span class="pl-pds">"</span>memLimit<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 104857600,
+                        <span class="pl-s"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>simple<span class="pl-pds">"</span></span>,
+                        <span class="pl-s"><span class="pl-pds">"</span>inputStage<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> {
+                                <span class="pl-s"><span class="pl-pds">"</span>stage<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>COLLSCAN<span class="pl-pds">"</span></span>,
+                                <span class="pl-s"><span class="pl-pds">"</span>filter<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> {
+                                        <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> {
+                                                <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$gt</span><span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 30
+                                        }
+                                },
+                                <span class="pl-s"><span class="pl-pds">"</span>direction<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>forward<span class="pl-pds">"</span></span>
+                        }
+                },
+                <span class="pl-s"><span class="pl-pds">"</span>rejectedPlans<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ ]
+        },
+        <span class="pl-s"><span class="pl-pds">"</span>serverInfo<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> {
+                <span class="pl-s"><span class="pl-pds">"</span>host<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>6066384c07db<span class="pl-pds">"</span></span>,
+                <span class="pl-s"><span class="pl-pds">"</span>port<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 27017,
+                <span class="pl-s"><span class="pl-pds">"</span>version<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>4.4.18<span class="pl-pds">"</span></span>,
+                <span class="pl-s"><span class="pl-pds">"</span>gitVersion<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>8ed32b5c2c68ebe7f8ae2ebe8d23f36037a17dea<span class="pl-pds">"</span></span>
+        },
+        <span class="pl-s"><span class="pl-pds">"</span>ok<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1
+}
+</pre></div>
+<p dir="auto">On peut voir que l'index haché n'a pas été utilisé cette fois ci, l'optimizer à selectionné de refaire un SORT sur les données.</p>
+<h4 dir="auto"><a id="user-content-7-intérêt-dun-index-haché" class="anchor" aria-hidden="true" href="#7-intérêt-dun-index-haché"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>7. Intérêt d'un index haché</h4>
+<p dir="auto">L'utilisation d'un index haché est moins intéressant dans ce cadre car la requête qu'on utilise à un .sort(). L'optimizer de mongoDB va donc refuser de prendre cet index haché car il ne donne aucun avantage sur la rapidité de la requête par rapport à un sort classique.</p>
+<h2 dir="auto"><a id="user-content-agrégation" class="anchor" aria-hidden="true" href="#agrégation"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Agrégation</h2>
+<p dir="auto">On utilise $group pour grouper par nickname avec les opérateurs $avg pour la moyenne d'age et $sum pour le nombre d'utilisateurs avec le même nickname. On utilise aussi $first pour récupérer le nickname dans un attribut.<br>
+Ensuite, pour supprimer l'id on utilise $project avec _id:0, et pour finir on utilise $sort pour trier, d'abord par l'age:</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.users.aggregate( [ { $group : { &quot;_id&quot;:&quot;$nickname&quot;, &quot;age&quot;:{$avg:&quot;$age&quot;}, count: { $sum: 1.0 }, &quot;nickname&quot;:{$first:&quot;$nickname&quot;}  } }, {$project:{_id:0}},{$sort:{&quot;age&quot;:-1}} ] )
+
+{ &quot;age&quot; : 69, &quot;count&quot; : 1, &quot;nickname&quot; : &quot;Yellowjacket&quot; }
+{ &quot;age&quot; : 68, &quot;count&quot; : 1, &quot;nickname&quot; : &quot;Atom&quot; }
+{ &quot;age&quot; : 68, &quot;count&quot; : 1, &quot;nickname&quot; : &quot;He-Man&quot; }
+{ &quot;age&quot; : 68, &quot;count&quot; : 1, &quot;nickname&quot; : &quot;Mister Knife&quot; }
+{ &quot;age&quot; : 68, &quot;count&quot; : 1, &quot;nickname&quot; : &quot;Mimic&quot; }
+{ &quot;age&quot; : 67, &quot;count&quot; : 1, &quot;nickname&quot; : &quot;Batman II&quot; }
+{ &quot;age&quot; : 67, &quot;count&quot; : 1, &quot;nickname&quot; : &quot;Shatterstar&quot; }"><pre><span class="pl-k">&gt;</span> db.users.aggregate( [ { <span class="pl-smi">$group</span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$nickname</span><span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span>:{<span class="pl-smi">$avg</span>:<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$age</span><span class="pl-pds">"</span></span>}, count: { <span class="pl-smi">$sum</span>: 1.0 }, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span>:{<span class="pl-smi">$first</span>:<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$nickname</span><span class="pl-pds">"</span></span>}  } }, {<span class="pl-smi">$project</span>:{_id:0}},{<span class="pl-smi">$sort</span>:{<span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span>:-1}} ] )
+
+{ <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 69, <span class="pl-s"><span class="pl-pds">"</span>count<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Yellowjacket<span class="pl-pds">"</span></span> }
+{ <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 68, <span class="pl-s"><span class="pl-pds">"</span>count<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Atom<span class="pl-pds">"</span></span> }
+{ <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 68, <span class="pl-s"><span class="pl-pds">"</span>count<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>He-Man<span class="pl-pds">"</span></span> }
+{ <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 68, <span class="pl-s"><span class="pl-pds">"</span>count<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Mister Knife<span class="pl-pds">"</span></span> }
+{ <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 68, <span class="pl-s"><span class="pl-pds">"</span>count<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Mimic<span class="pl-pds">"</span></span> }
+{ <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 67, <span class="pl-s"><span class="pl-pds">"</span>count<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Batman II<span class="pl-pds">"</span></span> }
+{ <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 67, <span class="pl-s"><span class="pl-pds">"</span>count<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Shatterstar<span class="pl-pds">"</span></span> }</pre></div>
+<p dir="auto">puis par le nombre d'utilisateurs:</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.users.aggregate( [ { $group : { &quot;_id&quot;:&quot;$nickname&quot;, &quot;age&quot;:{$avg:&quot;$age&quot;}, count: { $sum: 1.0 }, &quot;nickname&quot;:{$first:&quot;$nickname&quot;}  } }, {$project:{_id:0}},{$sort:{&quot;count&quot;:-1}} ] )
+
+{ &quot;age&quot; : 19, &quot;count&quot; : 2, &quot;nickname&quot; : &quot;Armor&quot; }
+{ &quot;age&quot; : 41.5, &quot;count&quot; : 2, &quot;nickname&quot; : &quot;Cy-Gor&quot; }
+{ &quot;age&quot; : 30, &quot;count&quot; : 2, &quot;nickname&quot; : &quot;Big Man&quot; }
+{ &quot;age&quot; : 52.5, &quot;count&quot; : 2, &quot;nickname&quot; : &quot;Donatello&quot; }
+{ &quot;age&quot; : 38, &quot;count&quot; : 2, &quot;nickname&quot; : &quot;Proto-Goblin&quot; }
+{ &quot;age&quot; : 26.5, &quot;count&quot; : 2, &quot;nickname&quot; : &quot;Crimson Dynamo&quot; }
+{ &quot;age&quot; : 13, &quot;count&quot; : 1, &quot;nickname&quot; : &quot;Man-Bat&quot; }
+{ &quot;age&quot; : 24, &quot;count&quot; : 1, &quot;nickname&quot; : &quot;Spock&quot; }
+{ &quot;age&quot; : 63, &quot;count&quot; : 1, &quot;nickname&quot; : &quot;Space Ghost&quot; }"><pre><span class="pl-k">&gt;</span> db.users.aggregate( [ { <span class="pl-smi">$group</span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$nickname</span><span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span>:{<span class="pl-smi">$avg</span>:<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$age</span><span class="pl-pds">"</span></span>}, count: { <span class="pl-smi">$sum</span>: 1.0 }, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span>:{<span class="pl-smi">$first</span>:<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$nickname</span><span class="pl-pds">"</span></span>}  } }, {<span class="pl-smi">$project</span>:{_id:0}},{<span class="pl-smi">$sort</span>:{<span class="pl-s"><span class="pl-pds">"</span>count<span class="pl-pds">"</span></span>:-1}} ] )
+
+{ <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 19, <span class="pl-s"><span class="pl-pds">"</span>count<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 2, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Armor<span class="pl-pds">"</span></span> }
+{ <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 41.5, <span class="pl-s"><span class="pl-pds">"</span>count<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 2, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Cy-Gor<span class="pl-pds">"</span></span> }
+{ <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 30, <span class="pl-s"><span class="pl-pds">"</span>count<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 2, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Big Man<span class="pl-pds">"</span></span> }
+{ <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 52.5, <span class="pl-s"><span class="pl-pds">"</span>count<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 2, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Donatello<span class="pl-pds">"</span></span> }
+{ <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 38, <span class="pl-s"><span class="pl-pds">"</span>count<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 2, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Proto-Goblin<span class="pl-pds">"</span></span> }
+{ <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 26.5, <span class="pl-s"><span class="pl-pds">"</span>count<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 2, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Crimson Dynamo<span class="pl-pds">"</span></span> }
+{ <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 13, <span class="pl-s"><span class="pl-pds">"</span>count<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Man-Bat<span class="pl-pds">"</span></span> }
+{ <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 24, <span class="pl-s"><span class="pl-pds">"</span>count<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Spock<span class="pl-pds">"</span></span> }
+{ <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 63, <span class="pl-s"><span class="pl-pds">"</span>count<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Space Ghost<span class="pl-pds">"</span></span> }</pre></div>
+<h2 dir="auto"><a id="user-content-modélisation" class="anchor" aria-hidden="true" href="#modélisation"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Modélisation</h2>
+<h3 dir="auto"><a id="user-content-1-manière-de-modéliser-des-relations" class="anchor" aria-hidden="true" href="#1-manière-de-modéliser-des-relations"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>1. Manière de modéliser des relations</h3>
+<p dir="auto">Il existe plusieurs manière de modéliser des relations avec mongodb, soit avec des sous-documents, soit avec des documents liés.</p>
+<h3 dir="auto"><a id="user-content-2-implémentations" class="anchor" aria-hidden="true" href="#2-implémentations"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>2. Implémentations</h3>
+<h4 dir="auto"><a id="user-content-embedded-document" class="anchor" aria-hidden="true" href="#embedded-document"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Embedded document</h4>
+<ul dir="auto">
+<li>Version 1
+Ajout d'un attribut user et un attribut thread dans post.<br>
+On ajoute donc un user et un thread dans la classes Post</li>
+</ul>
+<div class="highlight highlight-source-java notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="  private final User user;"><pre>  <span class="pl-k">private</span> <span class="pl-k">final</span> <span class="pl-smi">User</span> <span class="pl-s1">user</span>;</pre></div>
+<p dir="auto">Ensuite on modifie ThreadGenerator et PostGenerator pour prendre un utilisateur aléatoire.</p>
+<div class="highlight highlight-source-java notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="Thread randomThread = threadGenerator.getRandomThread();
+User randomKnownUser = userGenerator.getRandomKnownUser();
+
+Post newPost = Post.builder()
+      ._id(idString)
+      .title(textGenerator.generateText(1))
+      .user(randomKnownUser)
+      .thread(randomThread)
+      .content(textGenerator.generateText(10))
+      .build();
+"><pre><span class="pl-smi">Thread</span> <span class="pl-s1">randomThread</span> = <span class="pl-s1">threadGenerator</span>.<span class="pl-en">getRandomThread</span>();
+<span class="pl-smi">User</span> <span class="pl-s1">randomKnownUser</span> = <span class="pl-s1">userGenerator</span>.<span class="pl-en">getRandomKnownUser</span>();
+
+<span class="pl-smi">Post</span> <span class="pl-s1">newPost</span> = <span class="pl-s1">Post</span>.<span class="pl-en">builder</span>()
+      .<span class="pl-en">_id</span>(<span class="pl-s1">idString</span>)
+      .<span class="pl-en">title</span>(<span class="pl-s1">textGenerator</span>.<span class="pl-en">generateText</span>(<span class="pl-c1">1</span>))
+      .<span class="pl-en">user</span>(<span class="pl-s1">randomKnownUser</span>)
+      .<span class="pl-en">thread</span>(<span class="pl-s1">randomThread</span>)
+      .<span class="pl-en">content</span>(<span class="pl-s1">textGenerator</span>.<span class="pl-en">generateText</span>(<span class="pl-c1">10</span>))
+      .<span class="pl-en">build</span>();</pre></div>
+<p dir="auto">On génère ensuite les données et on trouve bien des user et des thread dans chaque post</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.posts.find()
+{ &quot;_id&quot; : &quot;0&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;user&quot; : { &quot;_id&quot; : &quot;Elongated Man|71&quot;, &quot;nickname&quot; : &quot;Elongated Man&quot;, &quot;age&quot; : 14 }, &quot;thread&quot; : { &quot;_id&quot; : &quot;0&quot;, &quot;title&quot; : &quot;blah. &quot; } }
+{ &quot;_id&quot; : &quot;1&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;user&quot; : { &quot;_id&quot; : &quot;Elongated Man|71&quot;, &quot;nickname&quot; : &quot;Elongated Man&quot;, &quot;age&quot; : 14 }, &quot;thread&quot; : { &quot;_id&quot; : &quot;0&quot;, &quot;title&quot; : &quot;blah. &quot; } }
+{ &quot;_id&quot; : &quot;2&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;user&quot; : { &quot;_id&quot; : &quot;Elongated Man|71&quot;, &quot;nickname&quot; : &quot;Elongated Man&quot;, &quot;age&quot; : 14 }, &quot;thread&quot; : { &quot;_id&quot; : &quot;0&quot;, &quot;title&quot; : &quot;blah. &quot; } }"><pre><span class="pl-k">&gt;</span> <span class="pl-en">db.posts.find</span>()
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Elongated Man|71<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Elongated Man<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 14 }, <span class="pl-s"><span class="pl-pds">"</span>thread<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span> } }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Elongated Man|71<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Elongated Man<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 14 }, <span class="pl-s"><span class="pl-pds">"</span>thread<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span> } }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>2<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Elongated Man|71<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Elongated Man<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 14 }, <span class="pl-s"><span class="pl-pds">"</span>thread<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span> } }</pre></div>
+<p dir="auto">On peut trouver tout les posts d'un utilisateur avec la commande</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.posts.find({&quot;user.nickname&quot;:&quot;Thor Girl&quot;})
+{ &quot;_id&quot; : &quot;492&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;user&quot; : { &quot;_id&quot; : &quot;Thor Girl|08&quot;, &quot;nickname&quot; : &quot;Thor Girl&quot;, &quot;age&quot; : 26 }, &quot;thread&quot; : { &quot;_id&quot; : &quot;149&quot;, &quot;title&quot; : &quot;blah. &quot; } }
+{ &quot;_id&quot; : &quot;500&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;user&quot; : { &quot;_id&quot; : &quot;Thor Girl|08&quot;, &quot;nickname&quot; : &quot;Thor Girl&quot;, &quot;age&quot; : 26 }, &quot;thread&quot; : { &quot;_id&quot; : &quot;127&quot;, &quot;title&quot; : &quot;blah. &quot; } }"><pre><span class="pl-k">&gt;</span> db.posts.find({<span class="pl-s"><span class="pl-pds">"</span>user.nickname<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>Thor Girl<span class="pl-pds">"</span></span>})
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>492<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Thor Girl|08<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Thor Girl<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 26 }, <span class="pl-s"><span class="pl-pds">"</span>thread<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>149<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span> } }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>500<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Thor Girl|08<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Thor Girl<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 26 }, <span class="pl-s"><span class="pl-pds">"</span>thread<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>127<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span> } }</pre></div>
+<p dir="auto">et avec le .explain("executionStats") on récupère les statistiques suivantes:</p>
+<div class="highlight highlight-source-json notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="        &quot;executionStats&quot; : {
+                &quot;executionSuccess&quot; : true,
+                &quot;nReturned&quot; : 22,
+                &quot;executionTimeMillis&quot; : 1,
+                &quot;totalKeysExamined&quot; : 0,
+                &quot;totalDocsExamined&quot; : 796,
+                &quot;executionStages&quot; : {
+                        &quot;stage&quot; : &quot;COLLSCAN&quot;,
+                        &quot;filter&quot; : {
+                                &quot;user.nickname&quot; : {
+                                        &quot;$eq&quot; : &quot;Thor Girl&quot;
+                                }
+                        },
+                        &quot;nReturned&quot; : 22,
+                        &quot;executionTimeMillisEstimate&quot; : 0,
+                        &quot;works&quot; : 798,
+                        &quot;advanced&quot; : 22,
+                        &quot;needTime&quot; : 775,
+                        &quot;needYield&quot; : 0,
+                        &quot;saveState&quot; : 0,
+                        &quot;restoreState&quot; : 0,
+                        &quot;isEOF&quot; : 1,
+                        &quot;direction&quot; : &quot;forward&quot;,
+                        &quot;docsExamined&quot; : 796
+                }
+        },"><pre>        <span class="pl-ent">"executionStats"</span> : {
+                <span class="pl-ent">"executionSuccess"</span> : <span class="pl-c1">true</span>,
+                <span class="pl-ent">"nReturned"</span> : <span class="pl-c1">22</span>,
+                <span class="pl-ent">"executionTimeMillis"</span> : <span class="pl-c1">1</span>,
+                <span class="pl-ent">"totalKeysExamined"</span> : <span class="pl-c1">0</span>,
+                <span class="pl-ent">"totalDocsExamined"</span> : <span class="pl-c1">796</span>,
+                <span class="pl-ent">"executionStages"</span> : {
+                        <span class="pl-ent">"stage"</span> : <span class="pl-s"><span class="pl-pds">"</span>COLLSCAN<span class="pl-pds">"</span></span>,
+                        <span class="pl-ent">"filter"</span> : {
+                                <span class="pl-ent">"user.nickname"</span> : {
+                                        <span class="pl-ent">"$eq"</span> : <span class="pl-s"><span class="pl-pds">"</span>Thor Girl<span class="pl-pds">"</span></span>
+                                }
+                        },
+                        <span class="pl-ent">"nReturned"</span> : <span class="pl-c1">22</span>,
+                        <span class="pl-ent">"executionTimeMillisEstimate"</span> : <span class="pl-c1">0</span>,
+                        <span class="pl-ent">"works"</span> : <span class="pl-c1">798</span>,
+                        <span class="pl-ent">"advanced"</span> : <span class="pl-c1">22</span>,
+                        <span class="pl-ent">"needTime"</span> : <span class="pl-c1">775</span>,
+                        <span class="pl-ent">"needYield"</span> : <span class="pl-c1">0</span>,
+                        <span class="pl-ent">"saveState"</span> : <span class="pl-c1">0</span>,
+                        <span class="pl-ent">"restoreState"</span> : <span class="pl-c1">0</span>,
+                        <span class="pl-ent">"isEOF"</span> : <span class="pl-c1">1</span>,
+                        <span class="pl-ent">"direction"</span> : <span class="pl-s"><span class="pl-pds">"</span>forward<span class="pl-pds">"</span></span>,
+                        <span class="pl-ent">"docsExamined"</span> : <span class="pl-c1">796</span>
+                }
+        },</pre></div>
+<p dir="auto">On peut trouver tout les posts d'un thread</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.posts.find({&quot;thread._id&quot;:&quot;23&quot;})
+{ &quot;_id&quot; : &quot;84&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;user&quot; : { &quot;_id&quot; : &quot;Flash III|47&quot;, &quot;nickname&quot; : &quot;Flash III&quot;, &quot;age&quot; : 34 }, &quot;thread&quot; : { &quot;_id&quot; : &quot;23&quot;, &quot;title&quot; : &quot;blah. &quot; } }
+{ &quot;_id&quot; : &quot;115&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;user&quot; : { &quot;_id&quot; : &quot;John Wraith|82&quot;, &quot;nickname&quot; : &quot;John Wraith&quot;, &quot;age&quot; : 68 }, &quot;thread&quot; : { &quot;_id&quot; : &quot;23&quot;, &quot;title&quot; : &quot;blah. &quot; } }
+{ &quot;_id&quot; : &quot;176&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;user&quot; : { &quot;_id&quot; : &quot;Donna Troy|35&quot;, &quot;nickname&quot; : &quot;Donna Troy&quot;, &quot;age&quot; : 25 }, &quot;thread&quot; : { &quot;_id&quot; : &quot;23&quot;, &quot;title&quot; : &quot;blah. &quot; } }
+{ &quot;_id&quot; : &quot;201&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;user&quot; : { &quot;_id&quot; : &quot;Big Barda|75&quot;, &quot;nickname&quot; : &quot;Big Barda&quot;, &quot;age&quot; : 35 }, &quot;thread&quot; : { &quot;_id&quot; : &quot;23&quot;, &quot;title&quot; : &quot;blah. &quot; } }"><pre><span class="pl-k">&gt;</span> db.posts.find({<span class="pl-s"><span class="pl-pds">"</span>thread._id<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>23<span class="pl-pds">"</span></span>})
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>84<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Flash III|47<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Flash III<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 34 }, <span class="pl-s"><span class="pl-pds">"</span>thread<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>23<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span> } }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>115<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>John Wraith|82<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>John Wraith<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 68 }, <span class="pl-s"><span class="pl-pds">"</span>thread<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>23<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span> } }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>176<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Donna Troy|35<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Donna Troy<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 25 }, <span class="pl-s"><span class="pl-pds">"</span>thread<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>23<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span> } }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>201<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Big Barda|75<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Big Barda<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 35 }, <span class="pl-s"><span class="pl-pds">"</span>thread<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>23<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span> } }</pre></div>
+<p dir="auto">Et on a les statistiques suivantes:</p>
+<div class="highlight highlight-source-json notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&quot;executionStats&quot; : {
+                &quot;executionSuccess&quot; : true,
+                &quot;nReturned&quot; : 5,
+                &quot;executionTimeMillis&quot; : 1,
+                &quot;totalKeysExamined&quot; : 0,
+                &quot;totalDocsExamined&quot; : 796,
+                &quot;executionStages&quot; : {
+                        &quot;stage&quot; : &quot;COLLSCAN&quot;,
+                        &quot;filter&quot; : {
+                                &quot;thread._id&quot; : {
+                                        &quot;$eq&quot; : &quot;23&quot;
+                                }
+                        },
+                        &quot;nReturned&quot; : 5,
+                        &quot;executionTimeMillisEstimate&quot; : 0,
+                        &quot;works&quot; : 798,
+                        &quot;advanced&quot; : 5,
+                        &quot;needTime&quot; : 792,
+                        &quot;needYield&quot; : 0,
+                        &quot;saveState&quot; : 0,
+                        &quot;restoreState&quot; : 0,
+                        &quot;isEOF&quot; : 1,
+                        &quot;direction&quot; : &quot;forward&quot;,
+                        &quot;docsExamined&quot; : 796
+                }
+        }"><pre><span class="pl-ent">"executionStats"</span> : {
+                <span class="pl-ent">"executionSuccess"</span> : <span class="pl-c1">true</span>,
+                <span class="pl-ent">"nReturned"</span> : <span class="pl-c1">5</span>,
+                <span class="pl-ent">"executionTimeMillis"</span> : <span class="pl-c1">1</span>,
+                <span class="pl-ent">"totalKeysExamined"</span> : <span class="pl-c1">0</span>,
+                <span class="pl-ent">"totalDocsExamined"</span> : <span class="pl-c1">796</span>,
+                <span class="pl-ent">"executionStages"</span> : {
+                        <span class="pl-ent">"stage"</span> : <span class="pl-s"><span class="pl-pds">"</span>COLLSCAN<span class="pl-pds">"</span></span>,
+                        <span class="pl-ent">"filter"</span> : {
+                                <span class="pl-ent">"thread._id"</span> : {
+                                        <span class="pl-ent">"$eq"</span> : <span class="pl-s"><span class="pl-pds">"</span>23<span class="pl-pds">"</span></span>
+                                }
+                        },
+                        <span class="pl-ent">"nReturned"</span> : <span class="pl-c1">5</span>,
+                        <span class="pl-ent">"executionTimeMillisEstimate"</span> : <span class="pl-c1">0</span>,
+                        <span class="pl-ent">"works"</span> : <span class="pl-c1">798</span>,
+                        <span class="pl-ent">"advanced"</span> : <span class="pl-c1">5</span>,
+                        <span class="pl-ent">"needTime"</span> : <span class="pl-c1">792</span>,
+                        <span class="pl-ent">"needYield"</span> : <span class="pl-c1">0</span>,
+                        <span class="pl-ent">"saveState"</span> : <span class="pl-c1">0</span>,
+                        <span class="pl-ent">"restoreState"</span> : <span class="pl-c1">0</span>,
+                        <span class="pl-ent">"isEOF"</span> : <span class="pl-c1">1</span>,
+                        <span class="pl-ent">"direction"</span> : <span class="pl-s"><span class="pl-pds">"</span>forward<span class="pl-pds">"</span></span>,
+                        <span class="pl-ent">"docsExamined"</span> : <span class="pl-c1">796</span>
+                }
+        }</pre></div>
+<ul dir="auto">
+<li>Version 2
+On ajoute un tableau de post dans user et un tableau de post dans thread.
+on ajoute une map dans postGenerator</li>
+</ul>
+<div class="highlight highlight-source-java notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="  private final ConcurrentHashMap&lt;String, Post&gt; knownPost = new ConcurrentHashMap&lt;&gt;();"><pre>  <span class="pl-k">private</span> <span class="pl-k">final</span> <span class="pl-smi">ConcurrentHashMap</span>&lt;<span class="pl-smi">String</span>, <span class="pl-smi">Post</span>&gt; <span class="pl-s1">knownPost</span> = <span class="pl-k">new</span> <span class="pl-smi">ConcurrentHashMap</span>&lt;&gt;();</pre></div>
+<p dir="auto">Dans la méthode generatePost on ajoute les post dans la map</p>
+<div class="highlight highlight-source-java notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="knownPost.put(idString, newPost);"><pre><span class="pl-s1">knownPost</span>.<span class="pl-en">put</span>(<span class="pl-s1">idString</span>, <span class="pl-s1">newPost</span>);</pre></div>
+<p dir="auto">On ajoute ensuite une méthode getRandomPost</p>
+<div class="highlight highlight-source-java notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="  public Post getRandomKnownPost() {
+
+    Iterator&lt;Post&gt; iterator = knownPost.values().iterator();
+
+    Post retValue = null;
+    if (!knownPost.isEmpty()) {
+      int nextPos = RANDOM.nextInt(knownPost.size());
+
+      for (int i = 0; i &lt;= nextPos; i++) {
+        retValue = iterator.next();
+      }
+    }
+
+    return retValue;
+  }"><pre>  <span class="pl-k">public</span> <span class="pl-smi">Post</span> <span class="pl-s1">getRandomKnownPost</span>() {
+
+    <span class="pl-smi">Iterator</span>&lt;<span class="pl-smi">Post</span>&gt; <span class="pl-s1">iterator</span> = <span class="pl-s1">knownPost</span>.<span class="pl-en">values</span>().<span class="pl-en">iterator</span>();
+
+    <span class="pl-smi">Post</span> <span class="pl-s1">retValue</span> = <span class="pl-c1">null</span>;
+    <span class="pl-k">if</span> (!<span class="pl-s1">knownPost</span>.<span class="pl-en">isEmpty</span>()) {
+      <span class="pl-smi">int</span> <span class="pl-s1">nextPos</span> = <span class="pl-c1">RANDOM</span>.<span class="pl-en">nextInt</span>(<span class="pl-s1">knownPost</span>.<span class="pl-en">size</span>());
+
+      <span class="pl-k">for</span> (<span class="pl-smi">int</span> <span class="pl-s1">i</span> = <span class="pl-c1">0</span>; <span class="pl-s1">i</span> &lt;= <span class="pl-s1">nextPos</span>; <span class="pl-s1">i</span>++) {
+        <span class="pl-s1">retValue</span> = <span class="pl-s1">iterator</span>.<span class="pl-en">next</span>();
+      }
+    }
+
+    <span class="pl-k">return</span> <span class="pl-s1">retValue</span>;
+  }</pre></div>
+<p dir="auto">On rajoute en attribut dans user et dans thread une liste de post</p>
+<div class="highlight highlight-source-java notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="  private final List&lt;Post&gt; posts;
+"><pre>  <span class="pl-k">private</span> <span class="pl-k">final</span> <span class="pl-smi">List</span>&lt;<span class="pl-smi">Post</span>&gt; <span class="pl-s1">posts</span>;</pre></div>
+<p dir="auto">On va ensuite rajouter dans ThreadGenerator et dans UserGenerator les lignes de code suivante:</p>
+<div class="highlight highlight-source-java notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="    List&lt;Post&gt; myPosts = new ArrayList&lt;Post&gt;();
+    for(int i = 0; i&lt; (new Random().nextInt(6));i++){
+      Post randomPost = postGenerator.getRandomKnownPost();
+      myPosts.add(randomPost);
+    }
+
+    ...
+  private final List&lt;Post&gt; posts;
+      Thread newThread = Thread.builder()
+              ._id(idString)
+              .title(textGenerator.generateText(1))
+              .posts(myPosts)
+              .build();"><pre>    <span class="pl-smi">List</span>&lt;<span class="pl-smi">Post</span>&gt; <span class="pl-s1">myPosts</span> = <span class="pl-k">new</span> <span class="pl-smi">ArrayList</span>&lt;<span class="pl-smi">Post</span>&gt;();
+    <span class="pl-k">for</span>(<span class="pl-smi">int</span> <span class="pl-s1">i</span> = <span class="pl-c1">0</span>; <span class="pl-s1">i</span>&lt; (<span class="pl-k">new</span> <span class="pl-smi">Random</span>().<span class="pl-en">nextInt</span>(<span class="pl-c1">6</span>));<span class="pl-s1">i</span>++){
+      <span class="pl-smi">Post</span> <span class="pl-s1">randomPost</span> = <span class="pl-s1">postGenerator</span>.<span class="pl-en">getRandomKnownPost</span>();
+      <span class="pl-s1">myPosts</span>.<span class="pl-en">add</span>(<span class="pl-s1">randomPost</span>);
+    }
+
+    ...
+  <span class="pl-k">private</span> <span class="pl-k">final</span> <span class="pl-smi">List</span>&lt;<span class="pl-smi">Post</span>&gt; <span class="pl-s1">posts</span>;
+      <span class="pl-smi">Thread</span> <span class="pl-s1">newThread</span> = <span class="pl-s1">Thread</span>.<span class="pl-en">builder</span>()
+              .<span class="pl-en">_id</span>(<span class="pl-s1">idString</span>)
+              .<span class="pl-en">title</span>(<span class="pl-s1">textGenerator</span>.<span class="pl-en">generateText</span>(<span class="pl-c1">1</span>))
+              .<span class="pl-en">posts</span>(<span class="pl-s1">myPosts</span>)
+              .<span class="pl-en">build</span>();</pre></div>
+<p dir="auto">On trouve maintenant dans thread une liste de post</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.threads.find()
+{ &quot;_id&quot; : &quot;0&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;posts&quot; : [ { &quot;_id&quot; : &quot;1&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot; } ] }
+{ &quot;_id&quot; : &quot;1&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;posts&quot; : [ { &quot;_id&quot; : &quot;4&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot; } ] }
+{ &quot;_id&quot; : &quot;2&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;posts&quot; : [ { &quot;_id&quot; : &quot;5&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot; } ] }
+{ &quot;_id&quot; : &quot;3&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;posts&quot; : [ { &quot;_id&quot; : &quot;9&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot; }, { &quot;_id&quot; : &quot;10&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot; } ] }"><pre><span class="pl-k">&gt;</span> <span class="pl-en">db.threads.find</span>()
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>posts<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> } ] }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>posts<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>4<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> } ] }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>2<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>posts<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>5<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> } ] }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>3<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>posts<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>9<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> }, { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>10<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> } ] }</pre></div>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.users.find()
+{ &quot;_id&quot; : &quot;Blob|69&quot;, &quot;nickname&quot; : &quot;Blob&quot;, &quot;age&quot; : 20, &quot;posts&quot; : [ { &quot;_id&quot; : &quot;880&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot; }, { &quot;_id&quot; : &quot;885&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot; } ] }
+{ &quot;_id&quot; : &quot;Atlas|54&quot;, &quot;nickname&quot; : &quot;Atlas&quot;, &quot;age&quot; : 13, &quot;posts&quot; : [ { &quot;_id&quot; : &quot;889&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot; }, { &quot;_id&quot; : &quot;890&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot; } ] }
+{ &quot;_id&quot; : &quot;Blackwing|41&quot;, &quot;nickname&quot; : &quot;Blackwing&quot;, &quot;age&quot; : 53, &quot;posts&quot; : [ { &quot;_id&quot; : &quot;895&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot; } ] }
+{ &quot;_id&quot; : &quot;Goliath IV|89&quot;, &quot;nickname&quot; : &quot;Goliath IV&quot;, &quot;age&quot; : 21, &quot;posts&quot; : [ { &quot;_id&quot; : &quot;902&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot; }, { &quot;_id&quot; : &quot;903&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot; } ] }
+{ &quot;_id&quot; : &quot;Tracy Strauss|20&quot;, &quot;nickname&quot; : &quot;Tracy Strauss&quot;, &quot;age&quot; : 27, &quot;posts&quot; : [ { &quot;_id&quot; : &quot;908&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot; } ] }"><pre><span class="pl-k">&gt;</span> <span class="pl-en">db.users.find</span>()
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Blob|69<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Blob<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 20, <span class="pl-s"><span class="pl-pds">"</span>posts<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>880<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> }, { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>885<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> } ] }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Atlas|54<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Atlas<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 13, <span class="pl-s"><span class="pl-pds">"</span>posts<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>889<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> }, { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>890<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> } ] }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Blackwing|41<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Blackwing<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 53, <span class="pl-s"><span class="pl-pds">"</span>posts<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>895<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> } ] }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Goliath IV|89<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Goliath IV<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 21, <span class="pl-s"><span class="pl-pds">"</span>posts<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>902<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> }, { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>903<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> } ] }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Tracy Strauss|20<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Tracy Strauss<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 27, <span class="pl-s"><span class="pl-pds">"</span>posts<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>908<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> } ] }</pre></div>
+<p dir="auto">Pour trouver tout les posts d'un utilisateur on peut faire</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="db.users.find({&quot;nickname&quot;:&quot;Deadpool&quot;},{&quot;posts&quot;:1})"><pre>db.users.find({<span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>Deadpool<span class="pl-pds">"</span></span>},{<span class="pl-s"><span class="pl-pds">"</span>posts<span class="pl-pds">"</span></span>:1})</pre></div>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="db.threads.find({&quot;_id&quot;:&quot;6&quot;},{&quot;posts&quot;:1})"><pre>db.threads.find({<span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>6<span class="pl-pds">"</span></span>},{<span class="pl-s"><span class="pl-pds">"</span>posts<span class="pl-pds">"</span></span>:1})</pre></div>
+<p dir="auto">Ensuite avec explain on trouve les données suivantes</p>
+<div class="highlight highlight-source-json notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content=" &quot;executionStats&quot; : {
+                &quot;executionSuccess&quot; : true,
+                &quot;nReturned&quot; : 1,
+                &quot;executionTimeMillis&quot; : 0,
+                &quot;totalKeysExamined&quot; : 1,
+                &quot;totalDocsExamined&quot; : 1,
+                &quot;executionStages&quot; : {
+                        &quot;stage&quot; : &quot;PROJECTION_SIMPLE&quot;,
+                        &quot;nReturned&quot; : 1,
+                        &quot;executionTimeMillisEstimate&quot; : 0,
+                        &quot;works&quot; : 2,
+                        &quot;advanced&quot; : 1,
+                        &quot;needTime&quot; : 0,
+                        &quot;needYield&quot; : 0,
+                        &quot;saveState&quot; : 0,
+                        &quot;restoreState&quot; : 0,
+                        &quot;isEOF&quot; : 1,
+                        &quot;transformBy&quot; : {
+                                &quot;posts&quot; : 1
+                        },
+                        &quot;inputStage&quot; : {
+                                &quot;stage&quot; : &quot;IDHACK&quot;,
+                                &quot;nReturned&quot; : 1,
+                                &quot;executionTimeMillisEstimate&quot; : 0,
+                                &quot;works&quot; : 2,
+                                &quot;advanced&quot; : 1,
+                                &quot;needTime&quot; : 0,
+                                &quot;needYield&quot; : 0,
+                                &quot;saveState&quot; : 0,
+                                &quot;restoreState&quot; : 0,
+                                &quot;isEOF&quot; : 1,
+                                &quot;keysExamined&quot; : 1,
+                                &quot;docsExamined&quot; : 1
+                        }
+                }
+        }"><pre> <span class="pl-ent">"executionStats"</span> : {
+                <span class="pl-ent">"executionSuccess"</span> : <span class="pl-c1">true</span>,
+                <span class="pl-ent">"nReturned"</span> : <span class="pl-c1">1</span>,
+                <span class="pl-ent">"executionTimeMillis"</span> : <span class="pl-c1">0</span>,
+                <span class="pl-ent">"totalKeysExamined"</span> : <span class="pl-c1">1</span>,
+                <span class="pl-ent">"totalDocsExamined"</span> : <span class="pl-c1">1</span>,
+                <span class="pl-ent">"executionStages"</span> : {
+                        <span class="pl-ent">"stage"</span> : <span class="pl-s"><span class="pl-pds">"</span>PROJECTION_SIMPLE<span class="pl-pds">"</span></span>,
+                        <span class="pl-ent">"nReturned"</span> : <span class="pl-c1">1</span>,
+                        <span class="pl-ent">"executionTimeMillisEstimate"</span> : <span class="pl-c1">0</span>,
+                        <span class="pl-ent">"works"</span> : <span class="pl-c1">2</span>,
+                        <span class="pl-ent">"advanced"</span> : <span class="pl-c1">1</span>,
+                        <span class="pl-ent">"needTime"</span> : <span class="pl-c1">0</span>,
+                        <span class="pl-ent">"needYield"</span> : <span class="pl-c1">0</span>,
+                        <span class="pl-ent">"saveState"</span> : <span class="pl-c1">0</span>,
+                        <span class="pl-ent">"restoreState"</span> : <span class="pl-c1">0</span>,
+                        <span class="pl-ent">"isEOF"</span> : <span class="pl-c1">1</span>,
+                        <span class="pl-ent">"transformBy"</span> : {
+                                <span class="pl-ent">"posts"</span> : <span class="pl-c1">1</span>
+                        },
+                        <span class="pl-ent">"inputStage"</span> : {
+                                <span class="pl-ent">"stage"</span> : <span class="pl-s"><span class="pl-pds">"</span>IDHACK<span class="pl-pds">"</span></span>,
+                                <span class="pl-ent">"nReturned"</span> : <span class="pl-c1">1</span>,
+                                <span class="pl-ent">"executionTimeMillisEstimate"</span> : <span class="pl-c1">0</span>,
+                                <span class="pl-ent">"works"</span> : <span class="pl-c1">2</span>,
+                                <span class="pl-ent">"advanced"</span> : <span class="pl-c1">1</span>,
+                                <span class="pl-ent">"needTime"</span> : <span class="pl-c1">0</span>,
+                                <span class="pl-ent">"needYield"</span> : <span class="pl-c1">0</span>,
+                                <span class="pl-ent">"saveState"</span> : <span class="pl-c1">0</span>,
+                                <span class="pl-ent">"restoreState"</span> : <span class="pl-c1">0</span>,
+                                <span class="pl-ent">"isEOF"</span> : <span class="pl-c1">1</span>,
+                                <span class="pl-ent">"keysExamined"</span> : <span class="pl-c1">1</span>,
+                                <span class="pl-ent">"docsExamined"</span> : <span class="pl-c1">1</span>
+                        }
+                }
+        }</pre></div>
+<p dir="auto">On observe que l'étape stage n'est pas la même puisque la requête n'a pas eu besoin de scanner l'entrièreté des utilisateurs. En théorie, cette modélisation est plus optimale pour les requêtes.</p>
+</article></div>
