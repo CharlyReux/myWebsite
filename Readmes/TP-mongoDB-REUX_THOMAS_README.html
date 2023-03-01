@@ -6,6 +6,8 @@
 <div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="docker exec -it mongo bash
 mongo admin -u root -p password"><pre>docker <span class="pl-c1">exec</span> -it mongo bash
 mongo admin -u root -p password</pre></div>
+<h2 dir="auto"><a id="user-content-introduction" class="anchor" aria-hidden="true" href="#introduction"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Introduction</h2>
+<p dir="auto">Dans ce TP, nous allons découvrir l'utilisation et les particularités des bases de données mongoDB, d'abord en apprenant les bases, puis en abordant la génération de données ainsi que la modélisation. Enfin, nous nous focaliserons sur l'amélioration de la disponibité ainsi que de la scalabilité horizontale.</p>
 <h2 dir="auto"><a id="user-content-pour-débuter-1" class="anchor" aria-hidden="true" href="#pour-débuter-1"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Pour débuter 1</h2>
 <h3 dir="auto"><a id="user-content-3-insertion-utilisateur" class="anchor" aria-hidden="true" href="#3-insertion-utilisateur"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>3. Insertion utilisateur</h3>
 <div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; use forum"><pre><span class="pl-k">&gt;</span> use forum</pre></div>
@@ -54,6 +56,7 @@ WriteResult({
                 <span class="pl-s"><span class="pl-pds">"</span>errmsg<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Performing an update on the path '_id' would modify the immutable field '_id'<span class="pl-pds">"</span></span>
         }
 })</pre></div>
+<p dir="auto">Il est impossible de changer l'id d'une entité car cette variable est immuable. Il faut donc passer outre cette contrainte en créant une nouvelle entité avec les mêmes paramètres mais un id différent.</p>
 <h3 dir="auto"><a id="user-content-9-méthode-pour-mettre-à-jour-lid-de-lutilisateur" class="anchor" aria-hidden="true" href="#9-méthode-pour-mettre-à-jour-lid-de-lutilisateur"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>9. Méthode pour mettre à jour l'id de l'utilisateur</h3>
 <div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="doc = db.collection.findOne({_id: OAbjectId(&quot;63cfe4054a461e15c728b3bc&quot;)})
 
@@ -95,14 +98,14 @@ WriteResult({
                 <span class="pl-s"><span class="pl-pds">"</span>errmsg<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>E11000 duplicate key error collection: forum.collection index: _id_ dup key: { _id: ObjectId('000123454a461e15c728b3bc') }<span class="pl-pds">"</span></span>
         }
 })</pre></div>
-<p dir="auto">Impossible car l'id est unique</p>
+<p dir="auto">Cette opération est mpossible car l'id est unique.</p>
 <h3 dir="auto"><a id="user-content-4-supprimer-un-utilisateur-grâce-à-son-identifiant" class="anchor" aria-hidden="true" href="#4-supprimer-un-utilisateur-grâce-à-son-identifiant"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>4. Supprimer un utilisateur grâce à son identifiant</h3>
 <div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.collection.remove({_id: ObjectId(&quot;000123454a461e15c728b3bc&quot;)})
 WriteResult({ &quot;nRemoved&quot; : 1 })"><pre><span class="pl-k">&gt;</span> db.collection.remove({_id: ObjectId(<span class="pl-s"><span class="pl-pds">"</span>000123454a461e15c728b3bc<span class="pl-pds">"</span></span>)})
 WriteResult({ <span class="pl-s"><span class="pl-pds">"</span>nRemoved<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1 })</pre></div>
 <h3 dir="auto"><a id="user-content-5-suppression-de-plusieurs-utilisateurs-en-même-temps" class="anchor" aria-hidden="true" href="#5-suppression-de-plusieurs-utilisateurs-en-même-temps"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>5. Suppression de plusieurs utilisateurs en même temps</h3>
 <div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.collection.remove({&quot;age&quot;:20})"><pre><span class="pl-k">&gt;</span> db.collection.remove({<span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span>:20})</pre></div>
-<p dir="auto">5.1. Suppression de tout les document en gardant la base</p>
+<p dir="auto">5.1. Suppression de tous les documents en gardant la base</p>
 <div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.collection.remove({})"><pre><span class="pl-k">&gt;</span> db.collection.remove({})</pre></div>
 <p dir="auto">ou</p>
 <div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.collection.deletemany({})"><pre><span class="pl-k">&gt;</span> db.collection.deletemany({})</pre></div>
@@ -155,7 +158,7 @@ users</pre></div>
 { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Cy-Gor|56<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Cy-Gor<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 25 }
 { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Ego|65<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Ego<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 13 }
 { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Bushido|08<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Bushido<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 13 }</pre></div>
-<p dir="auto">Pour avoir plus d'informations sur les collection on peut utiliser les méthodes suivantes:</p>
+<p dir="auto">Pour avoir plus d'informations sur les collections on peut utiliser les méthodes suivantes:</p>
 <div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.getCollectionInfos()
 &gt; db.users.stats()"><pre><span class="pl-k">&gt;</span> <span class="pl-en">db.getCollectionInfos</span>()
 <span class="pl-k">&gt;</span> <span class="pl-en">db.users.stats</span>()</pre></div>
@@ -207,7 +210,7 @@ users</pre></div>
 { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Gladiator|42<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Gladiator<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 36 }
 ...</pre></div>
 <h2 dir="auto"><a id="user-content-explain" class="anchor" aria-hidden="true" href="#explain"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Explain</h2>
-<h3 dir="auto"><a id="user-content-1-execution-de-de-la-requête-explain" class="anchor" aria-hidden="true" href="#1-execution-de-de-la-requête-explain"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>1. Execution de de la requête explain</h3>
+<h3 dir="auto"><a id="user-content-1-execution-de-la-requête-explain" class="anchor" aria-hidden="true" href="#1-execution-de-la-requête-explain"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>1. Execution de la requête explain</h3>
 <div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.users.find({&quot;age&quot;:{&quot;$gt&quot;:30}}).sort({&quot;age&quot;:1}).explain()"><pre><span class="pl-k">&gt;</span> <span class="pl-en">db.users.find({"age":{"$gt":30}}).sort({"age":1}).explain</span>()</pre></div>
 <h3 dir="auto"><a id="user-content-2-résultat" class="anchor" aria-hidden="true" href="#2-résultat"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>2. Résultat</h3>
 <div class="highlight highlight-source-json notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="{
@@ -287,7 +290,7 @@ users</pre></div>
         },
         <span class="pl-ent">"ok"</span> : <span class="pl-c1">1</span>
 }</pre></div>
-<p dir="auto">La méthode explain nous donne (en plus de données générales sur la requête), le nombre d'indexes utilisé.<br> Un index est une structure de données qui stocke une partie des données d'une collection pour améliorer la performance d'accès à ces données.<br>
+<p dir="auto">La méthode explain nous donne (en plus de données générales sur la requête), le nombre d'indexes utilisés.<br> Un index est une structure de données qui stocke une partie des données d'une collection pour améliorer la performance d'accès à ces données.<br>
 Dans notre requête actuelle, aucun index n'est utilisé.</p>
 <h3 dir="auto"><a id="user-content-3-création-dun-index-sur-le-champ-age" class="anchor" aria-hidden="true" href="#3-création-dun-index-sur-le-champ-age"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>3. Création d'un index sur le champ age</h3>
 <div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.users.createIndex({&quot;age&quot;:1})"><pre><span class="pl-k">&gt;</span> db.users.createIndex({<span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span>:1})</pre></div>
@@ -398,9 +401,9 @@ Dans notre requête actuelle, aucun index n'est utilisé.</p>
         <span class="pl-ent">"ok"</span> : <span class="pl-c1">1</span>
 }</pre></div>
 <p dir="auto">On voit que l'index apparaît <code>"indexName" : "age_1"</code></p>
-<h3 dir="auto"><a id="user-content-4-plans-de-requêtes-utilisé-par-mongodb" class="anchor" aria-hidden="true" href="#4-plans-de-requêtes-utilisé-par-mongodb"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>4. Plans de requêtes utilisé par mongoDB</h3>
+<h3 dir="auto"><a id="user-content-4-plans-de-requêtes-utilisés-par-mongodb" class="anchor" aria-hidden="true" href="#4-plans-de-requêtes-utilisés-par-mongodb"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>4. Plans de requêtes utilisés par mongoDB</h3>
 <p dir="auto">Lors de la première requête l'optimizer de mongodb a utilisé comme "winning plan" un SORT car aucun index n'avait été créé. Lors de la seconde requête, l'optimizer a trouvé qu'un index existait et a donc utilisé un FETCH, ce qui améliore les performances.</p>
-<h3 dir="auto"><a id="user-content-5-utilisation-dun-indexe-hashed" class="anchor" aria-hidden="true" href="#5-utilisation-dun-indexe-hashed"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>5. Utilisation d'un indexe "Hashed"</h3>
+<h3 dir="auto"><a id="user-content-5-utilisation-dun-index-hashed" class="anchor" aria-hidden="true" href="#5-utilisation-dun-index-hashed"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>5. Utilisation d'un index "Hashed"</h3>
 <p dir="auto">On récupère et on supprime d'abord l'index existant avec</p>
 <div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.users.getIndexes()
 &gt; db.users.dropIndex(&quot;age_1&quot;)"><pre><span class="pl-k">&gt;</span> <span class="pl-en">db.users.getIndexes</span>()
@@ -501,10 +504,10 @@ Dans notre requête actuelle, aucun index n'est utilisé.</p>
         <span class="pl-s"><span class="pl-pds">"</span>ok<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1
 }
 </pre></div>
-<p dir="auto">On peut voir que l'index haché n'a pas été utilisé cette fois ci, l'optimizer à selectionné de refaire un SORT sur les données.</p>
+<p dir="auto">On peut voir que l'index haché n'a pas été utilisé cette fois-ci, l'optimizer à préféré refaire un SORT sur les données.</p>
 <h4 dir="auto"><a id="user-content-7-intérêt-dun-index-haché" class="anchor" aria-hidden="true" href="#7-intérêt-dun-index-haché"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>7. Intérêt d'un index haché</h4>
 <p dir="auto">L'utilisation d'un index haché est moins intéressant dans ce cadre car la requête qu'on utilise à un .sort(). L'optimizer de mongoDB va donc refuser de prendre cet index haché car il ne donne aucun avantage sur la rapidité de la requête par rapport à un sort classique.</p>
-<h2 dir="auto"><a id="user-content-agrégation" class="anchor" aria-hidden="true" href="#agrégation"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Agrégation</h2>
+<h2 dir="auto"><a id="user-content-aggrégation" class="anchor" aria-hidden="true" href="#aggrégation"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Aggrégation</h2>
 <p dir="auto">On utilise $group pour grouper par nickname avec les opérateurs $avg pour la moyenne d'age et $sum pour le nombre d'utilisateurs avec le même nickname. On utilise aussi $first pour récupérer le nickname dans un attribut.<br>
 Ensuite, pour supprimer l'id on utilise $project avec _id:0, et pour finir on utilise $sort pour trier, d'abord par l'age:</p>
 <div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.users.aggregate( [ { $group : { &quot;_id&quot;:&quot;$nickname&quot;, &quot;age&quot;:{$avg:&quot;$age&quot;}, count: { $sum: 1.0 }, &quot;nickname&quot;:{$first:&quot;$nickname&quot;}  } }, {$project:{_id:0}},{$sort:{&quot;age&quot;:-1}} ] )
@@ -546,16 +549,16 @@ Ensuite, pour supprimer l'id on utilise $project avec _id:0, et pour finir on ut
 { <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 13, <span class="pl-s"><span class="pl-pds">"</span>count<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Man-Bat<span class="pl-pds">"</span></span> }
 { <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 24, <span class="pl-s"><span class="pl-pds">"</span>count<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Spock<span class="pl-pds">"</span></span> }
 { <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 63, <span class="pl-s"><span class="pl-pds">"</span>count<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Space Ghost<span class="pl-pds">"</span></span> }</pre></div>
-<h2 dir="auto"><a id="user-content-modélisation" class="anchor" aria-hidden="true" href="#modélisation"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Modélisation</h2>
+<h2 dir="auto"><a id="user-content-modélisation1" class="anchor" aria-hidden="true" href="#modélisation1"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Modélisation(1)</h2>
 <h3 dir="auto"><a id="user-content-1-manière-de-modéliser-des-relations" class="anchor" aria-hidden="true" href="#1-manière-de-modéliser-des-relations"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>1. Manière de modéliser des relations</h3>
-<p dir="auto">Il existe plusieurs manière de modéliser des relations avec mongodb, soit avec des sous-documents, soit avec des documents liés.</p>
+<p dir="auto">Il existe plusieurs manières de modéliser des relations avec mongodb, soit avec des sous-documents, soit avec des documents liés.</p>
 <h3 dir="auto"><a id="user-content-2-implémentations" class="anchor" aria-hidden="true" href="#2-implémentations"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>2. Implémentations</h3>
 <h4 dir="auto"><a id="user-content-embedded-document" class="anchor" aria-hidden="true" href="#embedded-document"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Embedded document</h4>
 <ul dir="auto">
-<li>Version 1
-Ajout d'un attribut user et un attribut thread dans post.<br>
-On ajoute donc un user et un thread dans la classes Post</li>
+<li>Version 1</li>
 </ul>
+<p dir="auto">Ajout d'un attribut user et un attribut thread dans post.<br>
+On va donc ajouter un user et un thread dans la classe Post</p>
 <div class="highlight highlight-source-java notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="  private final User user;"><pre>  <span class="pl-k">private</span> <span class="pl-k">final</span> <span class="pl-smi">User</span> <span class="pl-s1">user</span>;</pre></div>
 <p dir="auto">Ensuite on modifie ThreadGenerator et PostGenerator pour prendre un utilisateur aléatoire.</p>
 <div class="highlight highlight-source-java notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="Thread randomThread = threadGenerator.getRandomThread();
@@ -578,7 +581,7 @@ Post newPost = Post.builder()
       .<span class="pl-en">thread</span>(<span class="pl-s1">randomThread</span>)
       .<span class="pl-en">content</span>(<span class="pl-s1">textGenerator</span>.<span class="pl-en">generateText</span>(<span class="pl-c1">10</span>))
       .<span class="pl-en">build</span>();</pre></div>
-<p dir="auto">On génère ensuite les données et on trouve bien des user et des thread dans chaque post</p>
+<p dir="auto">On génère ensuite les données et on trouve bien des users et des threads dans chaque post</p>
 <div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.posts.find()
 { &quot;_id&quot; : &quot;0&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;user&quot; : { &quot;_id&quot; : &quot;Elongated Man|71&quot;, &quot;nickname&quot; : &quot;Elongated Man&quot;, &quot;age&quot; : 14 }, &quot;thread&quot; : { &quot;_id&quot; : &quot;0&quot;, &quot;title&quot; : &quot;blah. &quot; } }
 { &quot;_id&quot; : &quot;1&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;user&quot; : { &quot;_id&quot; : &quot;Elongated Man|71&quot;, &quot;nickname&quot; : &quot;Elongated Man&quot;, &quot;age&quot; : 14 }, &quot;thread&quot; : { &quot;_id&quot; : &quot;0&quot;, &quot;title&quot; : &quot;blah. &quot; } }
@@ -586,7 +589,7 @@ Post newPost = Post.builder()
 { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Elongated Man|71<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Elongated Man<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 14 }, <span class="pl-s"><span class="pl-pds">"</span>thread<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span> } }
 { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Elongated Man|71<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Elongated Man<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 14 }, <span class="pl-s"><span class="pl-pds">"</span>thread<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span> } }
 { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>2<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Elongated Man|71<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Elongated Man<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 14 }, <span class="pl-s"><span class="pl-pds">"</span>thread<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span> } }</pre></div>
-<p dir="auto">On peut trouver tout les posts d'un utilisateur avec la commande</p>
+<p dir="auto">On peut trouver tous les posts d'un utilisateur avec la commande :</p>
 <div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.posts.find({&quot;user.nickname&quot;:&quot;Thor Girl&quot;})
 { &quot;_id&quot; : &quot;492&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;user&quot; : { &quot;_id&quot; : &quot;Thor Girl|08&quot;, &quot;nickname&quot; : &quot;Thor Girl&quot;, &quot;age&quot; : 26 }, &quot;thread&quot; : { &quot;_id&quot; : &quot;149&quot;, &quot;title&quot; : &quot;blah. &quot; } }
 { &quot;_id&quot; : &quot;500&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;user&quot; : { &quot;_id&quot; : &quot;Thor Girl|08&quot;, &quot;nickname&quot; : &quot;Thor Girl&quot;, &quot;age&quot; : 26 }, &quot;thread&quot; : { &quot;_id&quot; : &quot;127&quot;, &quot;title&quot; : &quot;blah. &quot; } }"><pre><span class="pl-k">&gt;</span> db.posts.find({<span class="pl-s"><span class="pl-pds">"</span>user.nickname<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>Thor Girl<span class="pl-pds">"</span></span>})
@@ -644,7 +647,7 @@ Post newPost = Post.builder()
                         <span class="pl-ent">"docsExamined"</span> : <span class="pl-c1">796</span>
                 }
         },</pre></div>
-<p dir="auto">On peut trouver tout les posts d'un thread</p>
+<p dir="auto">On peut trouver tous les posts d'un thread :</p>
 <div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.posts.find({&quot;thread._id&quot;:&quot;23&quot;})
 { &quot;_id&quot; : &quot;84&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;user&quot; : { &quot;_id&quot; : &quot;Flash III|47&quot;, &quot;nickname&quot; : &quot;Flash III&quot;, &quot;age&quot; : 34 }, &quot;thread&quot; : { &quot;_id&quot; : &quot;23&quot;, &quot;title&quot; : &quot;blah. &quot; } }
 { &quot;_id&quot; : &quot;115&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;user&quot; : { &quot;_id&quot; : &quot;John Wraith|82&quot;, &quot;nickname&quot; : &quot;John Wraith&quot;, &quot;age&quot; : 68 }, &quot;thread&quot; : { &quot;_id&quot; : &quot;23&quot;, &quot;title&quot; : &quot;blah. &quot; } }
@@ -654,7 +657,7 @@ Post newPost = Post.builder()
 { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>115<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>John Wraith|82<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>John Wraith<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 68 }, <span class="pl-s"><span class="pl-pds">"</span>thread<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>23<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span> } }
 { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>176<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Donna Troy|35<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Donna Troy<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 25 }, <span class="pl-s"><span class="pl-pds">"</span>thread<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>23<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span> } }
 { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>201<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Big Barda|75<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Big Barda<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 35 }, <span class="pl-s"><span class="pl-pds">"</span>thread<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>23<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span> } }</pre></div>
-<p dir="auto">Et on a les statistiques suivantes:</p>
+<p dir="auto">Et on obtient les statistiques suivantes:</p>
 <div class="highlight highlight-source-json notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&quot;executionStats&quot; : {
                 &quot;executionSuccess&quot; : true,
                 &quot;nReturned&quot; : 5,
@@ -707,12 +710,12 @@ Post newPost = Post.builder()
                 }
         }</pre></div>
 <ul dir="auto">
-<li>Version 2
-On ajoute un tableau de post dans user et un tableau de post dans thread.
-on ajoute une map dans postGenerator</li>
+<li>Version 2</li>
 </ul>
+<p dir="auto">On ajoute un tableau de post dans user et un tableau de post dans thread.
+on ajoute une map dans postGenerator</p>
 <div class="highlight highlight-source-java notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="  private final ConcurrentHashMap&lt;String, Post&gt; knownPost = new ConcurrentHashMap&lt;&gt;();"><pre>  <span class="pl-k">private</span> <span class="pl-k">final</span> <span class="pl-smi">ConcurrentHashMap</span>&lt;<span class="pl-smi">String</span>, <span class="pl-smi">Post</span>&gt; <span class="pl-s1">knownPost</span> = <span class="pl-k">new</span> <span class="pl-smi">ConcurrentHashMap</span>&lt;&gt;();</pre></div>
-<p dir="auto">Dans la méthode generatePost on ajoute les post dans la map</p>
+<p dir="auto">Dans la méthode generatePost on ajoute les posts dans la map</p>
 <div class="highlight highlight-source-java notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="knownPost.put(idString, newPost);"><pre><span class="pl-s1">knownPost</span>.<span class="pl-en">put</span>(<span class="pl-s1">idString</span>, <span class="pl-s1">newPost</span>);</pre></div>
 <p dir="auto">On ajoute ensuite une méthode getRandomPost</p>
 <div class="highlight highlight-source-java notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="  public Post getRandomKnownPost() {
@@ -773,7 +776,7 @@ on ajoute une map dans postGenerator</li>
               .<span class="pl-en">title</span>(<span class="pl-s1">textGenerator</span>.<span class="pl-en">generateText</span>(<span class="pl-c1">1</span>))
               .<span class="pl-en">posts</span>(<span class="pl-s1">myPosts</span>)
               .<span class="pl-en">build</span>();</pre></div>
-<p dir="auto">On trouve maintenant dans thread une liste de post</p>
+<p dir="auto">On trouve maintenant dans thread une liste de posts</p>
 <div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.threads.find()
 { &quot;_id&quot; : &quot;0&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;posts&quot; : [ { &quot;_id&quot; : &quot;1&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot; } ] }
 { &quot;_id&quot; : &quot;1&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;posts&quot; : [ { &quot;_id&quot; : &quot;4&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot; } ] }
@@ -794,7 +797,7 @@ on ajoute une map dans postGenerator</li>
 { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Blackwing|41<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Blackwing<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 53, <span class="pl-s"><span class="pl-pds">"</span>posts<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>895<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> } ] }
 { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Goliath IV|89<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Goliath IV<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 21, <span class="pl-s"><span class="pl-pds">"</span>posts<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>902<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> }, { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>903<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> } ] }
 { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Tracy Strauss|20<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Tracy Strauss<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 27, <span class="pl-s"><span class="pl-pds">"</span>posts<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>908<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> } ] }</pre></div>
-<p dir="auto">Pour trouver tout les posts d'un utilisateur on peut faire</p>
+<p dir="auto">Pour trouver tous les posts d'un utilisateur on peut faire :</p>
 <div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="db.users.find({&quot;nickname&quot;:&quot;Deadpool&quot;},{&quot;posts&quot;:1})"><pre>db.users.find({<span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>Deadpool<span class="pl-pds">"</span></span>},{<span class="pl-s"><span class="pl-pds">"</span>posts<span class="pl-pds">"</span></span>:1})</pre></div>
 <div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="db.threads.find({&quot;_id&quot;:&quot;6&quot;},{&quot;posts&quot;:1})"><pre>db.threads.find({<span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>6<span class="pl-pds">"</span></span>},{<span class="pl-s"><span class="pl-pds">"</span>posts<span class="pl-pds">"</span></span>:1})</pre></div>
 <p dir="auto">Ensuite avec explain on trouve les données suivantes</p>
@@ -869,5 +872,726 @@ on ajoute une map dans postGenerator</li>
                         }
                 }
         }</pre></div>
-<p dir="auto">On observe que l'étape stage n'est pas la même puisque la requête n'a pas eu besoin de scanner l'entrièreté des utilisateurs. En théorie, cette modélisation est plus optimale pour les requêtes.</p>
+<p dir="auto">On observe que l'étape stage n'est pas la même puisque la requête n'a pas eu besoin de scanner l'entièreté des utilisateurs. En théorie, cette modélisation est plus optimale pour les requêtes.</p>
+<p dir="auto">Pour la partie suivante, nous utiliserons cette version pour effectuer nos requêtes.</p>
+<h2 dir="auto"><a id="user-content-modélisation-2" class="anchor" aria-hidden="true" href="#modélisation-2"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Modélisation (2)</h2>
+<ol dir="auto">
+<li>Ajout d'une notion de tag dans les threads.</li>
+</ol>
+<ul dir="auto">
+<li>Pour implémenter ce modèle, nous allons rajouter une liste de string dans la classe thread.</li>
+<li>Une autre méthode serait d'utiliser une classe Tag et de mettre une liste de tag dans les thread</li>
+<li>On pourrait aussi utiliser un ENUM et lister des tags possible, puis faire une liste de tag dans thread.</li>
+</ul>
+<ol start="2" dir="auto">
+<li>Nous avons décidé de selectionner la liste de string, qui permet plus de liberté quant au contenu du tag, et qui reste plus facile à implémenter. Pour faire ceci, nous avons rajouté un attribut tags dans la class thread comme ceci:</li>
+</ol>
+<div class="highlight highlight-source-java notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="  private final List&lt;String&gt; tags;"><pre>  <span class="pl-k">private</span> <span class="pl-k">final</span> <span class="pl-smi">List</span>&lt;<span class="pl-smi">String</span>&gt; <span class="pl-s1">tags</span>;</pre></div>
+<p dir="auto">Nous n'avons pas généré automatiquement de tags, mais on peut en rajouter à partir de notre console avec la commande:</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt;db.threads.update({&quot;_id&quot;:&quot;2&quot;},{$push:{&quot;tags&quot;:&quot;not found&quot;}})
+{ &quot;_id&quot; : &quot;2&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;posts&quot; : [ { &quot;_id&quot; : &quot;6&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot; }, { &quot;_id&quot; : &quot;9&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot; }, { &quot;_id&quot; : &quot;10&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot; } ], &quot;tags&quot; : [ &quot;not found&quot; ] }"><pre><span class="pl-k">&gt;</span>db.threads.update({<span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>2<span class="pl-pds">"</span></span>},{<span class="pl-smi">$push</span>:{<span class="pl-s"><span class="pl-pds">"</span>tags<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>not found<span class="pl-pds">"</span></span>}})
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>2<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>posts<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>6<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> }, { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>9<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> }, { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>10<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span> } ], <span class="pl-s"><span class="pl-pds">"</span>tags<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ <span class="pl-s"><span class="pl-pds">"</span>not found<span class="pl-pds">"</span></span> ] }</pre></div>
+<h2 dir="auto"><a id="user-content-modélisation3" class="anchor" aria-hidden="true" href="#modélisation3"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Modélisation(3)</h2>
+<ol dir="auto">
+<li>Effectuer des statistiques sur l'âge moyen</li>
+</ol>
+<ul dir="auto">
+<li>La première modélisation à laquelle nous avons pensé serait de ne plus avoir une liste de posts dans user, mais avoir dans post un user, ce qui permettrait de simplifier la requête à la base de données. En plus de cela on peut directement rajouter dans threads un double moyenne contenant la moyenne de l'âge des utilisateurs.</li>
+<li>La deuxième possibilité serait d'utiliser notre architecture actuelle (avec une liste de post dans user et une liste de post dans thread) et de faire une fonction aggregate complexe.</li>
+</ul>
+<ol start="2" dir="auto">
+<li>Nous allons utiliser la première méthode et modifier notre architecture.
+Premièrement, on va ajouter un attribut averageAge dans la classe thread:</li>
+</ol>
+<div class="highlight highlight-source-java notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="  private final double averageAge;"><pre>  <span class="pl-k">private</span> <span class="pl-k">final</span> <span class="pl-smi">double</span> <span class="pl-s1">averageAge</span>;</pre></div>
+<p dir="auto">Ensuite, il faut supprimer la liste contenant les posts dans les users.
+Lors de la génération d'un thread, on va maintenant calculer la moyenne sur les utilisateurs des posts pris aléatoirement, sans oublier de ne pas prendre plusieurs fois le même user.</p>
+<div class="highlight highlight-source-java notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="    double myAverageAge = 0;
+    Set&lt;User&gt; myUserInThread = new HashSet&lt;User&gt;();
+    for (Post myPost : myPosts) {
+      if (myPost == null)
+        continue;
+      myUserInThread.add(myPost.getUser());
+    }
+
+    for (User user : myUserInThread) {
+      myAverageAge += user.getAge();
+    }
+    myAverageAge /= myUserInThread.size();
+"><pre>    <span class="pl-smi">double</span> <span class="pl-s1">myAverageAge</span> = <span class="pl-c1">0</span>;
+    <span class="pl-smi">Set</span>&lt;<span class="pl-smi">User</span>&gt; <span class="pl-s1">myUserInThread</span> = <span class="pl-k">new</span> <span class="pl-smi">HashSet</span>&lt;<span class="pl-smi">User</span>&gt;();
+    <span class="pl-k">for</span> (<span class="pl-smi">Post</span> <span class="pl-s1">myPost</span> : <span class="pl-s1">myPosts</span>) {
+      <span class="pl-k">if</span> (<span class="pl-s1">myPost</span> == <span class="pl-c1">null</span>)
+        <span class="pl-k">continue</span>;
+      <span class="pl-s1">myUserInThread</span>.<span class="pl-en">add</span>(<span class="pl-s1">myPost</span>.<span class="pl-en">getUser</span>());
+    }
+
+    <span class="pl-k">for</span> (<span class="pl-smi">User</span> <span class="pl-s1">user</span> : <span class="pl-s1">myUserInThread</span>) {
+      <span class="pl-s1">myAverageAge</span> += <span class="pl-s1">user</span>.<span class="pl-en">getAge</span>();
+    }
+    <span class="pl-s1">myAverageAge</span> /= <span class="pl-s1">myUserInThread</span>.<span class="pl-en">size</span>();</pre></div>
+<p dir="auto">Ici myPost contient la liste des posts du thread actuel.</p>
+<p dir="auto">Maintenant lorsqu'on requête la base de données on a bien un attribut averageAge qui a été ajouté:</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.threads.find()
+{ &quot;_id&quot; : &quot;0&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;posts&quot; : [ { &quot;_id&quot; : &quot;1&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;user&quot; : { &quot;_id&quot; : &quot;Han Solo|82&quot;, &quot;nickname&quot; : &quot;Han Solo&quot;, &quot;age&quot; : 13 } } ], &quot;tags&quot; : [ ], &quot;averageAge&quot; : 13 }
+{ &quot;_id&quot; : &quot;3&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;posts&quot; : [ { &quot;_id&quot; : &quot;9&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;user&quot; : { &quot;_id&quot; : &quot;Han Solo|82&quot;, &quot;nickname&quot; : &quot;Han Solo&quot;, &quot;age&quot; : 13 } }, { &quot;_id&quot; : &quot;10&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;user&quot; : { &quot;_id&quot; : &quot;Klaw|77&quot;, &quot;nickname&quot; : &quot;Klaw&quot;, &quot;age&quot; : 66 } } ], &quot;tags&quot; : [ ], &quot;averageAge&quot; : 39.5 }
+{ &quot;_id&quot; : &quot;4&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;posts&quot; : [ { &quot;_id&quot; : &quot;14&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;user&quot; : { &quot;_id&quot; : &quot;Bloodwraith|85&quot;, &quot;nickname&quot; : &quot;Bloodwraith&quot;, &quot;age&quot; : 63 } } ], &quot;tags&quot; : [ ], &quot;averageAge&quot; : 63 }"><pre><span class="pl-k">&gt;</span> <span class="pl-en">db.threads.find</span>()
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>posts<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Han Solo|82<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Han Solo<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 13 } } ], <span class="pl-s"><span class="pl-pds">"</span>tags<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ ], <span class="pl-s"><span class="pl-pds">"</span>averageAge<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 13 }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>3<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>posts<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>9<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Han Solo|82<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Han Solo<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 13 } }, { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>10<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Klaw|77<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Klaw<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 66 } } ], <span class="pl-s"><span class="pl-pds">"</span>tags<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ ], <span class="pl-s"><span class="pl-pds">"</span>averageAge<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 39.5 }
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>4<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>posts<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>14<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Bloodwraith|85<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Bloodwraith<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 63 } } ], <span class="pl-s"><span class="pl-pds">"</span>tags<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ ], <span class="pl-s"><span class="pl-pds">"</span>averageAge<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 63 }</pre></div>
+<h2 dir="auto"><a id="user-content-modélisation4" class="anchor" aria-hidden="true" href="#modélisation4"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Modélisation(4)</h2>
+<ol dir="auto">
+<li>Effectuer des statistiques sur les tags des threads par utilisateur.</li>
+</ol>
+<ul dir="auto">
+<li>Encore une fois on pourrait utiliser l'architecture actuelle, et effectuer une méthode aggregate complexe.</li>
+<li>Ou on peut changer notre architecture pour répondre aux besoins. On peut cette fois-ci remettre dans user une liste de posts et dans chaque poste mettre un thread. Ensuite on va rajouter dans user une liste de tags qu'on aura récupéré depuis les posts lors de la génération d'un user.</li>
+</ul>
+<ol start="2" dir="auto">
+<li>On va donc implémenter la deuxième modélisation.
+Premièrement, on va rajouter dans User un attribut tagList et un attribut post</li>
+</ol>
+<div class="highlight highlight-source-java notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="private final List&lt;String&gt; Usedtags;
+
+private final List&lt;Post&gt; posts;"><pre><span class="pl-k">private</span> <span class="pl-k">final</span> <span class="pl-smi">List</span>&lt;<span class="pl-smi">String</span>&gt; <span class="pl-s1">Usedtags</span>;
+
+<span class="pl-k">private</span> <span class="pl-k">final</span> <span class="pl-smi">List</span>&lt;<span class="pl-smi">Post</span>&gt; <span class="pl-s1">posts</span>;</pre></div>
+<p dir="auto">Ensuite on va générer des tags aléatoires dans les threads:</p>
+<div class="highlight highlight-source-java notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="    for (int i = 0; i &lt; 5; i++) {
+      tags.add(textGenerator.generateText(2));
+    }"><pre>    <span class="pl-k">for</span> (<span class="pl-smi">int</span> <span class="pl-s1">i</span> = <span class="pl-c1">0</span>; <span class="pl-s1">i</span> &lt; <span class="pl-c1">5</span>; <span class="pl-s1">i</span>++) {
+      <span class="pl-s1">tags</span>.<span class="pl-en">add</span>(<span class="pl-s1">textGenerator</span>.<span class="pl-en">generateText</span>(<span class="pl-c1">2</span>));
+    }</pre></div>
+<p dir="auto">Et finalement, dans thread on va ajouter un attribut thread</p>
+<div class="highlight highlight-source-java notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="  private final Thread thread;"><pre>  <span class="pl-k">private</span> <span class="pl-k">final</span> <span class="pl-smi">Thread</span> <span class="pl-s1">thread</span>;</pre></div>
+<p dir="auto">Et on va l'initialiser aléatoirement lors de la création d'un post.</p>
+<p dir="auto">Ensuite, lors de la génération des users, on va itérer dans la liste de ses posts et accéder aux threads correspondant pour trouver la liste des tags correspondant.</p>
+<div class="highlight highlight-source-java notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="  List&lt;String&gt; myUserTags = new LinkedList&lt;&gt;();
+      // getting the tags
+      for (Post post : myPosts) {
+        myUserTags.addAll(post.getThread().getTags());
+      }"><pre>  <span class="pl-smi">List</span>&lt;<span class="pl-smi">String</span>&gt; <span class="pl-s1">myUserTags</span> = <span class="pl-k">new</span> <span class="pl-smi">LinkedList</span>&lt;&gt;();
+      <span class="pl-c">// getting the tags</span>
+      <span class="pl-k">for</span> (<span class="pl-smi">Post</span> <span class="pl-s1">post</span> : <span class="pl-s1">myPosts</span>) {
+        <span class="pl-s1">myUserTags</span>.<span class="pl-en">addAll</span>(<span class="pl-s1">post</span>.<span class="pl-en">getThread</span>().<span class="pl-en">getTags</span>());
+      }</pre></div>
+<p dir="auto">Mainenant, en faisant des requêtes, on peut trouver dans chaque user une liste de tag correspondant au tag des threads dans lequel il a posté, et donc effectuer des statistiques sur ceux-ci.<br>
+Voici un exemple d'utilisateur.</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="{ &quot;_id&quot; : &quot;Yellowjacket II|65&quot;, &quot;nickname&quot; : &quot;Yellowjacket II&quot;, &quot;age&quot; : 13, &quot;posts&quot; : [ { &quot;_id&quot; : &quot;121&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;thread&quot; : { &quot;_id&quot; : &quot;7&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;tags&quot; : [ &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot; ] } }, { &quot;_id&quot; : &quot;108&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;thread&quot; : { &quot;_id&quot; : &quot;14&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;tags&quot; : [ &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot; ] } }, { &quot;_id&quot; : &quot;109&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;thread&quot; : { &quot;_id&quot; : &quot;9&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;tags&quot; : [ &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot; ] } } ], &quot;usedtags&quot; : [ &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot; ] }"><pre>{ "_id" : "Yellowjacket II|65", "nickname" : "Yellowjacket II", "age" : 13, "posts" : [ { "_id" : "121", "title" : "blah. ", "content" : "blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. ", "thread" : { "_id" : "7", "title" : "blah. ", "tags" : [ "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. " ] } }, { "_id" : "108", "title" : "blah. ", "content" : "blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. ", "thread" : { "_id" : "14", "title" : "blah. ", "tags" : [ "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. " ] } }, { "_id" : "109", "title" : "blah. ", "content" : "blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. ", "thread" : { "_id" : "9", "title" : "blah. ", "tags" : [ "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. " ] } } ], "usedtags" : [ "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. " ] }</pre></div>
+<p dir="auto">Ici en l'occurence les tags sont générés "aléatoirement" avec textGenerator, donc tous égaux à "blah blah".</p>
+<h2 dir="auto"><a id="user-content-réplication-et-haute-disponibilité" class="anchor" aria-hidden="true" href="#réplication-et-haute-disponibilité"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Réplication et haute disponibilité</h2>
+<ol dir="auto">
+<li>On utilise les commandes suivante:
+Pour pouvoir continuer de lire dans les bases de données secondaires, on va ajouter l'option <code>rs.secondaryOK()</code>.</li>
+</ol>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="$ mongo --nodb
+var replicaSet = new ReplSetTest({&quot;nodes&quot; : 3})
+replicaSet.startSet()
+replicaSet.initiate()"><pre>$ mongo --nodb
+var replicaSet = new ReplSetTest({<span class="pl-s"><span class="pl-pds">"</span>nodes<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 3})
+<span class="pl-en">replicaSet.startSet</span>()
+<span class="pl-en">replicaSet.initiate</span>()</pre></div>
+<ol start="2" dir="auto">
+<li>on se connecte ensuite au docker depuis une autre fenêtre de commande:</li>
+</ol>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="docker exec -it mongo bash"><pre>docker <span class="pl-c1">exec</span> -it mongo bash</pre></div>
+<p dir="auto">On va ensuite se connecter à un replicaSet secondaire:</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="mongo --host localhost:20002"><pre>mongo --host localhost:20002</pre></div>
+<ol start="3" dir="auto">
+<li>On effectue maintenant la commande status:</li>
+</ol>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; rs.status()"><pre><span class="pl-k">&gt;</span> <span class="pl-en">rs.status</span>()</pre></div>
+<p dir="auto">On obtient comme réponse une liste des membres ainsi qu'un attribut "ok" à 1.</p>
+<ol start="4" dir="auto">
+<li>On va maintenant changer le string de connexion dans le application.properties, mais avant cela, il faut trouver l'ip du conteneur mongo:</li>
+</ol>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mongo
+172.19.0.2"><pre><span class="pl-k">&gt;</span> docker inspect -f <span class="pl-s"><span class="pl-pds">'</span>{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}<span class="pl-pds">'</span></span> mongo
+172.19.0.2</pre></div>
+<p dir="auto">On peut ensuite rajouter ce qui suit dans le fichier application.properties du java :</p>
+<div class="highlight highlight-source-ini notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="mongo.cnx.string=mongodb://172.19.0.2:20000"><pre><span class="pl-k">mongo.cnx.string</span>=mongodb://172.19.0.2:20000</pre></div>
+<ol start="5" dir="auto">
+<li>On utilise ces commandes pour interroger la base:</li>
+</ol>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt;use forum
+&gt;db.users.find()
+...,
+{ &quot;_id&quot; : &quot;Hawkwoman III|78&quot;, &quot;nickname&quot; : &quot;Hawkwoman III&quot;, &quot;age&quot; : 13, &quot;posts&quot; : [ { &quot;_id&quot; : &quot;126&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;thread&quot; : { &quot;_id&quot; : &quot;13&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;tags&quot; : [ &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot; ] } }, { &quot;_id&quot; : &quot;127&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;thread&quot; : { &quot;_id&quot; : &quot;34&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;tags&quot; : [ &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot; ] } } ], &quot;usedtags&quot; : [ &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot; ] }"><pre><span class="pl-k">&gt;</span>use forum
+<span class="pl-en">&gt;db.users.find</span>()
+...,
+{ <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Hawkwoman III|78<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>nickname<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>Hawkwoman III<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>age<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 13, <span class="pl-s"><span class="pl-pds">"</span>posts<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>126<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>thread<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>13<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>tags<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ <span class="pl-s"><span class="pl-pds">"</span>blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>blah. blah. <span class="pl-pds">"</span></span> ] } }, { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>127<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>thread<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> { <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>34<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>tags<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ <span class="pl-s"><span class="pl-pds">"</span>blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>blah. blah. <span class="pl-pds">"</span></span> ] } } ], <span class="pl-s"><span class="pl-pds">"</span>usedtags<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ <span class="pl-s"><span class="pl-pds">"</span>blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>blah. blah. <span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>blah. blah. <span class="pl-pds">"</span></span> ] }</pre></div>
+<p dir="auto">Les données ont bien été ajoutées.</p>
+<ol start="6" dir="auto">
+<li>On va stopper une des replica avec la commande kill. Pour cela, on trouve d'abord le pid des instances :</li>
+</ol>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt;ps -aux
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+...
+root         898  1.2  1.2 1766632 95908 pts/0   Sl+  16:25   0:06 /usr/bin/mongod --oplogSize 40 --port 20000 --replSet __unknown_name__ --dbpath /data/db/__u
+root         900  1.3  1.2 1779572 98500 pts/0   Sl+  16:25   0:06 /usr/bin/mongod --oplogSize 40 --port 20001 --replSet __unknown_name__ --dbpath /data/db/__u
+root         902  1.3  1.2 1742708 95736 pts/0   Sl+  16:25   0:06 /usr/bin/mongod --oplogSize 40 --port 20002 --replSet __unknown_name__ --dbpath /data/db/__u"><pre><span class="pl-k">&gt;</span>ps -aux
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+...
+root         898  1.2  1.2 1766632 95908 pts/0   Sl+  16:25   0:06 /usr/bin/mongod --oplogSize 40 --port 20000 --replSet __unknown_name__ --dbpath /data/db/__u
+root         900  1.3  1.2 1779572 98500 pts/0   Sl+  16:25   0:06 /usr/bin/mongod --oplogSize 40 --port 20001 --replSet __unknown_name__ --dbpath /data/db/__u
+root         902  1.3  1.2 1742708 95736 pts/0   Sl+  16:25   0:06 /usr/bin/mongod --oplogSize 40 --port 20002 --replSet __unknown_name__ --dbpath /data/db/__u</pre></div>
+<p dir="auto">Puis on kill l'instance correspondante(sur le port 20001):</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="kill 900"><pre><span class="pl-c1">kill</span> 900</pre></div>
+<ol start="7" dir="auto">
+<li>Et on regarde le statut:</li>
+</ol>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="replicaset.status()"><pre><span class="pl-en">replicaset.status</span>()</pre></div>
+<p dir="auto">dans le noeud avec l'id 2, on observe les lignes suivantes:</p>
+<div class="highlight highlight-source-json notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="...,
+ &quot;health&quot; : 0,
+ &quot;state&quot; : 8,
+ &quot;stateStr&quot; : &quot;(not reachable/healthy)&quot;,
+ ..."><pre><span class="pl-ii">...,</span>
+ <span class="pl-ent">"health"</span> : <span class="pl-c1">0</span>,
+ <span class="pl-ent">"state"</span> : <span class="pl-c1">8</span>,
+ <span class="pl-ent">"stateStr"</span> : <span class="pl-s"><span class="pl-pds">"</span>(not reachable/healthy)<span class="pl-pds">"</span></span>,
+ <span class="pl-ii">...</span></pre></div>
+<ol start="8" dir="auto">
+<li>On va ré-interroger la base de données avec la commande suivante:</li>
+</ol>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.users.find()
+{ &quot;_id&quot; : &quot;Ultron|19&quot;, &quot;nickname&quot; : &quot;Ultron&quot;, &quot;age&quot; : 13, &quot;posts&quot; : [ { &quot;_id&quot; : &quot;8&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;thread&quot; : { &quot;_id&quot; : &quot;0&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;tags&quot; : [ &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot; ] } }, { &quot;_id&quot; : &quot;9&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;thread&quot; : { &quot;_id&quot; : &quot;1&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;tags&quot; : [ &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot; ] } }, { &quot;_id&quot; : &quot;10&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;thread&quot; : { &quot;_id&quot; : &quot;1&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;tags&quot; : [ &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot; ] } } ], &quot;usedtags&quot; : [ &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot; ] }"><pre><span class="pl-k">&gt;</span> <span class="pl-en">db.users.find</span>()
+{ "_id" : "Ultron|19", "nickname" : "Ultron", "age" : 13, "posts" : [ { "_id" : "8", "title" : "blah. ", "content" : "blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. ", "thread" : { "_id" : "0", "title" : "blah. ", "tags" : [ "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. " ] } }, { "_id" : "9", "title" : "blah. ", "content" : "blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. ", "thread" : { "_id" : "1", "title" : "blah. ", "tags" : [ "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. " ] } }, { "_id" : "10", "title" : "blah. ", "content" : "blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. ", "thread" : { "_id" : "1", "title" : "blah. ", "tags" : [ "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. " ] } } ], "usedtags" : [ "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. " ] }</pre></div>
+<p dir="auto">Même si un noeud secondaire est arreté, la base est toujours fonctionnelle.</p>
+<h2 dir="auto"><a id="user-content-réplication-et-haute-disponibilité2" class="anchor" aria-hidden="true" href="#réplication-et-haute-disponibilité2"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Réplication et haute disponibilité(2)</h2>
+<ol dir="auto">
+<li>On va kill le noeud primaire:</li>
+</ol>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="kill 898"><pre><span class="pl-c1">kill</span> 898</pre></div>
+<ol start="2" dir="auto">
+<li>Voici ce qu'on obtient avec la commande status du réplicaset</li>
+</ol>
+<div class="highlight highlight-source-json notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="{
+        &quot;set&quot; : &quot;__unknown_name__&quot;,
+        &quot;date&quot; : ISODate(&quot;2023-02-01T16:46:05.200Z&quot;),
+        &quot;myState&quot; : 2,
+        &quot;term&quot; : NumberLong(2),
+        &quot;syncSourceHost&quot; : &quot;&quot;,
+        &quot;syncSourceId&quot; : -1,
+        &quot;heartbeatIntervalMillis&quot; : NumberLong(2000),
+        &quot;majorityVoteCount&quot; : 2,
+        &quot;writeMajorityCount&quot; : 2,
+        &quot;votingMembersCount&quot; : 3,
+        &quot;writableVotingMembersCount&quot; : 3,
+        &quot;optimes&quot; : {
+                &quot;lastCommittedOpTime&quot; : {
+                        &quot;ts&quot; : Timestamp(1675269837, 14),
+                        &quot;t&quot; : NumberLong(1)
+                },
+                &quot;lastCommittedWallTime&quot; : ISODate(&quot;2023-02-01T16:43:57.920Z&quot;),
+                &quot;readConcernMajorityOpTime&quot; : {
+                        &quot;ts&quot; : Timestamp(1675269837, 14),
+                        &quot;t&quot; : NumberLong(1)
+                },
+                &quot;readConcernMajorityWallTime&quot; : ISODate(&quot;2023-02-01T16:43:57.920Z&quot;),
+                &quot;appliedOpTime&quot; : {
+                        &quot;ts&quot; : Timestamp(1675269837, 14),
+                        &quot;t&quot; : NumberLong(1)
+                },
+                &quot;durableOpTime&quot; : {
+                        &quot;ts&quot; : Timestamp(1675269837, 14),
+                        &quot;t&quot; : NumberLong(1)
+                },
+                &quot;lastAppliedWallTime&quot; : ISODate(&quot;2023-02-01T16:43:57.920Z&quot;),
+                &quot;lastDurableWallTime&quot; : ISODate(&quot;2023-02-01T16:43:57.920Z&quot;)
+        },
+        &quot;lastStableRecoveryTimestamp&quot; : Timestamp(1675269837, 14),
+        &quot;members&quot; : [
+                {
+                        &quot;_id&quot; : 0,
+                        &quot;name&quot; : &quot;df397d65d352:20000&quot;,
+                        &quot;health&quot; : 0,
+                        &quot;state&quot; : 8,
+                        &quot;stateStr&quot; : &quot;(not reachable/healthy)&quot;,
+                        &quot;uptime&quot; : 0,
+                        &quot;optime&quot; : {
+                                &quot;ts&quot; : Timestamp(0, 0),
+                                &quot;t&quot; : NumberLong(-1)
+                        },
+                        &quot;optimeDurable&quot; : {
+                                &quot;ts&quot; : Timestamp(0, 0),
+                                &quot;t&quot; : NumberLong(-1)
+                        },
+                        &quot;optimeDate&quot; : ISODate(&quot;1970-01-01T00:00:00Z&quot;),
+                        &quot;optimeDurableDate&quot; : ISODate(&quot;1970-01-01T00:00:00Z&quot;),
+                        &quot;lastAppliedWallTime&quot; : ISODate(&quot;2023-02-01T16:43:57.920Z&quot;),
+                        &quot;lastDurableWallTime&quot; : ISODate(&quot;2023-02-01T16:43:57.920Z&quot;),
+                        &quot;lastHeartbeat&quot; : ISODate(&quot;2023-02-01T16:46:05.029Z&quot;),
+                        &quot;lastHeartbeatRecv&quot; : ISODate(&quot;2023-02-01T16:45:58.130Z&quot;),
+                        &quot;pingMs&quot; : NumberLong(0),
+                        &quot;lastHeartbeatMessage&quot; : &quot;Error connecting to df397d65d352:20000 (172.19.0.2:20000) :: caused by :: Connection refused&quot;,
+                        &quot;syncSourceHost&quot; : &quot;&quot;,
+                        &quot;syncSourceId&quot; : -1,
+                        &quot;infoMessage&quot; : &quot;&quot;,
+                        &quot;configVersion&quot; : 3,
+                        &quot;configTerm&quot; : 1
+                },
+                {
+                        &quot;_id&quot; : 1,
+                        &quot;name&quot; : &quot;df397d65d352:20001&quot;,
+                        &quot;health&quot; : 0,
+                        &quot;state&quot; : 8,
+                        &quot;stateStr&quot; : &quot;(not reachable/healthy)&quot;,
+                        &quot;uptime&quot; : 0,
+                        &quot;optime&quot; : {
+                                &quot;ts&quot; : Timestamp(0, 0),
+                                &quot;t&quot; : NumberLong(-1)
+                        },
+                        &quot;optimeDurable&quot; : {
+                                &quot;ts&quot; : Timestamp(0, 0),
+                                &quot;t&quot; : NumberLong(-1)
+                        },
+                        &quot;optimeDate&quot; : ISODate(&quot;1970-01-01T00:00:00Z&quot;),
+                        &quot;optimeDurableDate&quot; : ISODate(&quot;1970-01-01T00:00:00Z&quot;),
+                        &quot;lastAppliedWallTime&quot; : ISODate(&quot;2023-02-01T16:29:56.581Z&quot;),
+                        &quot;lastDurableWallTime&quot; : ISODate(&quot;2023-02-01T16:29:56.581Z&quot;),
+                        &quot;lastHeartbeat&quot; : ISODate(&quot;2023-02-01T16:46:05.028Z&quot;),
+                        &quot;lastHeartbeatRecv&quot; : ISODate(&quot;2023-02-01T16:37:36.630Z&quot;),
+                        &quot;pingMs&quot; : NumberLong(0),
+                        &quot;lastHeartbeatMessage&quot; : &quot;Error connecting to df397d65d352:20001 (172.19.0.2:20001) :: caused by :: Connection refused&quot;,
+                        &quot;syncSourceHost&quot; : &quot;&quot;,
+                        &quot;syncSourceId&quot; : -1,
+                        &quot;infoMessage&quot; : &quot;&quot;,
+                        &quot;configVersion&quot; : 3,
+                        &quot;configTerm&quot; : 1
+                },
+                {
+                        &quot;_id&quot; : 2,
+                        &quot;name&quot; : &quot;df397d65d352:20002&quot;,
+                        &quot;health&quot; : 1,
+                        &quot;state&quot; : 2,
+                        &quot;stateStr&quot; : &quot;SECONDARY&quot;,
+                        &quot;uptime&quot; : 1210,
+                        &quot;optime&quot; : {
+                                &quot;ts&quot; : Timestamp(1675269837, 14),
+                                &quot;t&quot; : NumberLong(1)
+                        },
+                        &quot;optimeDate&quot; : ISODate(&quot;2023-02-01T16:43:57Z&quot;),
+                        &quot;lastAppliedWallTime&quot; : ISODate(&quot;2023-02-01T16:43:57.920Z&quot;),
+                        &quot;lastDurableWallTime&quot; : ISODate(&quot;2023-02-01T16:43:57.920Z&quot;),
+                        &quot;syncSourceHost&quot; : &quot;&quot;,
+                        &quot;syncSourceId&quot; : -1,
+                        &quot;infoMessage&quot; : &quot;&quot;,
+                        &quot;configVersion&quot; : 3,
+                        &quot;configTerm&quot; : 1,
+                        &quot;self&quot; : true,
+                        &quot;lastHeartbeatMessage&quot; : &quot;&quot;
+                }
+        ],
+        &quot;ok&quot; : 1,
+        &quot;$clusterTime&quot; : {
+                &quot;clusterTime&quot; : Timestamp(1675269838, 1),
+                &quot;signature&quot; : {
+                        &quot;hash&quot; : BinData(0,&quot;AAAAAAAAAAAAAAAAAAAAAAAAAAA=&quot;),
+                        &quot;keyId&quot; : NumberLong(0)
+                }
+        },
+        &quot;operationTime&quot; : Timestamp(1675269837, 14)
+}"><pre>{
+        <span class="pl-ent">"set"</span> : <span class="pl-s"><span class="pl-pds">"</span>__unknown_name__<span class="pl-pds">"</span></span>,
+        <span class="pl-ent">"date"</span> : <span class="pl-ii">ISODate("2023-02-01T16:46:05.200Z"),</span>
+        <span class="pl-ent">"myState"</span> : <span class="pl-c1">2</span>,
+        <span class="pl-ent">"term"</span> : <span class="pl-ii">NumberLong(2),</span>
+        <span class="pl-ent">"syncSourceHost"</span> : <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+        <span class="pl-ent">"syncSourceId"</span> : <span class="pl-c1">-1</span>,
+        <span class="pl-ent">"heartbeatIntervalMillis"</span> : <span class="pl-ii">NumberLong(2000),</span>
+        <span class="pl-ent">"majorityVoteCount"</span> : <span class="pl-c1">2</span>,
+        <span class="pl-ent">"writeMajorityCount"</span> : <span class="pl-c1">2</span>,
+        <span class="pl-ent">"votingMembersCount"</span> : <span class="pl-c1">3</span>,
+        <span class="pl-ent">"writableVotingMembersCount"</span> : <span class="pl-c1">3</span>,
+        <span class="pl-ent">"optimes"</span> : {
+                <span class="pl-ent">"lastCommittedOpTime"</span> : {
+                        <span class="pl-ent">"ts"</span> : <span class="pl-ii">Timestamp(1675269837, 14),</span>
+                        <span class="pl-ent">"t"</span> : <span class="pl-ii">NumberLong(1)</span>
+                },
+                <span class="pl-ent">"lastCommittedWallTime"</span> : <span class="pl-ii">ISODate("2023-02-01T16:43:57.920Z"),</span>
+                <span class="pl-ent">"readConcernMajorityOpTime"</span> : {
+                        <span class="pl-ent">"ts"</span> : <span class="pl-ii">Timestamp(1675269837, 14),</span>
+                        <span class="pl-ent">"t"</span> : <span class="pl-ii">NumberLong(1)</span>
+                },
+                <span class="pl-ent">"readConcernMajorityWallTime"</span> : <span class="pl-ii">ISODate("2023-02-01T16:43:57.920Z"),</span>
+                <span class="pl-ent">"appliedOpTime"</span> : {
+                        <span class="pl-ent">"ts"</span> : <span class="pl-ii">Timestamp(1675269837, 14),</span>
+                        <span class="pl-ent">"t"</span> : <span class="pl-ii">NumberLong(1)</span>
+                },
+                <span class="pl-ent">"durableOpTime"</span> : {
+                        <span class="pl-ent">"ts"</span> : <span class="pl-ii">Timestamp(1675269837, 14),</span>
+                        <span class="pl-ent">"t"</span> : <span class="pl-ii">NumberLong(1)</span>
+                },
+                <span class="pl-ent">"lastAppliedWallTime"</span> : <span class="pl-ii">ISODate("2023-02-01T16:43:57.920Z"),</span>
+                <span class="pl-ent">"lastDurableWallTime"</span> : <span class="pl-ii">ISODate("2023-02-01T16:43:57.920Z")</span>
+        },
+        <span class="pl-ent">"lastStableRecoveryTimestamp"</span> : <span class="pl-ii">Timestamp(1675269837, 14),</span>
+        <span class="pl-ent">"members"</span> : [
+                {
+                        <span class="pl-ent">"_id"</span> : <span class="pl-c1">0</span>,
+                        <span class="pl-ent">"name"</span> : <span class="pl-s"><span class="pl-pds">"</span>df397d65d352:20000<span class="pl-pds">"</span></span>,
+                        <span class="pl-ent">"health"</span> : <span class="pl-c1">0</span>,
+                        <span class="pl-ent">"state"</span> : <span class="pl-c1">8</span>,
+                        <span class="pl-ent">"stateStr"</span> : <span class="pl-s"><span class="pl-pds">"</span>(not reachable/healthy)<span class="pl-pds">"</span></span>,
+                        <span class="pl-ent">"uptime"</span> : <span class="pl-c1">0</span>,
+                        <span class="pl-ent">"optime"</span> : {
+                                <span class="pl-ent">"ts"</span> : <span class="pl-ii">Timestamp(0, 0),</span>
+                                <span class="pl-ent">"t"</span> : <span class="pl-ii">NumberLong(-1)</span>
+                        },
+                        <span class="pl-ent">"optimeDurable"</span> : {
+                                <span class="pl-ent">"ts"</span> : <span class="pl-ii">Timestamp(0, 0),</span>
+                                <span class="pl-ent">"t"</span> : <span class="pl-ii">NumberLong(-1)</span>
+                        },
+                        <span class="pl-ent">"optimeDate"</span> : <span class="pl-ii">ISODate("1970-01-01T00:00:00Z"),</span>
+                        <span class="pl-ent">"optimeDurableDate"</span> : <span class="pl-ii">ISODate("1970-01-01T00:00:00Z"),</span>
+                        <span class="pl-ent">"lastAppliedWallTime"</span> : <span class="pl-ii">ISODate("2023-02-01T16:43:57.920Z"),</span>
+                        <span class="pl-ent">"lastDurableWallTime"</span> : <span class="pl-ii">ISODate("2023-02-01T16:43:57.920Z"),</span>
+                        <span class="pl-ent">"lastHeartbeat"</span> : <span class="pl-ii">ISODate("2023-02-01T16:46:05.029Z"),</span>
+                        <span class="pl-ent">"lastHeartbeatRecv"</span> : <span class="pl-ii">ISODate("2023-02-01T16:45:58.130Z"),</span>
+                        <span class="pl-ent">"pingMs"</span> : <span class="pl-ii">NumberLong(0),</span>
+                        <span class="pl-ent">"lastHeartbeatMessage"</span> : <span class="pl-s"><span class="pl-pds">"</span>Error connecting to df397d65d352:20000 (172.19.0.2:20000) :: caused by :: Connection refused<span class="pl-pds">"</span></span>,
+                        <span class="pl-ent">"syncSourceHost"</span> : <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+                        <span class="pl-ent">"syncSourceId"</span> : <span class="pl-c1">-1</span>,
+                        <span class="pl-ent">"infoMessage"</span> : <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+                        <span class="pl-ent">"configVersion"</span> : <span class="pl-c1">3</span>,
+                        <span class="pl-ent">"configTerm"</span> : <span class="pl-c1">1</span>
+                },
+                {
+                        <span class="pl-ent">"_id"</span> : <span class="pl-c1">1</span>,
+                        <span class="pl-ent">"name"</span> : <span class="pl-s"><span class="pl-pds">"</span>df397d65d352:20001<span class="pl-pds">"</span></span>,
+                        <span class="pl-ent">"health"</span> : <span class="pl-c1">0</span>,
+                        <span class="pl-ent">"state"</span> : <span class="pl-c1">8</span>,
+                        <span class="pl-ent">"stateStr"</span> : <span class="pl-s"><span class="pl-pds">"</span>(not reachable/healthy)<span class="pl-pds">"</span></span>,
+                        <span class="pl-ent">"uptime"</span> : <span class="pl-c1">0</span>,
+                        <span class="pl-ent">"optime"</span> : {
+                                <span class="pl-ent">"ts"</span> : <span class="pl-ii">Timestamp(0, 0),</span>
+                                <span class="pl-ent">"t"</span> : <span class="pl-ii">NumberLong(-1)</span>
+                        },
+                        <span class="pl-ent">"optimeDurable"</span> : {
+                                <span class="pl-ent">"ts"</span> : <span class="pl-ii">Timestamp(0, 0),</span>
+                                <span class="pl-ent">"t"</span> : <span class="pl-ii">NumberLong(-1)</span>
+                        },
+                        <span class="pl-ent">"optimeDate"</span> : <span class="pl-ii">ISODate("1970-01-01T00:00:00Z"),</span>
+                        <span class="pl-ent">"optimeDurableDate"</span> : <span class="pl-ii">ISODate("1970-01-01T00:00:00Z"),</span>
+                        <span class="pl-ent">"lastAppliedWallTime"</span> : <span class="pl-ii">ISODate("2023-02-01T16:29:56.581Z"),</span>
+                        <span class="pl-ent">"lastDurableWallTime"</span> : <span class="pl-ii">ISODate("2023-02-01T16:29:56.581Z"),</span>
+                        <span class="pl-ent">"lastHeartbeat"</span> : <span class="pl-ii">ISODate("2023-02-01T16:46:05.028Z"),</span>
+                        <span class="pl-ent">"lastHeartbeatRecv"</span> : <span class="pl-ii">ISODate("2023-02-01T16:37:36.630Z"),</span>
+                        <span class="pl-ent">"pingMs"</span> : <span class="pl-ii">NumberLong(0),</span>
+                        <span class="pl-ent">"lastHeartbeatMessage"</span> : <span class="pl-s"><span class="pl-pds">"</span>Error connecting to df397d65d352:20001 (172.19.0.2:20001) :: caused by :: Connection refused<span class="pl-pds">"</span></span>,
+                        <span class="pl-ent">"syncSourceHost"</span> : <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+                        <span class="pl-ent">"syncSourceId"</span> : <span class="pl-c1">-1</span>,
+                        <span class="pl-ent">"infoMessage"</span> : <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+                        <span class="pl-ent">"configVersion"</span> : <span class="pl-c1">3</span>,
+                        <span class="pl-ent">"configTerm"</span> : <span class="pl-c1">1</span>
+                },
+                {
+                        <span class="pl-ent">"_id"</span> : <span class="pl-c1">2</span>,
+                        <span class="pl-ent">"name"</span> : <span class="pl-s"><span class="pl-pds">"</span>df397d65d352:20002<span class="pl-pds">"</span></span>,
+                        <span class="pl-ent">"health"</span> : <span class="pl-c1">1</span>,
+                        <span class="pl-ent">"state"</span> : <span class="pl-c1">2</span>,
+                        <span class="pl-ent">"stateStr"</span> : <span class="pl-s"><span class="pl-pds">"</span>SECONDARY<span class="pl-pds">"</span></span>,
+                        <span class="pl-ent">"uptime"</span> : <span class="pl-c1">1210</span>,
+                        <span class="pl-ent">"optime"</span> : {
+                                <span class="pl-ent">"ts"</span> : <span class="pl-ii">Timestamp(1675269837, 14),</span>
+                                <span class="pl-ent">"t"</span> : <span class="pl-ii">NumberLong(1)</span>
+                        },
+                        <span class="pl-ent">"optimeDate"</span> : <span class="pl-ii">ISODate("2023-02-01T16:43:57Z"),</span>
+                        <span class="pl-ent">"lastAppliedWallTime"</span> : <span class="pl-ii">ISODate("2023-02-01T16:43:57.920Z"),</span>
+                        <span class="pl-ent">"lastDurableWallTime"</span> : <span class="pl-ii">ISODate("2023-02-01T16:43:57.920Z"),</span>
+                        <span class="pl-ent">"syncSourceHost"</span> : <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+                        <span class="pl-ent">"syncSourceId"</span> : <span class="pl-c1">-1</span>,
+                        <span class="pl-ent">"infoMessage"</span> : <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
+                        <span class="pl-ent">"configVersion"</span> : <span class="pl-c1">3</span>,
+                        <span class="pl-ent">"configTerm"</span> : <span class="pl-c1">1</span>,
+                        <span class="pl-ent">"self"</span> : <span class="pl-c1">true</span>,
+                        <span class="pl-ent">"lastHeartbeatMessage"</span> : <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>
+                }
+        ],
+        <span class="pl-ent">"ok"</span> : <span class="pl-c1">1</span>,
+        <span class="pl-ent">"$clusterTime"</span> : {
+                <span class="pl-ent">"clusterTime"</span> : <span class="pl-ii">Timestamp(1675269838, 1),</span>
+                <span class="pl-ent">"signature"</span> : {
+                        <span class="pl-ent">"hash"</span> : <span class="pl-ii">BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),</span>
+                        <span class="pl-ent">"keyId"</span> : <span class="pl-ii">NumberLong(0)</span>
+                }
+        },
+        <span class="pl-ent">"operationTime"</span> : <span class="pl-ii">Timestamp(1675269837, 14)</span>
+}</pre></div>
+<p dir="auto">On voit bien que le noeud primaire n'est plus disponible et comme il ne reste qu'un noeud secondaire, il n'a pas la majorité sur les trois noeuds pour passer en primaire.
+3. On va ré-interroger la base de données</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt;  db.users.find()
+{ &quot;_id&quot; : &quot;Ultron|19&quot;, &quot;nickname&quot; : &quot;Ultron&quot;, &quot;age&quot; : 13, &quot;posts&quot; : [ { &quot;_id&quot; : &quot;8&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;thread&quot; : { &quot;_id&quot; : &quot;0&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;tags&quot; : [ &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot; ] } }, { &quot;_id&quot; : &quot;9&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;thread&quot; : { &quot;_id&quot; : &quot;1&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;tags&quot; : [ &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot; ] } }, { &quot;_id&quot; : &quot;10&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;content&quot; : &quot;blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. &quot;, &quot;thread&quot; : { &quot;_id&quot; : &quot;1&quot;, &quot;title&quot; : &quot;blah. &quot;, &quot;tags&quot; : [ &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot; ] } } ], &quot;usedtags&quot; : [ &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot;, &quot;blah. blah. &quot; ] }"><pre><span class="pl-k">&gt;</span>  <span class="pl-en">db.users.find</span>()
+{ "_id" : "Ultron|19", "nickname" : "Ultron", "age" : 13, "posts" : [ { "_id" : "8", "title" : "blah. ", "content" : "blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. ", "thread" : { "_id" : "0", "title" : "blah. ", "tags" : [ "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. " ] } }, { "_id" : "9", "title" : "blah. ", "content" : "blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. ", "thread" : { "_id" : "1", "title" : "blah. ", "tags" : [ "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. " ] } }, { "_id" : "10", "title" : "blah. ", "content" : "blah. blah. blah. blah. blah. blah. blah. blah. blah. blah. ", "thread" : { "_id" : "1", "title" : "blah. ", "tags" : [ "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. " ] } } ], "usedtags" : [ "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. ", "blah. blah. " ] }</pre></div>
+<ol start="5" dir="auto">
+<li>On observe que les données sont toujours disponibles dans la base, le dernier replica secondaire permet toujours de lire les données grâce à l'option que nous avons rajouté au début.</li>
+</ol>
+<h2 dir="auto"><a id="user-content-sharding" class="anchor" aria-hidden="true" href="#sharding"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Sharding</h2>
+<ol dir="auto">
+<li>On commence par initialiser le cluster shardé:</li>
+</ol>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; cluster = new ShardingTest({&quot;shards&quot; : 3, &quot;chunkSize&quot; : 1})"><pre><span class="pl-k">&gt;</span> cluster = new ShardingTest({<span class="pl-s"><span class="pl-pds">"</span>shards<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 3, <span class="pl-s"><span class="pl-pds">"</span>chunkSize<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1})</pre></div>
+<ol start="2" dir="auto">
+<li>On peut ensuite se connecter au cluster shardé avec la commande suivante:</li>
+</ol>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; mongo --host localhost:20006"><pre><span class="pl-k">&gt;</span> mongo --host localhost:20006</pre></div>
+<ol start="3" dir="auto">
+<li>Pour vérifier l'état du cluster, on lance la commande suivante:</li>
+</ol>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; sh.status(true) 
+--- Sharding Status --- 
+  sharding version: {
+        &quot;_id&quot; : 1,
+        &quot;minCompatibleVersion&quot; : 5,
+        &quot;currentVersion&quot; : 6,
+        &quot;clusterId&quot; : ObjectId(&quot;63e3a45c9818f73ef8f45af5&quot;)
+  }
+  shards:
+        {  &quot;_id&quot; : &quot;__unknown_name__-rs0&quot;,  &quot;host&quot; : &quot;__unknown_name__-rs0/342c6c438131:20000&quot;,  &quot;state&quot; : 1 }
+        {  &quot;_id&quot; : &quot;__unknown_name__-rs1&quot;,  &quot;host&quot; : &quot;__unknown_name__-rs1/342c6c438131:20001&quot;,  &quot;state&quot; : 1 }
+        {  &quot;_id&quot; : &quot;__unknown_name__-rs2&quot;,  &quot;host&quot; : &quot;__unknown_name__-rs2/342c6c438131:20002&quot;,  &quot;state&quot; : 1 }
+  active mongoses:
+        {  &quot;_id&quot; : &quot;342c6c438131:20006&quot;,  &quot;advisoryHostFQDNs&quot; : [ ],  &quot;mongoVersion&quot; : &quot;4.4.18&quot;,  &quot;ping&quot; : ISODate(&quot;2023-02-08T13:33:10.428Z&quot;),  &quot;up&quot; : NumberLong(50),  &quot;waiting&quot; : true }
+  autosplit:
+        Currently enabled: no
+  balancer:
+        Currently enabled:  no
+        Currently running:  no
+        Failed balancer rounds in last 5 attempts:  0
+        Migration Results for the last 24 hours: 
+                No recent migrations
+  databases:
+        {  &quot;_id&quot; : &quot;config&quot;,  &quot;primary&quot; : &quot;config&quot;,  &quot;partitioned&quot; : true }"><pre><span class="pl-k">&gt;</span> sh.status(true) 
+--- Sharding Status --- 
+  sharding version: {
+        <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1,
+        <span class="pl-s"><span class="pl-pds">"</span>minCompatibleVersion<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 5,
+        <span class="pl-s"><span class="pl-pds">"</span>currentVersion<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 6,
+        <span class="pl-s"><span class="pl-pds">"</span>clusterId<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> ObjectId(<span class="pl-s"><span class="pl-pds">"</span>63e3a45c9818f73ef8f45af5<span class="pl-pds">"</span></span>)
+  }
+  shards:
+        {  <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>__unknown_name__-rs0<span class="pl-pds">"</span></span>,  <span class="pl-s"><span class="pl-pds">"</span>host<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>__unknown_name__-rs0/342c6c438131:20000<span class="pl-pds">"</span></span>,  <span class="pl-s"><span class="pl-pds">"</span>state<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1 }
+        {  <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>__unknown_name__-rs1<span class="pl-pds">"</span></span>,  <span class="pl-s"><span class="pl-pds">"</span>host<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>__unknown_name__-rs1/342c6c438131:20001<span class="pl-pds">"</span></span>,  <span class="pl-s"><span class="pl-pds">"</span>state<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1 }
+        {  <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>__unknown_name__-rs2<span class="pl-pds">"</span></span>,  <span class="pl-s"><span class="pl-pds">"</span>host<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>__unknown_name__-rs2/342c6c438131:20002<span class="pl-pds">"</span></span>,  <span class="pl-s"><span class="pl-pds">"</span>state<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1 }
+  active mongoses:
+        {  <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>342c6c438131:20006<span class="pl-pds">"</span></span>,  <span class="pl-s"><span class="pl-pds">"</span>advisoryHostFQDNs<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> [ ],  <span class="pl-s"><span class="pl-pds">"</span>mongoVersion<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>4.4.18<span class="pl-pds">"</span></span>,  <span class="pl-s"><span class="pl-pds">"</span>ping<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> ISODate(<span class="pl-s"><span class="pl-pds">"</span>2023-02-08T13:33:10.428Z<span class="pl-pds">"</span></span>),  <span class="pl-s"><span class="pl-pds">"</span>up<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> NumberLong(50),  <span class="pl-s"><span class="pl-pds">"</span>waiting<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-c1">true</span> }
+  autosplit:
+        Currently enabled: no
+  balancer:
+        Currently enabled:  no
+        Currently running:  no
+        Failed balancer rounds <span class="pl-k">in</span> last 5 attempts:  0
+        Migration Results <span class="pl-k">for</span> the last 24 hours: 
+                No recent migrations
+  databases:
+        {  <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>config<span class="pl-pds">"</span></span>,  <span class="pl-s"><span class="pl-pds">"</span>primary<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>config<span class="pl-pds">"</span></span>,  <span class="pl-s"><span class="pl-pds">"</span>partitioned<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-c1">true</span> }</pre></div>
+<div class="snippet-clipboard-content notranslate position-relative overflow-auto" data-snippet-clipboard-copy-content="    On peut observer que les 3 shards et le mongos sont up, que le balancer n'est pas activé et que la base de données utilisée est pour l'instant la base config."><pre class="notranslate"><code>    On peut observer que les 3 shards et le mongos sont up, que le balancer n'est pas activé et que la base de données utilisée est pour l'instant la base config.
+</code></pre></div>
+<ol start="4" dir="auto">
+<li>On crée notre base de données forum et on active le sharding avec les commandes suivantes:</li>
+</ol>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="use forum
+sh.enableSharding(&quot;forum&quot;)"><pre>use forum
+sh.enableSharding(<span class="pl-s"><span class="pl-pds">"</span>forum<span class="pl-pds">"</span></span>)</pre></div>
+<p dir="auto">En revérifiant le statut du cluster shardé, on observe l'apparition de la base de données:</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="{  &quot;_id&quot; : &quot;forum&quot;,  &quot;primary&quot; : &quot;__unknown_name__-rs0&quot;,  &quot;partitioned&quot; : true,  &quot;version&quot; : {  &quot;uuid&quot; : UUID(&quot;b2f172a6-3a3d-43ce-8710-0052fb6da9fc&quot;),  &quot;lastMod&quot; : 1 } }"><pre>{  <span class="pl-s"><span class="pl-pds">"</span>_id<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>forum<span class="pl-pds">"</span></span>,  <span class="pl-s"><span class="pl-pds">"</span>primary<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>__unknown_name__-rs0<span class="pl-pds">"</span></span>,  <span class="pl-s"><span class="pl-pds">"</span>partitioned<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> true,  <span class="pl-s"><span class="pl-pds">"</span>version<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> {  <span class="pl-s"><span class="pl-pds">"</span>uuid<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> UUID(<span class="pl-s"><span class="pl-pds">"</span>b2f172a6-3a3d-43ce-8710-0052fb6da9fc<span class="pl-pds">"</span></span>),  <span class="pl-s"><span class="pl-pds">"</span>lastMod<span class="pl-pds">"</span></span> <span class="pl-c1">:</span> 1 } }</pre></div>
+<ol start="5" dir="auto">
+<li>On lance les commandes suivantes pour définir les clés de sharding:</li>
+</ol>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="sh.shardCollection(&quot;forum.posts&quot;, { _id : 1})
+sh.shardCollection(&quot;forum.threads&quot;, { _id : 1})
+sh.shardCollection(&quot;forum.users&quot;, { _id : 1})"><pre>sh.shardCollection(<span class="pl-s"><span class="pl-pds">"</span>forum.posts<span class="pl-pds">"</span></span>, { _id <span class="pl-c1">:</span> 1})
+sh.shardCollection(<span class="pl-s"><span class="pl-pds">"</span>forum.threads<span class="pl-pds">"</span></span>, { _id <span class="pl-c1">:</span> 1})
+sh.shardCollection(<span class="pl-s"><span class="pl-pds">"</span>forum.users<span class="pl-pds">"</span></span>, { _id <span class="pl-c1">:</span> 1})</pre></div>
+<ol start="6" dir="auto">
+<li>Le balancer est déjà stoppé par défaut.</li>
+<li>On va ensuite changer le paramètre de connection dans le programme java pour se connecter à notre base de données:</li>
+</ol>
+<div class="highlight highlight-source-yaml notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="mongo.cnx.string=mongodb://172.18.0.2:20006"><pre><span class="pl-s">mongo.cnx.string=mongodb://172.18.0.2:20006</span></pre></div>
+<p dir="auto">On a récupéré l'addresse du conteneur mongo avec la même commande utilisé plus haut pour le réplicaset.
+Et on va maintenant lancer le programme de génération de données(<code>mvn spring-boot:run</code>).</p>
+<p dir="auto">Pour vérifier la répartition des données sur les shards, on lance la commande suivante:</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="db.getCollection('collName').getShardDistribution()"><pre><span class="pl-en">db.getCollection('collName').getShardDistribution</span>()</pre></div>
+<p dir="auto">Pour toutes les collections, on observe qu'elles ne sont que sur le shard 1:</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="Shard __unknown_name__-rs0 at __unknown_name__-rs0/342c6c438131:20000
+ data : 342KiB docs : 1325 chunks : 1
+ estimated data per chunk : 342KiB
+ estimated docs per chunk : 1325
+
+Totals
+ data : 342KiB docs : 1325 chunks : 1
+ Shard __unknown_name__-rs0 contains 100% data, 100% docs in cluster, avg obj size on shard : 264B"><pre>Shard __unknown_name__-rs0 at __unknown_name__-rs0/342c6c438131:20000
+ data <span class="pl-c1">:</span> 342KiB docs <span class="pl-c1">:</span> 1325 chunks <span class="pl-c1">:</span> 1
+ estimated data per chunk <span class="pl-c1">:</span> 342KiB
+ estimated docs per chunk <span class="pl-c1">:</span> 1325
+
+Totals
+ data <span class="pl-c1">:</span> 342KiB docs <span class="pl-c1">:</span> 1325 chunks <span class="pl-c1">:</span> 1
+ Shard __unknown_name__-rs0 contains 100% data, 100% docs <span class="pl-k">in</span> cluster, avg obj size on shard <span class="pl-c1">:</span> 264B</pre></div>
+<h3 dir="auto"><a id="user-content-sharding2" class="anchor" aria-hidden="true" href="#sharding2"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Sharding(2)</h3>
+<ol dir="auto">
+<li>Pour activer le balancer, on lance startBalancer()</li>
+</ol>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="sh.startBalancer()"><pre><span class="pl-en">sh.startBalancer</span>()</pre></div>
+<p dir="auto">Dans le statut du sharding on observe que le balancer est activé mais il n'est pas lancé:</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="  balancer:
+        Currently enabled:  yes
+        Currently running:  no
+        Failed balancer rounds in last 5 attempts:  0
+        Migration Results for the last 24 hours: 
+                No recent migrations"><pre>  balancer:
+        Currently enabled:  yes
+        Currently running:  no
+        Failed balancer rounds <span class="pl-k">in</span> last 5 attempts:  0
+        Migration Results <span class="pl-k">for</span> the last 24 hours: 
+                No recent migrations</pre></div>
+<p dir="auto">Cela est dû au fait que la fenêtre d'execution n'est pas activée.
+Pour ce faire, on met à jour la base de données:</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="db.settings.update(
+   { _id: &quot;balancer&quot; },
+   { $set: { activeWindow : { start : &quot;00:00&quot;, stop : &quot;24:00&quot; } } },
+   { upsert: true }
+)"><pre>db.settings.update(
+   { _id: <span class="pl-s"><span class="pl-pds">"</span>balancer<span class="pl-pds">"</span></span> },
+   { <span class="pl-smi">$set</span>: { activeWindow <span class="pl-c1">:</span> { start <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>00:00<span class="pl-pds">"</span></span>, stop <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>24:00<span class="pl-pds">"</span></span> } } },
+   { upsert: <span class="pl-c1">true</span> }
+)</pre></div>
+<p dir="auto">Après avoir généré des données pendant 10 minutes, on observe qu'elles se répartissent sur les shards, par exemple avec la commande suivante:</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt;db.getCollection('posts').getShardDistribution()
+
+Shard __unknown_name__-rs0 at __unknown_name__-rs0/342c6c438131:20000
+ data : 2.22MiB docs : 8798 chunks : 2
+ estimated data per chunk : 1.11MiB
+ estimated docs per chunk : 4399
+
+Shard __unknown_name__-rs2 at __unknown_name__-rs2/342c6c438131:20002
+ data : 2KiB docs : 11 chunks : 1
+ estimated data per chunk : 2KiB
+ estimated docs per chunk : 11
+
+Shard __unknown_name__-rs1 at __unknown_name__-rs1/342c6c438131:20001
+ data : 1.29MiB docs : 5079 chunks : 2
+ estimated data per chunk : 660KiB
+ estimated docs per chunk : 2539
+
+Totals
+ data : 3.52MiB docs : 13888 chunks : 5
+ Shard __unknown_name__-rs0 contains 63.27% data, 63.34% docs in cluster, avg obj size on shard : 265B
+ Shard __unknown_name__-rs2 contains 0.07% data, 0.07% docs in cluster, avg obj size on shard : 265B
+ Shard __unknown_name__-rs1 contains 36.64% data, 36.57% docs in cluster, avg obj size on shard : 266B"><pre><span class="pl-en">&gt;db.getCollection('posts').getShardDistribution</span>()
+
+Shard __unknown_name__-rs0 at __unknown_name__-rs0/342c6c438131:20000
+ data <span class="pl-c1">:</span> 2.22MiB docs <span class="pl-c1">:</span> 8798 chunks <span class="pl-c1">:</span> 2
+ estimated data per chunk <span class="pl-c1">:</span> 1.11MiB
+ estimated docs per chunk <span class="pl-c1">:</span> 4399
+
+Shard __unknown_name__-rs2 at __unknown_name__-rs2/342c6c438131:20002
+ data <span class="pl-c1">:</span> 2KiB docs <span class="pl-c1">:</span> 11 chunks <span class="pl-c1">:</span> 1
+ estimated data per chunk <span class="pl-c1">:</span> 2KiB
+ estimated docs per chunk <span class="pl-c1">:</span> 11
+
+Shard __unknown_name__-rs1 at __unknown_name__-rs1/342c6c438131:20001
+ data <span class="pl-c1">:</span> 1.29MiB docs <span class="pl-c1">:</span> 5079 chunks <span class="pl-c1">:</span> 2
+ estimated data per chunk <span class="pl-c1">:</span> 660KiB
+ estimated docs per chunk <span class="pl-c1">:</span> 2539
+
+Totals
+ data <span class="pl-c1">:</span> 3.52MiB docs <span class="pl-c1">:</span> 13888 chunks <span class="pl-c1">:</span> 5
+ Shard __unknown_name__-rs0 contains 63.27% data, 63.34% docs <span class="pl-k">in</span> cluster, avg obj size on shard <span class="pl-c1">:</span> 265B
+ Shard __unknown_name__-rs2 contains 0.07% data, 0.07% docs <span class="pl-k">in</span> cluster, avg obj size on shard <span class="pl-c1">:</span> 265B
+ Shard __unknown_name__-rs1 contains 36.64% data, 36.57% docs <span class="pl-k">in</span> cluster, avg obj size on shard <span class="pl-c1">:</span> 266B</pre></div>
+<p dir="auto">On voit bien que les 3 shards sont utilisé et possèdent tous une partie des donnée.
+et avec <code>sh.status</code> on peut voir</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="Migration Results for the last 24 hours: 
+        4 : Success"><pre>Migration Results <span class="pl-k">for</span> the last 24 hours: 
+        4 <span class="pl-c1">:</span> Success</pre></div>
+<ol dir="auto">
+<li>Pour effectuer la répartition des données, on peut changer la clé de sharding par une clé hashed lors de la création de la clé de sharding:</li>
+</ol>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="sh.shardCollection(&quot;forum.posts&quot;, { _id : &quot;hashed&quot;})
+sh.shardCollection(&quot;forum.threads&quot;, { _id : &quot;hashed&quot;})
+sh.shardCollection(&quot;forum.users&quot;, { _id : &quot;hashed&quot;})"><pre>sh.shardCollection(<span class="pl-s"><span class="pl-pds">"</span>forum.posts<span class="pl-pds">"</span></span>, { _id <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>hashed<span class="pl-pds">"</span></span>})
+sh.shardCollection(<span class="pl-s"><span class="pl-pds">"</span>forum.threads<span class="pl-pds">"</span></span>, { _id <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>hashed<span class="pl-pds">"</span></span>})
+sh.shardCollection(<span class="pl-s"><span class="pl-pds">"</span>forum.users<span class="pl-pds">"</span></span>, { _id <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>hashed<span class="pl-pds">"</span></span>})</pre></div>
+<p dir="auto">De cette manière, dès la création d'une nouvelle données, elle aura moins de chance qu'elle soit mise dans le même shard que les autres.
+Et on peut voir après avoir généré quelques données que les shards sont bien mieux réparties:</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&gt; db.getCollection('users').getShardDistribution()
+...
+Totals
+ data : 44KiB docs : 51 chunks : 6
+ Shard __unknown_name__-rs1 contains 37% data, 35.29% docs in cluster, avg obj size on shard : 946B
+ Shard __unknown_name__-rs0 contains 37.48% data, 41.17% docs in cluster, avg obj size on shard : 822B
+ Shard __unknown_name__-rs2 contains 25.51% data, 23.52% docs in cluster, avg obj size on shard : 979B"><pre><span class="pl-k">&gt;</span> <span class="pl-en">db.getCollection('users').getShardDistribution</span>()
+...
+Totals
+ data <span class="pl-c1">:</span> 44KiB docs <span class="pl-c1">:</span> 51 chunks <span class="pl-c1">:</span> 6
+ Shard __unknown_name__-rs1 contains 37% data, 35.29% docs <span class="pl-k">in</span> cluster, avg obj size on shard <span class="pl-c1">:</span> 946B
+ Shard __unknown_name__-rs0 contains 37.48% data, 41.17% docs <span class="pl-k">in</span> cluster, avg obj size on shard <span class="pl-c1">:</span> 822B
+ Shard __unknown_name__-rs2 contains 25.51% data, 23.52% docs <span class="pl-k">in</span> cluster, avg obj size on shard <span class="pl-c1">:</span> 979B</pre></div>
+<ol start="2" dir="auto">
+<li>Les requêtes principales ne sont plus optimisées, car les requêtes accèdent à plusieurs shards en même temps.</li>
+</ol>
+<p dir="auto">a. Lors d'une requête des posts par user, par exemple avec cette commande:</p>
+<div class="highlight highlight-source-js notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="db.users.find({&quot;nickname&quot;:&quot;Deadpool&quot;},{&quot;posts&quot;:1}).explain(&quot;executionStats&quot;)"><pre><span class="pl-s1">db</span><span class="pl-kos">.</span><span class="pl-c1">users</span><span class="pl-kos">.</span><span class="pl-en">find</span><span class="pl-kos">(</span><span class="pl-kos">{</span><span class="pl-s">"nickname"</span>:<span class="pl-s">"Deadpool"</span><span class="pl-kos">}</span><span class="pl-kos">,</span><span class="pl-kos">{</span><span class="pl-s">"posts"</span>:<span class="pl-c1">1</span><span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-en">explain</span><span class="pl-kos">(</span><span class="pl-s">"executionStats"</span><span class="pl-kos">)</span></pre></div>
+<p dir="auto">on peut voir que la requête à scanné 2317 documents en ayant fusionné les shard</p>
+<div class="highlight highlight-source-json notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&quot;executionStats&quot; : {
+        &quot;nReturned&quot; : 1,
+        &quot;executionTimeMillis&quot; : 2,
+        &quot;totalKeysExamined&quot; : 0,
+        &quot;totalDocsExamined&quot; : 2317,
+        &quot;executionStages&quot; : {
+                &quot;stage&quot; : &quot;SHARD_MERGE&quot;,"><pre><span class="pl-ent">"executionStats"</span> : {
+        <span class="pl-ent">"nReturned"</span> : <span class="pl-c1">1</span>,
+        <span class="pl-ent">"executionTimeMillis"</span> : <span class="pl-c1">2</span>,
+        <span class="pl-ent">"totalKeysExamined"</span> : <span class="pl-c1">0</span>,
+        <span class="pl-ent">"totalDocsExamined"</span> : <span class="pl-c1">2317</span>,
+        <span class="pl-ent">"executionStages"</span> : {
+                <span class="pl-ent">"stage"</span> : <span class="pl-s"><span class="pl-pds">"</span>SHARD_MERGE<span class="pl-pds">"</span></span>,</pre></div>
+<p dir="auto">b. De même pour trouver tous les posts d'un fil de discussion:</p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="db.posts.find({&quot;thread._id&quot;:&quot;23&quot;}).explain(&quot;executionStats&quot;)"><pre>db.posts.find({<span class="pl-s"><span class="pl-pds">"</span>thread._id<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>23<span class="pl-pds">"</span></span>}).explain(<span class="pl-s"><span class="pl-pds">"</span>executionStats<span class="pl-pds">"</span></span>)</pre></div>
+<div class="highlight highlight-source-json notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&quot;executionStats&quot; : {
+        &quot;nReturned&quot; : 116,
+        &quot;executionTimeMillis&quot; : 40,
+        &quot;totalKeysExamined&quot; : 0,
+        &quot;totalDocsExamined&quot; : 90261,
+        &quot;executionStages&quot; : {
+                &quot;stage&quot; : &quot;SHARD_MERGE&quot;,"><pre><span class="pl-ent">"executionStats"</span> : {
+        <span class="pl-ent">"nReturned"</span> : <span class="pl-c1">116</span>,
+        <span class="pl-ent">"executionTimeMillis"</span> : <span class="pl-c1">40</span>,
+        <span class="pl-ent">"totalKeysExamined"</span> : <span class="pl-c1">0</span>,
+        <span class="pl-ent">"totalDocsExamined"</span> : <span class="pl-c1">90261</span>,
+        <span class="pl-ent">"executionStages"</span> : {
+                <span class="pl-ent">"stage"</span> : <span class="pl-s"><span class="pl-pds">"</span>SHARD_MERGE<span class="pl-pds">"</span></span>,</pre></div>
+<ol start="4" dir="auto">
+<li>Les requêtes ne sont plus optimisées car la clé de sharding est positionnée sur l'id, donc la requête doit fusionner les shards et faire un scan de collection.</li>
+</ol>
+<h3 dir="auto"><a id="user-content-sharding3" class="anchor" aria-hidden="true" href="#sharding3"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Sharding(3)</h3>
+<ol dir="auto">
+<li>Pour faire en sorte que les données soient correctement distribuées sur le cluster et que les requêtes précédentes soient optimisées, on peut par exemple positionner la clé de sharding en "hashed" sur le nickname de l'utilisateur.</li>
+</ol>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="sh.shardCollection(&quot;forum.posts&quot;, { _id : &quot;hashed&quot;})
+sh.shardCollection(&quot;forum.threads&quot;, { _id : &quot;hashed&quot; })
+sh.shardCollection(&quot;forum.users&quot;, { nickname : 1})"><pre>sh.shardCollection(<span class="pl-s"><span class="pl-pds">"</span>forum.posts<span class="pl-pds">"</span></span>, { _id <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>hashed<span class="pl-pds">"</span></span>})
+sh.shardCollection(<span class="pl-s"><span class="pl-pds">"</span>forum.threads<span class="pl-pds">"</span></span>, { _id <span class="pl-c1">:</span> <span class="pl-s"><span class="pl-pds">"</span>hashed<span class="pl-pds">"</span></span> })
+sh.shardCollection(<span class="pl-s"><span class="pl-pds">"</span>forum.users<span class="pl-pds">"</span></span>, { nickname <span class="pl-c1">:</span> 1})</pre></div>
+<p dir="auto">Nous n'avons pas eu le temps d'essayer avec une shardKey positionnée sur le thread._id dans la collection posts. Nous pourrions aussi optimiser la requête pour permettre de répartir équitablement.</p>
+<p dir="auto">Dans un contexte réel avec la configuration que nous avons mis en place, les users seraient mieux distribués sur les shards. Mais dû à la génération, beaucoup de users se retrouvent dans le même chunk.</p>
+<p dir="auto">Vis-à-vis des requêtes, elle sont plus optimales pour la requête d'utilisateurs, mais ne le sont pas pour les requêtes pas threads:</p>
+<div class="highlight highlight-source-js notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="db.users.find({&quot;nickname&quot;:&quot;Deadpool&quot;},{&quot;posts&quot;:1}).explain(&quot;executionStats&quot;)"><pre><span class="pl-s1">db</span><span class="pl-kos">.</span><span class="pl-c1">users</span><span class="pl-kos">.</span><span class="pl-en">find</span><span class="pl-kos">(</span><span class="pl-kos">{</span><span class="pl-s">"nickname"</span>:<span class="pl-s">"Deadpool"</span><span class="pl-kos">}</span><span class="pl-kos">,</span><span class="pl-kos">{</span><span class="pl-s">"posts"</span>:<span class="pl-c1">1</span><span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-en">explain</span><span class="pl-kos">(</span><span class="pl-s">"executionStats"</span><span class="pl-kos">)</span></pre></div>
+<div class="highlight highlight-source-json notranslate position-relative overflow-auto" dir="auto" data-snippet-clipboard-copy-content="&quot;executionStats&quot; : {
+        &quot;nReturned&quot; : 1,
+        &quot;executionTimeMillis&quot; : 0,
+        &quot;totalKeysExamined&quot; : 1,
+        &quot;totalDocsExamined&quot; : 1,
+        &quot;executionStages&quot; : {
+                &quot;stage&quot; : &quot;SINGLE_SHARD&quot;,"><pre><span class="pl-ent">"executionStats"</span> : {
+        <span class="pl-ent">"nReturned"</span> : <span class="pl-c1">1</span>,
+        <span class="pl-ent">"executionTimeMillis"</span> : <span class="pl-c1">0</span>,
+        <span class="pl-ent">"totalKeysExamined"</span> : <span class="pl-c1">1</span>,
+        <span class="pl-ent">"totalDocsExamined"</span> : <span class="pl-c1">1</span>,
+        <span class="pl-ent">"executionStages"</span> : {
+                <span class="pl-ent">"stage"</span> : <span class="pl-s"><span class="pl-pds">"</span>SINGLE_SHARD<span class="pl-pds">"</span></span>,</pre></div>
+<h2 dir="auto"><a id="user-content-conclusion" class="anchor" aria-hidden="true" href="#conclusion"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Conclusion</h2>
+<p dir="auto">Dans ce tp, nous avons pu aborder les aspects pratiques de mongoDB en passant par de la génération de données, du requêtage, des créations de différents modèles avec leurs avantages et inconvénients, puis nous avons manié des outils puissants de mongoDB comme les replica sets et le sharding, permettant d'accroître la scalabilité horizontale et la haute disponibilité.</p>
 </article></div>
